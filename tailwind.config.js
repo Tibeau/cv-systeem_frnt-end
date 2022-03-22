@@ -1,26 +1,39 @@
 module.exports = {
-    prefix: '',
-    purge: {
-      content: [
-        './src/**/*.{html,ts}',
-      ]
-    },
-    darkMode: 'class', // or 'media' or 'class'
-    theme: {
-      extend: {
-        colors: {
-        },
+  prefix: "",
+  mode: "jit",
+  purge: {
+    content: ["./src/**/*.{html,ts,css,scss,sass,less,styl}"],
+    safelist: [
+      'bg-blue-400',
+      'hover:bg-blue-800',
+      'bg-red-400',
+      'hover:bg-red-800',
+      'bg-yellow-400',
+      'hover:bg-yellow-800',
+      'bg-green-400',
+      'hover:bg-green-800',
+      'hover:bg-red-600'
+    ]
+  },
+  darkMode: "class", // or 'media' or 'class'
+  theme: {
+    extend: {
+      colors: {
+        Jorange: "#DE7A08",
+        Jblue: "#2122B0",
+        Jwhite: "#F4F8F7"
       },
-      backgroundColor: (theme) => ({
-        ...theme("colors"),
-      }),
-      fontFamily: {
-        firacode: ["Fira code", "sans-serif"],
-      },
     },
-
-    variants: {
-      extend: {},
+    backgroundColor: (theme) => ({
+      ...theme("colors"),
+      Jorange: "#DE7A08",
+    }),
+    fontFamily: {
+      firacode: ["FiraCode", "sans-serif"],
     },
-    plugins: [require('@tailwindcss/forms'),require('@tailwindcss/typography')],
+  },
+  variants: {
+    extend: {},
+  },
+  plugins: [require("@tailwindcss/forms"), require("@tailwindcss/typography")],
 };

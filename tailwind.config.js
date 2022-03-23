@@ -21,7 +21,8 @@ module.exports = {
       colors: {
         Jorange: "#DE7A08",
         Jblue: "#2122B0",
-        Jwhite: "#F4F8F7"
+        Jwhite: "#F4F8F7",
+        JorangeSelect:"#EB912A"
       },
     },
     backgroundColor: (theme) => ({
@@ -29,7 +30,7 @@ module.exports = {
       Jorange: "#DE7A08",
     }),
     fontFamily: {
-      firacode: ["FiraCode", "sans-serif"],
+      firacode: ["Fira Code", "sans-serif"],
     },
   },
   variants: {

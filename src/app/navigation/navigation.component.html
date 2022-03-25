@@ -1,7 +1,7 @@
 <div class="h-full flex flex-col">
   <!-- Top nav-->
 
-  <header class="flex-shrink-0 relative h-20 bg-Jblue flex items-center">
+  <header *ngIf="isLoggedIn == true" class="flex-shrink-0 relative h-20 bg-Jblue flex items-center">
         <div class="md:flex-shrink-0 flex items-center justify-end h-20 w-60 rounded-br-full rounded-tr-full bg-indigo-500 ">
      <h1 class="font-bold text-white mr-4 text-lg">My name</h1>
       <a href="/" class="mr-4">
@@ -45,7 +45,7 @@
     </div>
 
     <!-- Menu button area -->
-    <div class="absolute inset-y-0 right-0 pr-4 flex items-center sm:pr-6 md:hidden">
+    <div  class="absolute inset-y-0 right-0 pr-4 flex items-center sm:pr-6 md:hidden">
       <!-- Mobile menu button -->
       <button type="button" class="-mr-2 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-600">
         <span class="sr-only">Open main menu</span>
@@ -80,7 +80,7 @@
           From: "transform opacity-100 scale-100 sm:translate-x-0 sm:scale-100 sm:opacity-100"
           To: "transform opacity-0 scale-110  sm:translate-x-full sm:scale-100 sm:opacity-100"
       -->
-      <nav class="fixed z-40 inset-0 h-full w-full bg-white sm:inset-y-0 sm:left-auto sm:right-0 sm:max-w-sm sm:w-full sm:shadow-lg" aria-label="Global">
+      <nav *ngIf="isLoggedIn" class="fixed z-40 inset-0 h-full w-full bg-white sm:inset-y-0 sm:left-auto sm:right-0 sm:max-w-sm sm:w-full sm:shadow-lg" aria-label="Global">
         <div class="h-16 flex items-center justify-between px-4 sm:px-6">
           <a href="#">
             <img class="block h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=500" alt="Workflow">
@@ -147,9 +147,9 @@
     </div>
   </header>
   <!-- Bottom section -->
-  <div class="min-h-0 flex-1 flex overflow-hidden">
+  <div  class="min-h-0 flex-1 flex overflow-hidden">
     <!-- Narrow sidebar-->
-    <nav aria-label="Sidebar" class="hidden md:block md:flex-shrink-0 md:bg-Jorange md:overflow-y-auto">
+    <nav *ngIf="isLoggedIn" aria-label="Sidebar" class="hidden md:block md:flex-shrink-0 md:bg-Jorange md:overflow-y-auto">
       <div class="relative w-20 flex flex-col p-3 space-y-3">
 
         <a href="#" class="hover:bg-JorangeSelect text-white flex-shrink-0 inline-flex items-center justify-center h-14 w-14 rounded-lg">

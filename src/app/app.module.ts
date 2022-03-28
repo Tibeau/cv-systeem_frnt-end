@@ -9,6 +9,12 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { StoreModule } from '@ngrx/store';
+import {AuthService} from "./security/auth.service";
+import {AuthEffects} from "./store/effects/auth.effects";
+import { EffectsModule } from '@ngrx/effects';
+import { reducers } from './store/app.states';
+
 
 @NgModule({
   declarations: [
@@ -24,8 +30,10 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    EffectsModule.forRoot([AuthEffects]),
+    StoreModule.forRoot({}), //reducers
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

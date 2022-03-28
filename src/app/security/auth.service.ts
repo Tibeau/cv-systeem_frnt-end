@@ -9,9 +9,7 @@ import { User } from './user';
 })
 export class AuthService {
   api = environment.API_URL;
-  url = this.api + '/users';
-  urlpassword = this.api + '/password';
-  urlcontact = this.api + '/userSendEmail';
+  BASE_URL = this.api + '/users';
 
   constructor(private httpClient: HttpClient) {}
 
@@ -26,7 +24,8 @@ export class AuthService {
     return !!localStorage.getItem('token');
   }
 
-  authenticate(user: User): Observable<User> {
-    return this.httpClient.post<User>(this.api + '/authenticate', user);
+  logIn(email: string, password: string): Observable<any> {
+    const url = `${this.BASE_URL}/login`;
+    return this.httpClient.post<User>(url, {email, password});
   }
 }

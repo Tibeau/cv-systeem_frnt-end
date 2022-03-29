@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../security/auth.service';
 import { faIdCard, faGraduationCap, faBriefcase, faRightFromBracket, faGear,  faCertificate, faFile, faMessage, faEarthEurope, faLightbulb} from '@fortawesome/free-solid-svg-icons';
+import {LogOut} from "../store/actions/auth.actions";
+import {AppState} from "../store/app.states";
+import { Store } from '@ngrx/store';
+
 
 @Component({
   selector: 'app-navigation',
@@ -25,7 +29,9 @@ export class NavigationComponent implements OnInit {
   isShownNav: boolean = false; // hidden by default
   isExtendSideBar: boolean = false;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService,
+              private store: Store<AppState>
+  ) {}
 
   ngOnInit(): void {
     this.isLoggedIn = this.authService.isLoggedIn();
@@ -43,5 +49,8 @@ export class NavigationComponent implements OnInit {
     this.isExtendSideBar = true;
   }
 
+  logOut(): void {
+    this.store.dispatch(new LogOut);
+  }
 
 }

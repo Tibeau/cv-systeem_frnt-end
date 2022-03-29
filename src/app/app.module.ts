@@ -28,6 +28,7 @@ import { MatListModule } from '@angular/material/list';
     NavigationComponent,
     LoginComponent,
     DashboardComponent,
+
   ],
   imports: [
     BrowserModule,

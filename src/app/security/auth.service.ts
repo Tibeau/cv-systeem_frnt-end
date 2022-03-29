@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -25,7 +25,10 @@ export class AuthService {
   }
 
   logIn(email: string, password: string): Observable<any> {
-    const url = `${this.BASE_URL}/login`;
-    return this.httpClient.post<User>(url, {email, password});
+    let myeEmail = JSON.stringify(email);
+    let myPassword = JSON.stringify(password);
+    const url = `${this.api}/authenticate`;
+    return this.httpClient.post<User>(url, {email, password}
+    );
   }
 }

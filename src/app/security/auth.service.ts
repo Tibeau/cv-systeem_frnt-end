@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -9,9 +9,7 @@ import { User } from './user';
 })
 export class AuthService {
   api = environment.API_URL;
-  url = this.api + '/users';
-  urlpassword = this.api + '/password';
-  urlcontact = this.api + '/userSendEmail';
+  BASE_URL = this.api + '/users';
 
   constructor(private httpClient: HttpClient) {}
 
@@ -26,7 +24,11 @@ export class AuthService {
     return !!localStorage.getItem('token');
   }
 
-  authenticate(user: User): Observable<User> {
-    return this.httpClient.post<User>(this.api + '/authenticate', user);
+  logIn(email: string, password: string): Observable<any> {
+    let myeEmail = JSON.stringify(email);
+    let myPassword = JSON.stringify(password);
+    const url = `${this.api}/authenticate`;
+    return this.httpClient.post<User>(url, {email, password}
+    );
   }
 }

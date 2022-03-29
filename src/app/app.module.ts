@@ -13,7 +13,13 @@ import { StoreModule } from '@ngrx/store';
 import {AuthService} from "./security/auth.service";
 import {AuthEffects} from "./store/effects/auth.effects";
 import { EffectsModule } from '@ngrx/effects';
-import { reducers } from './store/app.states';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
 
 
 @NgModule({
@@ -31,7 +37,14 @@ import { reducers } from './store/app.states';
     FormsModule,
     ReactiveFormsModule,
     EffectsModule.forRoot([AuthEffects]),
-    StoreModule.forRoot({}), //reducers
+    StoreModule.forRoot({}),
+    BrowserAnimationsModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule, //reducers
   ],
   providers: [AuthService],
   bootstrap: [AppComponent],

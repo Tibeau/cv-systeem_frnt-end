@@ -46,7 +46,9 @@ export class AuthEffects {
     ofType(AuthActionTypes.LOGIN_SUCCESS),
     tap((user) => {
       // localStorage.setItem('token', user) //payload token
-      this.router.navigateByUrl('/');
+      this.router.navigateByUrl('/').then(() => {
+              window.location.reload();
+            });;
     })
   );
 

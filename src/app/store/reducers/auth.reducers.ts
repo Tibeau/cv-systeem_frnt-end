@@ -19,7 +19,7 @@ export const initialState: State = {
 
 export function reducer(state = initialState, action: All): State {
   switch (action.type) {
-    case AuthActionTypes.LOGIN: { //login success
+    case AuthActionTypes.LOGIN: { //login success LOGINSUCCESS NOT FOUND?
       return {
         ...state,
         isAuthenticated: true,
@@ -30,7 +30,7 @@ export function reducer(state = initialState, action: All): State {
         errorMessage: null
       };
     }
-    case AuthActionTypes.LOGIN: { //login fail
+    case AuthActionTypes.LOGIN: { //login fail LOGINFAIL NOT FOUND?
       return {
         ...state,
         errorMessage: 'Incorrect email and/or password.'

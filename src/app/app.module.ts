@@ -15,6 +15,7 @@ import {AuthEffects} from "./store/effects/auth.effects";
 import { EffectsModule } from '@ngrx/effects';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from '@angular/cdk/layout';
+import { ContactInfoComponent } from './contact-info/contact-info.component';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { LayoutModule } from '@angular/cdk/layout';
     NavigationComponent,
     LoginComponent,
     DashboardComponent,
+    ContactInfoComponent,
 
   ],
   imports: [

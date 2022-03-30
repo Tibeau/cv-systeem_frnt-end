@@ -13,7 +13,9 @@ import { StoreModule } from '@ngrx/store';
 import {AuthService} from "./security/auth.service";
 import {AuthEffects} from "./store/effects/auth.effects";
 import { EffectsModule } from '@ngrx/effects';
-import { reducers } from './store/app.states';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LayoutModule } from '@angular/cdk/layout';
+import { ContactInfoComponent } from './contact-info/contact-info.component';
 
 
 @NgModule({
@@ -22,6 +24,8 @@ import { reducers } from './store/app.states';
     NavigationComponent,
     LoginComponent,
     DashboardComponent,
+    ContactInfoComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -31,7 +35,10 @@ import { reducers } from './store/app.states';
     FormsModule,
     ReactiveFormsModule,
     EffectsModule.forRoot([AuthEffects]),
-    StoreModule.forRoot({}), //reducers
+    StoreModule.forRoot({}),
+    BrowserAnimationsModule,
+    LayoutModule,
+    //reducers
   ],
   providers: [AuthService],
   bootstrap: [AppComponent],

@@ -7,7 +7,7 @@ import {AuthService} from "../../security/auth.service";
 import {EMPTY, Observable, of} from "rxjs";
 import {
   AuthActionTypes,
-  LogIn, LogInSuccess, LogInFailure,
+  LogIn, LogInSuccess, LogInFailure, LogOut,
 } from '../actions/auth.actions';
 
 
@@ -19,6 +19,7 @@ export class AuthEffects {
     private authService: AuthService,
     private router: Router,
   ) {}
+
 
 
   @Effect()
@@ -55,5 +56,14 @@ export class AuthEffects {
   @Effect({ dispatch: false })
   LogInFailure: Observable<any> = this.actions.pipe(
     ofType(AuthActionTypes.LOGIN_FAILURE)
+  );
+
+  @Effect({ dispatch: false })
+  public LogOut: Observable<any> = this.actions.pipe(
+    ofType(AuthActionTypes.LOGOUT),
+    tap((user) => {
+      localStorage.removeItem('token');
+      localStorage.removeItem('id');
+    })
   );
 }

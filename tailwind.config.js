@@ -18,6 +18,10 @@ module.exports = {
   darkMode: "class", // or 'media' or 'class'
   theme: {
     extend: {
+      flexBasis: {
+        '1/7': '14.2857143%',
+        '6/7': '85.7142857%',
+      },
       colors: {
         Jorange: "#DE7A08",
         Jblue: "#2122B0",

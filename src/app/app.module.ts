@@ -16,6 +16,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from '@angular/cdk/layout';
 import { ContactInfoComponent } from './contact-info/contact-info.component';
+import { EducationComponent } from './education/education.component';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { ContactInfoComponent } from './contact-info/contact-info.component';
     LoginComponent,
     DashboardComponent,
     ContactInfoComponent,
+    EducationComponent,
 
   ],
   imports: [

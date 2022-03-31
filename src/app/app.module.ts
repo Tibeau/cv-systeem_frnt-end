@@ -18,6 +18,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { ContactInfoComponent } from './contact-info/contact-info.component';
 import { EducationComponent } from './education-feature/education/education.component';
 import { EducationFormComponent } from './education-feature/education-form/education-form.component';
+import { CertificationComponent } from './certification-feature/certification/certification.component';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { EducationFormComponent } from './education-feature/education-form/educa
     ContactInfoComponent,
     EducationComponent,
     EducationFormComponent,
+    CertificationComponent,
 
   ],
   imports: [

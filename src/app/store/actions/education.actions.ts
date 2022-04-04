@@ -2,31 +2,27 @@ import {Action, createAction, props} from '@ngrx/store';
 import {Education} from "../../models/education";
 
 export enum EducationActionTypes{
-  GETEDUCATIONS = "[Education] getEducations",
-  GETEDUCATIONS_SUCCESS = "[Education] getEducations SUCCESS",
-  GETEDUCATIONS_FAIL = "[Education] getEducations FAIL",
+  GET_EDUCATIONS = "[Education] getEducations",
+  GET_EDUCATIONS_SUCCESS = "[Education] getEducations SUCCESS",
+  GET_EDUCATIONS_FAIL = "[Education] getEducations FAIL",
 
 }
 
 
-export class getEducationsByCandidate implements Action {
-  readonly type = EducationActionTypes.GETEDUCATIONS;
-  constructor(public payload: any) {}
-}
+// export class loadEducations implements Action{
+//   readonly type = EducationActionTypes.GETEDUCATIONS;
+// }
 
 export const loadEducations = createAction(
-  EducationActionTypes.GETEDUCATIONS
+  EducationActionTypes.GET_EDUCATIONS
 )
 
 export const loadEducationsSuccess = createAction(
-  EducationActionTypes.GETEDUCATIONS_SUCCESS,
+  EducationActionTypes.GET_EDUCATIONS_SUCCESS,
   props<{educations: Education[]}>(),
 )
 
 export const loadEducationsFail = createAction(
-  EducationActionTypes.GETEDUCATIONS_FAIL,
+  EducationActionTypes.GET_EDUCATIONS_FAIL,
   props<{error: any}>()
 )
-
-
-export type All = | getEducationsByCandidate;

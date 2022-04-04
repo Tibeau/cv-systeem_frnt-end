@@ -30,7 +30,7 @@ export class AuthEffects {
         console.log(payload)
         return this.authService.logIn(payload.email, payload.password)
           .pipe(map((user) => {
-              console.log(user);
+              console.log("loggin in now with user:" + user)
               localStorage.setItem('token', JSON.stringify(user.token));
               localStorage.setItem('id', JSON.stringify(user.id));
               return new LogInSuccess({token: user.token, email: payload.email});

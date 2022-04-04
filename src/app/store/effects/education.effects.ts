@@ -16,12 +16,12 @@ export class EducationEffects {
 
   getEducations$ = createEffect(() => this.actions$.pipe(
     tap(() => console.log("get effect")),
-    ofType(educationActions.EducationActionTypes.GETEDUCATIONS),
+    ofType(educationActions.EducationActionTypes.GET_EDUCATIONS),
     mergeMap(((response) => this.educationService.getEducationsByCandidateId("3")
       .pipe(
         tap(() => console.log("current educations are:" + response)),
-        map(educations => ({type: educationActions.EducationActionTypes.GETEDUCATIONS_SUCCESS, payload: educations})),
-        catchError(() => of({type: educationActions.EducationActionTypes.GETEDUCATIONS_FAIL}))
+        map(educations => ({type: educationActions.EducationActionTypes.GET_EDUCATIONS_SUCCESS, payload: response})),
+        catchError(() => of({type: educationActions.EducationActionTypes.GET_EDUCATIONS_FAIL}))
       )))
   ));
 }

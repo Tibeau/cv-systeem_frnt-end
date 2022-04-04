@@ -19,8 +19,7 @@ export class EducationComponent implements OnInit {
 
   ngOnInit(): void {
     console.log("start store dispatch")
-    this.store.dispatch({type: educationActions.EducationActionTypes.GETEDUCATIONS});
-    console.log(this.educations$)
+    this.store.dispatch({type: educationActions.EducationActionTypes.GET_EDUCATIONS});
   }
 
 }

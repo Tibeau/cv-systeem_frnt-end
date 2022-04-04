@@ -1,5 +1,4 @@
 import {Education} from "../../models/education";
-import {All, EducationActionTypes} from "../actions/education.actions";
 import {createReducer, Action, on} from "@ngrx/store";
 import * as EducationActions from '../actions/education.actions';
 

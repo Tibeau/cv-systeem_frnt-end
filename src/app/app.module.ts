@@ -19,6 +19,7 @@ import { ContactInfoComponent } from './contact-info/contact-info.component';
 import { EducationComponent } from './education-feature/education/education.component';
 import { EducationFormComponent } from './education-feature/education-form/education-form.component';
 import { CertificationComponent } from './certification-feature/certification/certification.component';
+import {CommonModule} from "@angular/common";
 
 
 @NgModule({
@@ -41,9 +42,11 @@ import { CertificationComponent } from './certification-feature/certification/ce
     FormsModule,
     ReactiveFormsModule,
     EffectsModule.forRoot([AuthEffects]),
+    EffectsModule.forFeature(),
     StoreModule.forRoot({}),
     BrowserAnimationsModule,
     LayoutModule,
+    CommonModule,
     //reducers
   ],
   providers: [AuthService],

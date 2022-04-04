@@ -9,7 +9,6 @@ import { User } from './user';
 })
 export class AuthService {
   api = environment.API_URL;
-  BASE_URL = this.api + '/users';
 
   constructor(private httpClient: HttpClient) {}
 
@@ -25,8 +24,6 @@ export class AuthService {
   }
 
   logIn(email: string, password: string): Observable<any> {
-    let myeEmail = JSON.stringify(email);
-    let myPassword = JSON.stringify(password);
     const url = `${this.api}/authenticate`;
     return this.httpClient.post<User>(url, {email, password}
     );

@@ -1,6 +1,6 @@
 <div class="max-w-7xl mt-8 mb-12 mx-auto px-4 sm:px-6 lg:px-8 bg-Jblue rounded-3xl">
   <div class="max-w-3xl mx-auto">
-    <form class="space-y-8 divide-y divide-gray-200 ">
+    <form [formGroup]="educationForm" (ngSubmit)="onSubmit()" class="space-y-8 divide-y divide-gray-200 ">
       <div class="space-y-8 divide-y divide-gray-200">
         <div class="pt-8 pb-8">
           <div>
@@ -11,16 +11,16 @@
           <hr>
 
           <div class="sm:col-span-3 mt-4">
-            <label for="first-name" class="block text-sm font-medium text-white">Diploma</label>
+            <label for="diploma" class="block text-sm font-medium text-white">Diploma</label>
             <div class="mt-1">
-              <input type="text" name="first-name" id="first-name" autocomplete="given-name" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+              <input type="text" name="diploma" id="diploma" formControlName="diploma" autocomplete="given-name" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
             </div>
           </div>
 
           <div class="sm:col-span-6 mt-4">
-            <label for="about" class="block text-sm font-medium text-white"> Description </label>
+            <label for="description" class="block text-sm font-medium text-white"> Description </label>
             <div class="mt-1">
-              <textarea id="about" name="about" rows="3" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md"></textarea>
+              <textarea id="description" name="description" formControlName="description" rows="3" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md"></textarea>
             </div>
             <p class="mt-2 text-sm text-white">Write a few sentences about yourself.</p>
           </div>
@@ -29,23 +29,23 @@
 
 
             <div class="sm:col-span-3">
-              <label for="last-name" class="block text-sm font-medium text-white"> School </label>
+              <label for="school" class="block text-sm font-medium text-white"> School </label>
               <div class="mt-1">
-                <input type="text" name="last-name" id="last-name" autocomplete="family-name" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <input type="text" name="school" id="school" formControlName="school" autocomplete="family-name" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
               </div>
             </div>
 
             <div class="sm:col-span-3">
-              <label for="email" class="block text-sm font-medium text-white"> Field of study </label>
+              <label for="fieldOfStudy" class="block text-sm font-medium text-white"> Field of study </label>
               <div class="mt-1">
-                <input id="email" name="email" type="email" autocomplete="email" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <input id="fieldOfStudy" name="fieldOfStudy" type="email" formControlName="fieldOfStudy" autocomplete="email" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
               </div>
             </div>
 
             <div class="sm:col-span-3">
               <label for="country" class="block text-sm font-medium text-white"> Country </label>
               <div class="mt-1">
-                <select id="country" name="country" autocomplete="country-name" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <select id="country" name="country" formControlName="country"  autocomplete="country-name" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
                   <option>United States</option>
                   <option>Canada</option>
                   <option>Mexico</option>
@@ -54,37 +54,37 @@
             </div>
 
             <div class="sm:col-span-3">
-              <label for="first-name" class="block text-sm font-medium text-white"> Website </label>
+              <label for="website" class="block text-sm font-medium text-white"> Website </label>
               <div class="mt-1">
-                <input type="text" name="phone" id="phone" autocomplete="given-name" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <input type="text" name="website" id="website" formControlName="website"  autocomplete="given-name" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
               </div>
             </div>
 
             <div class="sm:col-span-6">
-              <label for="street-address" class="block text-sm font-medium text-white"> Street address </label>
+              <label for="streetAddress" class="block text-sm font-medium text-white"> Street address </label>
               <div class="mt-1">
-                <input type="text" name="street-address" id="street-address" autocomplete="street-address" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <input type="text" name="streetAddress" id="streetAddress" formControlName="streetAddress"  autocomplete="street-address" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
               </div>
             </div>
 
             <div class="sm:col-span-2">
               <label for="city" class="block text-sm font-medium text-white"> City </label>
               <div class="mt-1">
-                <input type="text" name="city" id="city" autocomplete="address-level2" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <input type="text" name="city" id="city" formControlName="city"  autocomplete="address-level2" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
               </div>
             </div>
 
             <div class="sm:col-span-2">
-              <label for="region" class="block text-sm font-medium text-white"> State / Province </label>
+              <label for="province" class="block text-sm font-medium text-white"> State / Province </label>
               <div class="mt-1">
-                <input type="text" name="region" id="region" autocomplete="address-level1" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <input type="text" name="province" id="province" formControlName="province"  autocomplete="address-level1" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
               </div>
             </div>
 
             <div class="sm:col-span-2">
-              <label for="postal-code" class="block text-sm font-medium text-white"> ZIP / Postal code </label>
+              <label for="postalCode" class="block text-sm font-medium text-white"> ZIP / Postal code </label>
               <div class="mt-1">
-                <input type="text" name="postal-code" id="postal-code" autocomplete="postal-code" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <input type="text" name="postalCode" id="postalCode" formControlName="postalCode" autocomplete="postal-code" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
               </div>
             </div>
           </div>
@@ -94,20 +94,20 @@
 
 
             <div class="sm:col-span-3">
-              <label for="first-name" class="block text-sm font-medium text-white"> From </label>
+              <label for="startDate" class="block text-sm font-medium text-white"> From </label>
               <div class="mt-1">
-                <input type="text" name="startDate" id="startDate" autocomplete="given-name" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <input type="text" name="startDate" id="startDate" formControlName="startDate" autocomplete="given-name" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
               </div>
             </div>
 
             <div class="sm:col-span-3">
-              <label for="first-name" class="block text-sm font-medium text-white"> To </label>
+              <label for="endDate" class="block text-sm font-medium text-white"> To </label>
               <div class="mt-1">
-                <input type="text" name="endDate" id="endDate" autocomplete="given-name" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <input type="text" name="endDate" id="endDate" formControlName="endDate" autocomplete="given-name" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
               </div>
             </div>
 
-              <button type="button" class="flex bg-white items-center h-10 w-40 rounded-xl mb-4">
+              <button type="submit" [disabled]="!educationForm.valid"  class="flex bg-white items-center h-10 w-40 rounded-xl mb-4">
                 <p class="ml-10 text-Jblue font-bold text-2xl">Submit</p>
               </button>
           </div>

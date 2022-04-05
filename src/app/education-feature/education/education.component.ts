@@ -12,7 +12,6 @@ import * as educationActions from "../../store/actions/education.actions"
 })
 export class EducationComponent implements OnInit {
   educations$: Observable<Education[]> = this.store.select(state => state.educations)
-  educations: Education[] = []
   faPencil = faPencil
 
   constructor(private store: Store<{ educations: Education[] }>) {
@@ -21,7 +20,7 @@ export class EducationComponent implements OnInit {
   ngOnInit(): void {
     console.log("start store dispatch")
     this.store.dispatch({type: educationActions.EducationActionTypes.GET_EDUCATIONS, candidateId: "3"});
-    this.educations$ = this.store.pipe(select('educations')),
+    this.educations$ = this.store.pipe(select('educations'))
     // this.educations$.subscribe( (educations: Education[]) => {
     //   console.log(educations)
     // })

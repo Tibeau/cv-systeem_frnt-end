@@ -14,7 +14,9 @@ export enum EducationActionTypes{
 // }
 
 export const loadEducations = createAction(
-  EducationActionTypes.GET_EDUCATIONS
+  EducationActionTypes.GET_EDUCATIONS,
+  props<{candidateId: string}>(),
+
 )
 
 export const loadEducationsSuccess = createAction(

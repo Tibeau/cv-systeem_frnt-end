@@ -1,7 +1,6 @@
 import {User} from "../../security/user";
 import { AuthActionTypes, All } from '../actions/auth.actions';
-import {createReducer, on} from "@ngrx/store";
-import * as AuthActions from "../actions/auth.actions";
+
 
 
 export interface State {

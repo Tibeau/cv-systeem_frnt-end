@@ -16,10 +16,18 @@ export class EducationService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getEducationsByCandidateId(candidateId: string): Observable<Education[]> {
+  getEducationsByCandidateId(candidateId: string | null): Observable<Education[]> {
     const url = `${this.BASE_URL}/candidateId=`;
     console.log(url + candidateId);
     return this.httpClient.get<Education[]>(url + candidateId
+    );
+  }
+
+  getEducation(id: string): Observable<Education> {
+    const url = `${this.BASE_URL}/`;
+    console.log(url + id);
+    console.log(id)
+    return this.httpClient.get<Education>(url + id
     );
   }
 }

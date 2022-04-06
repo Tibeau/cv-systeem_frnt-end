@@ -58,31 +58,4 @@ export class LoginComponent implements OnInit {
     this.store.dispatch(new LogIn(payload))
     console.log("login started")
   }
-
-  // onSubmit(): void {
-  //   console.log(this.user);
-  //   this.isSubmitted = true;
-  //   this.authService.authenticate(this.user).subscribe((result) => {
-  //     console.log('login success');
-  //     console.log(result);
-  //     //Access token opslaan in localStorage
-  //     localStorage.setItem('token', result.jwttoken);
-  //     localStorage.setItem('id', JSON.stringify(result.id));
-  //     localStorage.setItem('email', result.email);
-  //     localStorage.setItem('firstname', result.firstname);
-  //     localStorage.setItem('lastname', result.lastname);
-  //     localStorage.setItem('role', result.role.toString().toUpperCase());
-  //     localStorage.setItem('city', result.city);
-  //     localStorage.setItem('country', result.country);
-  //     localStorage.setItem('street', result.street);
-  //     localStorage.setItem('number', result.number);
-  //     localStorage.setItem('postcode', result.postcode);
-  //     localStorage.setItem('phone', result.phone);
-  //     localStorage.setItem('description', result.description);
-  //     localStorage.setItem('active', result.active);
-  //     this.router.navigate(['']).then(() => {
-  //       window.location.reload();
-  //     });
-  //   });
-  // }
 }

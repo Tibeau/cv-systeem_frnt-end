@@ -1,6 +1,6 @@
 <div class="max-w-7xl mt-8 mb-12 mx-auto px-4 sm:px-6 lg:px-8 bg-Jblue rounded-3xl">
   <div class="max-w-3xl mx-auto">
-    <form [formGroup]="educationForm" (ngSubmit)="onSubmit()" class="space-y-8 divide-y divide-gray-200 ">
+    <form [formGroup]="educationForm" (ngSubmit)="onSubmit()" *ngIf="(education$ | async) as e" class="space-y-8 divide-y divide-gray-200 ">
       <div class="space-y-8 divide-y divide-gray-200">
         <div class="pt-8 pb-8">
           <div>

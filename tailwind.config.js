@@ -2,7 +2,7 @@ module.exports = {
   prefix: "",
   mode: "jit",
   purge: {
-    content: ["./src/**/*.{html,ts,css,scss,sass,less,styl}"],
+    content: ["./src/**/*.{html,ts,css,scss,sass,less,styl}", './node_modules/tw-elements/dist/js/**/*.js'],
     safelist: [
       'bg-blue-400',
       'hover:bg-blue-800',

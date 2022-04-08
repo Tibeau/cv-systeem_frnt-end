@@ -6,6 +6,7 @@ import {select, Store} from '@ngrx/store';
 import * as educationActions from "../../store/actions/education.actions"
 import {selectMyEducations} from "../education.selector";
 import {Router} from "@angular/router";
+import {putEducation} from "../../store/actions/education.actions";
 
 @Component({
   selector: 'app-education',
@@ -13,7 +14,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./education.component.scss']
 })
 export class EducationComponent implements OnInit {
-  educations$: Observable<Education[] | null> = this.educationStore.select(selectMyEducations)
+  educations$: Observable<Education[] | null> = this.educationStore.select(selectMyEducations);
   faPencil = faPencil
 
   constructor(private router: Router, private educationStore: Store<{ educations: Education[] }>) {
@@ -30,5 +31,15 @@ export class EducationComponent implements OnInit {
   }
   onAdd(){
     this.router.navigate(['/educationform']);
+  }
+
+  setActive(myEducation: Education){
+    myEducation.active = true
+    this.educationStore.dispatch(putEducation({education:myEducation, id: myEducation.id}));
+  }
+
+  setInActive(myEducation: Education){
+    myEducation.active = false
+    this.educationStore.dispatch(putEducation({education:myEducation, id: myEducation.id}));
   }
 }

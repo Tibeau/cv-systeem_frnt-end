@@ -35,12 +35,10 @@ export class EducationFormComponent implements OnInit {
     website: ""
   };
 
-
   isAdd: boolean = false;
   isEdit: boolean = false;
   educationId: number = 0;
-
-
+  isActive: boolean = false
 
   educationForm = this.fb.group({
       diploma: ['', Validators.required],
@@ -56,6 +54,7 @@ export class EducationFormComponent implements OnInit {
       postalCode: ['',Validators.required ],
       startDate: ['',Validators.required ],
       endDate: ['',Validators.required],
+      active: [false,Validators.required],
   })
 
   constructor(private router: Router, private route: ActivatedRoute, private fb: FormBuilder ,private educationStore: Store<{ educations: Education[] }>) {
@@ -82,6 +81,7 @@ export class EducationFormComponent implements OnInit {
         postalCode: e?.postalCode,
         startDate: e?.startDate,
         endDate: e?.endDate,
+        active: e?.active,
       }));
     }else {
       this.isAdd = true
@@ -91,7 +91,7 @@ export class EducationFormComponent implements OnInit {
   }
 
   onSubmit(): void{
-    this.education = {active: false,
+    this.education = {active: this.educationForm.value.active,
       candidateId: Number(localStorage.getItem('id' || 0)),
       city: this.educationForm.value.city,
       country: this.educationForm.value.country,

@@ -6,10 +6,6 @@ import {select, Store} from '@ngrx/store';
 import * as educationActions from "../../store/actions/education.actions"
 import {selectMyEducations} from "../education.selector";
 import {Router} from "@angular/router";
-import {FormState} from "../../models/formState";
-import {
-  setEditFormState
-} from '../../store/actions/formState.actions';
 
 @Component({
   selector: 'app-education',
@@ -20,17 +16,19 @@ export class EducationComponent implements OnInit {
   educations$: Observable<Education[] | null> = this.educationStore.select(selectMyEducations)
   faPencil = faPencil
 
-  constructor(private router: Router, private educationStore: Store<{ educations: Education[] }>, private formStore: Store<{formState: FormState}>) {
+  constructor(private router: Router, private educationStore: Store<{ educations: Education[] }>) {
   }
 
   ngOnInit(): void {
-    console.log("start store dispatch")
+    debugger;
     this.educationStore.dispatch({type: educationActions.EducationActionTypes.GET_EDUCATIONS});
     this.educations$.subscribe()
   }
 
-  onClick(educationId: number) {
-    // this.formStore.dispatch(setEditFormState({educationId}))
+  onEdit(education: Education) {
+    this.router.navigate(['/educationform/' + education.id]);
+  }
+  onAdd(){
     this.router.navigate(['/educationform']);
   }
 }

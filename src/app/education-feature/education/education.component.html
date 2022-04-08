@@ -11,7 +11,7 @@
             <p class="mt-1 max-w-2xl text-sm text-white">{{e.description}}</p>
           </div>
           <div>
-            <button (click)="onClick(e.candidateId)" class="text-white hover:bg-JorangeSelect items-center justify-center mt-1 rounded-lg">
+            <button (click)="onEdit(e)" class="text-white hover:bg-JorangeSelect items-center justify-center mt-1 rounded-lg">
               <span class="sr-only">Educations</span>
               <fa-icon transform="grow-12" [icon]="faPencil"></fa-icon>
             </button>
@@ -53,6 +53,10 @@
   </span>
       </div>
     </div>
+
+    <button (click)="onAdd()" class="ml-6 bg-gray-200 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+      <span class="text-lg font-bold text-Jblue">Add </span>
+    </button>
 
   </div>
 </div>

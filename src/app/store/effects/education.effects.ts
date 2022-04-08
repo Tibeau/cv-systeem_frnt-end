@@ -1,10 +1,15 @@
 import { Injectable } from '@angular/core';
 import {Actions, createEffect, Effect, ofType} from '@ngrx/effects';
-import { of } from 'rxjs';
-import {map, mergeMap, catchError, tap} from 'rxjs/operators';
+import {Observable, of} from 'rxjs';
+import {map, mergeMap, catchError, tap, switchMap} from 'rxjs/operators';
 import {EducationService} from "../../services/education/education.service";
 import * as educationActions from "../actions/education.actions"
-import {loadEducationsSuccess, loadEducationSuccess} from "../actions/education.actions";
+import {
+  createEducation,
+  createEducationSuccess,
+  loadEducationsSuccess, putEducation,
+  putEducationSuccess
+} from "../actions/education.actions";
 import {candidateId} from "../../education-feature/education.selector";
 
 @Injectable()
@@ -12,31 +17,37 @@ export class EducationEffects {
 
   constructor(
     private actions$: Actions,
-    private educationService: EducationService
+    private educationService: EducationService,
   ) {}
 
 
   getEducations$ = createEffect(() => this.actions$.pipe(
-    tap(() => console.log("get eduactions by candidateid")),
     ofType(educationActions.EducationActionTypes.GET_EDUCATIONS),
-    mergeMap(((educations) => this.educationService.getEducationsByCandidateId(candidateId)
+    switchMap(((educations) => this.educationService.getEducationsByCandidateId(candidateId)
       .pipe(
-        tap(() => console.log(educations)),
         map(educations => ( loadEducationsSuccess({educations}) )),
-        catchError(() => of({type: educationActions.EducationActionTypes.GET_EDUCATIONS_FAIL}))
+        catchError(() => of({type: educationActions.EducationActionTypes.GET_EDUCATIONS_FAIL})),
       )))
   ));
 
-  getEducation$ = createEffect(() => this.actions$.pipe(
-    tap(() => console.log("get education")),
-    ofType(educationActions.EducationActionTypes.GET_EDUCATION),
-    mergeMap(((education) => this.educationService.getEducation("3")
+
+  createEducation$ = createEffect(() => this.actions$.pipe(
+    ofType(createEducation),
+    switchMap(({education}) => this.educationService.createEducation(education)
       .pipe(
-        tap(() => console.log(education)),
-        map(education => ( loadEducationSuccess({education}) )),
-        catchError(() => of({type: educationActions.EducationActionTypes.GET_EDUCATION_FAIL}))
+        map(education => ( createEducationSuccess() )),
+        catchError(() => of({type: educationActions.EducationActionTypes.CREATE_EDUCATION_FAIL}))
+      )))
+  );
+
+
+  putEducation$ = createEffect(() => this.actions$.pipe(
+    ofType(putEducation),
+    switchMap((({education, id}) => this.educationService.putEducation(education, id)
+      .pipe(
+        map(education => ( putEducationSuccess() )),
+        catchError(() => of({type: educationActions.EducationActionTypes.PUT_EDUCATION_FAIL}))
       )))
   ));
-
 
 }

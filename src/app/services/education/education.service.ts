@@ -23,11 +23,21 @@ export class EducationService {
     );
   }
 
-  getEducation(id: string): Observable<Education> {
-    const url = `${this.BASE_URL}/`;
-    console.log(url + id);
-    console.log(id)
-    return this.httpClient.get<Education>(url + id
+  createEducation(education: Education){
+    const url = `${this.BASE_URL}`;
+    console.log("created on " + url);
+    console.log(education)
+    console.log(education.school)
+    return this.httpClient.post<Education>(url, education
+    );
+  }
+
+  putEducation(education: Education, id: number){
+    const url = `${this.BASE_URL}/` + id;
+    console.log("changed on " +url);
+    console.log(education)
+    console.log(education.school)
+    return this.httpClient.put<Education>(url, education
     );
   }
 }

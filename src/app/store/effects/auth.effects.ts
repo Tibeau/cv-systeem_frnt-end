@@ -46,7 +46,7 @@ export class AuthEffects {
   LogInSuccess: Observable<any> = this.actions.pipe(
     ofType(AuthActionTypes.LOGIN_SUCCESS),
     tap((user) => {
-      // localStorage.setItem('token', user) //payload token
+      localStorage.setItem('token', user) //payload token
       this.router.navigateByUrl('/').then(() => {
               window.location.reload();
             });;

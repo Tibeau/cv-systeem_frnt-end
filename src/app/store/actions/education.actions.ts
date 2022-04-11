@@ -1,59 +1,51 @@
-import {Action, createAction, props} from '@ngrx/store';
+import {createAction, props} from '@ngrx/store';
 import {Education} from "../../models/education";
-import {AuthActionTypes} from "./auth.actions";
 
-export enum EducationActionTypes{
-  GET_EDUCATIONS = "[Education] getEducations",
-  GET_EDUCATIONS_SUCCESS = "[Education] getEducations SUCCESS",
-  GET_EDUCATIONS_FAIL = "[Education] getEducations FAIL",
-  CREATE_EDUCATION = "[Education] createEducation",
-  CREATE_EUCATION_SUCCESS = "[Education] createEducation SUCCESS",
-  CREATE_EDUCATION_FAIL = "[Education] createEducation FAIL",
-  PUT_EDUCATION = "[Education] putEducation",
-  PUT_EDUCATION_SUCCESS = "[Education] putEducation SUCCESS",
-  PUT_EDUCATION_FAIL = "[Education] putEducation FAIL",
-
-}
+let type = "[Education]"
 
 
-export const putEducation = createAction(
-  EducationActionTypes.PUT_EDUCATION,
+//CHANGE EDUCATIONS
+export const changeEducation = createAction(
+  `${type} changeEducations`,
   props<{education: Education, id: number}>(),
 )
 
-export const putEducationSuccess = createAction(
-  EducationActionTypes.PUT_EDUCATION_SUCCESS,
+export const changeEducationSuccess = createAction(
+  `${type} changeEducations SUCCESS`,
 )
 
-export const putEducationFail = createAction(
-  EducationActionTypes.PUT_EDUCATION_FAIL,
+export const changeEducationFail = createAction(
+  `${type} changeEducations FAIL`,
   props<{error: any}>()
 )
 
 
-export const createEducation = createAction(
-  EducationActionTypes.CREATE_EDUCATION,
+
+//ADD EDUCATIONS
+export const addEducation = createAction(
+  `${type} addEducations`,
   props<{education: Education}>(),
 )
-export const createEducationSuccess = createAction(
-  EducationActionTypes.CREATE_EUCATION_SUCCESS,
+export const addEducationSuccess = createAction(
+  `${type} addEducations SUCCESS`,
 )
 
-export const createEducationFail = createAction(
-  EducationActionTypes.CREATE_EDUCATION_FAIL,
+export const addEducationFail = createAction(
+  `${type} addEducations FAIL`,
   props<{error: any}>()
 )
 
 
+//LOAD EDUCATIONS
 export const loadEducations = createAction(
-  EducationActionTypes.GET_EDUCATIONS,
+  `${type} loadEducations`,
 )
 export const loadEducationsSuccess = createAction(
-  EducationActionTypes.GET_EDUCATIONS_SUCCESS,
+  `${type} loadEducations SUCCESS`,
   props<{educations: Education[]}>(),
 )
 
 export const loadEducationsFail = createAction(
-  EducationActionTypes.GET_EDUCATIONS_FAIL,
+  `${type} loadEducations FAIL`,
   props<{error: any}>()
 )

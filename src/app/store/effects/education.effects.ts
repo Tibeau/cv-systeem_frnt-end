@@ -5,10 +5,10 @@ import {map, mergeMap, catchError, tap, switchMap} from 'rxjs/operators';
 import {EducationService} from "../../services/education/education.service";
 import * as educationActions from "../actions/education.actions"
 import {
-  createEducation,
-  createEducationSuccess,
-  loadEducationsSuccess, putEducation,
-  putEducationSuccess
+  addEducation,
+  addEducationSuccess,
+  loadEducationsSuccess, changeEducation,
+  changeEducationSuccess, changeEducationFail, addEducationFail, loadEducationsFail, loadEducations
 } from "../actions/education.actions";
 import {candidateId} from "../../education-feature/education.selector";
 
@@ -22,31 +22,31 @@ export class EducationEffects {
 
 
   getEducations$ = createEffect(() => this.actions$.pipe(
-    ofType(educationActions.EducationActionTypes.GET_EDUCATIONS),
+    ofType(`[Education] loadEducations`),
     switchMap(((educations) => this.educationService.getEducationsByCandidateId(candidateId)
       .pipe(
         map(educations => ( loadEducationsSuccess({educations}) )),
-        catchError(() => of({type: educationActions.EducationActionTypes.GET_EDUCATIONS_FAIL})),
+        catchError(() => of(loadEducationsFail))
       )))
   ));
 
 
-  createEducation$ = createEffect(() => this.actions$.pipe(
-    ofType(createEducation),
+ addEducation$ = createEffect(() => this.actions$.pipe(
+    ofType(`[Education] addEducations`),
     switchMap(({education}) => this.educationService.createEducation(education)
       .pipe(
-        map(education => ( createEducationSuccess() )),
-        catchError(() => of({type: educationActions.EducationActionTypes.CREATE_EDUCATION_FAIL}))
+        map(education => ( loadEducations() )),
+        catchError(() => of(addEducationFail))
       )))
   );
 
 
-  putEducation$ = createEffect(() => this.actions$.pipe(
-    ofType(putEducation),
+  changeEducation$ = createEffect(() => this.actions$.pipe(
+    ofType(changeEducation),
     switchMap((({education, id}) => this.educationService.putEducation(education, id)
       .pipe(
-        map(education => ( putEducationSuccess() )),
-        catchError(() => of({type: educationActions.EducationActionTypes.PUT_EDUCATION_FAIL}))
+        map(education => ( loadEducations() )),
+        catchError(() => of(changeEducationFail))
       )))
   ));
 

@@ -13,5 +13,6 @@ export interface Education {
   endDate: string;
   number: number;
   active: boolean;
+  province: string
   candidateId: number;
 }

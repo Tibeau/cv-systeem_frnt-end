@@ -114,7 +114,12 @@
               </div>
             </div>
 
-              <button type="submit" [disabled]="!educationForm.valid"  class="flex bg-white items-center h-10 w-40 rounded-xl mb-4">
+            <diV hidden>
+            <input type="text"  name="candidateId" id="candidateId" formControlName="candidateId">
+            <input type="checkbox"  name="active" id="active" formControlName="active">
+            </diV>
+
+            <button type="submit" [disabled]="!educationForm.valid"  class="flex bg-white items-center h-10 w-40 rounded-xl mb-4">
                 <p class="ml-10 text-Jblue font-bold text-2xl">Submit</p>
               </button>
           </div>

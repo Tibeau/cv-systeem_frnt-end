@@ -3,7 +3,7 @@ import {createReducer, on} from "@ngrx/store";
 import {
   loadEducations,
   loadEducationsFail,
-  loadEducationsSuccess, putEducation,
+  loadEducationsSuccess, changeEducation,
 } from '../actions/education.actions';
 
 export const educationFeatureKey = "educations";
@@ -28,7 +28,6 @@ export const educationReducer = createReducer(
   on(loadEducations, (state) => ({educations: null, errorMessage: "still loading educations"})),
   on(loadEducationsSuccess, (state, props) => ({educations: props.educations, errorMessage: "loaded educations"})),
   on(loadEducationsFail, (state) => ({educations: null, errorMessage: "failed to load educations"})),
-  on(putEducation, (state) => ({educations: null, errorMessage: "reset state"})),
 );
 
 

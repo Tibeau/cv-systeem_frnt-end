@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { faPencil } from '@fortawesome/free-solid-svg-icons';
 import {Observable} from "rxjs";
 import {Education} from "../../models/education";
-import {select, Store} from '@ngrx/store';
-import * as educationActions from "../../store/actions/education.actions"
+import {Store} from '@ngrx/store';
 import {selectMyEducations} from "../education.selector";
 import {Router} from "@angular/router";
-import {putEducation} from "../../store/actions/education.actions";
+import {loadEducations, changeEducation} from "../../store/actions/education.actions";
+import {FormBuilder, FormGroup, FormGroupDirective, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-education',
@@ -16,13 +16,32 @@ import {putEducation} from "../../store/actions/education.actions";
 export class EducationComponent implements OnInit {
   educations$: Observable<Education[] | null> = this.educationStore.select(selectMyEducations);
   faPencil = faPencil
+  active: boolean = false;
 
-  constructor(private router: Router, private educationStore: Store<{ educations: Education[] }>) {
+  educationForm = this.fb.group({
+    id: [0, Validators.required],
+    diploma: ['', Validators.required],
+    description: ['', Validators.required],
+    school: ['', Validators.required],
+    fieldOfStudy: ['', Validators.required],
+    country: ['', Validators.required],
+    website: ['', Validators.required],
+    street: ['', Validators.required],
+    number: [0, Validators.required],
+    city: ['', Validators.required],
+    province: ['', Validators.required],
+    postalCode: ['', Validators.required],
+    startDate: ['', Validators.required],
+    endDate: ['', Validators.required],
+    active: [false, Validators.required],
+    candidateId: ['', Validators.required]
+  })
+
+  constructor(private router: Router, private fb: FormBuilder, private educationStore: Store<{ educations: Education[] }>) {
   }
 
   ngOnInit(): void {
-    debugger;
-    this.educationStore.dispatch({type: educationActions.EducationActionTypes.GET_EDUCATIONS});
+    this.educationStore.dispatch(loadEducations());
     this.educations$.subscribe()
   }
 
@@ -33,13 +52,23 @@ export class EducationComponent implements OnInit {
     this.router.navigate(['/educationform']);
   }
 
-  setActive(myEducation: Education){
-    myEducation.active = true
-    this.educationStore.dispatch(putEducation({education:myEducation, id: myEducation.id}));
+  onSubmit() {
+
   }
 
-  setInActive(myEducation: Education){
-    myEducation.active = false
-    this.educationStore.dispatch(putEducation({education:myEducation, id: myEducation.id}));
+  toggleActive(myEducation: Education){
+    this.active = myEducation.active
+    this.educationForm.setValue(myEducation)
+    if (this.active){
+      this.active = false
+      console.log("active set to false")
+    } else {
+      this.active = true
+      console.log("active set to true")
+    }
+    this.educationForm.patchValue({
+      active: this.active,
+    })
+    this.educationStore.dispatch(changeEducation({education: this.educationForm.value, id: myEducation.id}));
   }
 }

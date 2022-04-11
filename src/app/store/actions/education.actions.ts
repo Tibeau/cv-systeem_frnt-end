@@ -6,16 +6,16 @@ let type = "[Education]"
 
 //CHANGE EDUCATIONS
 export const changeEducation = createAction(
-  `${type} changeEducations`,
+  `${type} changeEducation`,
   props<{education: Education, id: number}>(),
 )
 
 export const changeEducationSuccess = createAction(
-  `${type} changeEducations SUCCESS`,
+  `${type} changeEducation SUCCESS`,
 )
 
 export const changeEducationFail = createAction(
-  `${type} changeEducations FAIL`,
+  `${type} changeEducation FAIL`,
   props<{error: any}>()
 )
 
@@ -23,15 +23,15 @@ export const changeEducationFail = createAction(
 
 //ADD EDUCATIONS
 export const addEducation = createAction(
-  `${type} addEducations`,
+  `${type} addEducation`,
   props<{education: Education}>(),
 )
 export const addEducationSuccess = createAction(
-  `${type} addEducations SUCCESS`,
+  `${type} addEducation SUCCESS`,
 )
 
 export const addEducationFail = createAction(
-  `${type} addEducations FAIL`,
+  `${type} addEducation FAIL`,
   props<{error: any}>()
 )
 
@@ -47,5 +47,19 @@ export const loadEducationsSuccess = createAction(
 
 export const loadEducationsFail = createAction(
   `${type} loadEducations FAIL`,
+  props<{error: any}>()
+)
+
+//DELETE EDUCATION
+export const removeEducation = createAction(
+  `${type} removeEducation`,
+  props<{id: number}>(),
+)
+export const removeEducationSuccess = createAction(
+  `${type} removeEducation SUCCESS`,
+)
+
+export const removeEducationFail = createAction(
+  `${type} removeEducation FAIL`,
   props<{error: any}>()
 )

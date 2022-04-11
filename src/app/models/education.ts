@@ -1,7 +1,7 @@
 export interface Education {
   id: number;
   fieldOfStudy: string;
-  website: string;
+  website?: string;
   description?: string;
   diploma: string;
   postalCode: string;

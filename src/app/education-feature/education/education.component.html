@@ -10,9 +10,8 @@
             <h3 class="text-lg leading-6 font-bold text-white">{{e.diploma}}</h3>
             <p class="mt-1 max-w-2xl text-sm text-white">{{e.description}}</p>
           </div>
-          <div>
-            <button (click)="onEdit(e)" class="text-white hover:bg-JorangeSelect items-center justify-center mt-1 rounded-lg">
-              <span class="sr-only">Educations</span>
+          <div class="flex justify-center">
+            <button (click)="onEdit(e)" class="text-white rounded-xl w-10 h-10 hover:bg-Jorange">
               <fa-icon transform="grow-12" [icon]="faPencil"></fa-icon>
             </button>
           </div>
@@ -43,20 +42,30 @@
       </div>
 
       <!-- This example requires Tailwind CSS v2.0+ -->
+      <div class="flex justify-between">
       <div class="flex bg-white items-center h-10 w-40 rounded-xl mb-4 ml-4">
-        <input type="checkbox" (click)="toggleActive(e)"  *ngIf="e.active === false" class="ml-6 bg-gray-200 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" role="switch">
-        <input type="checkbox" (click)="toggleActive(e)" *ngIf="e.active === true" checked  class="ml-6 bg-gray-200 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" role="switch">
+        <input type="checkbox" (click)="toggleActive(e)"  *ngIf="e.active === false" class="ml-6 bg-gray-300 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 text-Jorange focus:ring-offset-2 focus:ring-Jorange" role="switch">
+        <input type="checkbox" (click)="toggleActive(e)" *ngIf="e.active === true" checked  class="ml-6 bg-gray-300 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 text-Jorange focus:ring-offset-2 focus:ring-Jorange" role="switch">
 
         <span class="ml-3" id="active">
-    <span class="text-lg font-bold text-Jblue">Active </span>
+    <span  *ngIf="e.active === false" class="text-lg font-bold text-Jblue ">Active </span>
+          <span  *ngIf="e.active === true" class="text-lg font-bold text-Jorange ">Active </span>
   </span>
       </div>
 
+        <div class="flex justify-center">
+        <button (click)="onRemove(e.id)" class="text-red-600 hover:text-white bg-white rounded-xl mr-6 mb-4 w-10 h-10 hover:bg-Jorange  ">
+        <fa-icon transform="grow-7" [icon]="faTrashCan"></fa-icon>
+      </button>
+        </div>
+    </div>
     </div>
 
+    <div>
     <button (click)="onAdd()" class="ml-6 bg-gray-200 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
       <span class="text-lg font-bold text-Jblue">Add </span>
     </button>
+    </div>
 
   </div>
 </div>

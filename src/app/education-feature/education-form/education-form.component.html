@@ -1,11 +1,12 @@
-<div class="max-w-7xl mt-8 mb-12 mx-auto px-4 sm:px-6 lg:px-8 bg-Jblue rounded-3xl">
+<div class="max-w-7xl mt-8 mb-12 mx-auto px-4 sm:px-6 lg:px-8 bg-Jblue rounded-3xl mr-6 ml-6">
   <div class="max-w-3xl mx-auto">
     <form [formGroup]="educationForm" (ngSubmit)="onSubmit()" class="space-y-8 divide-y divide-gray-200 ">
       <div class="space-y-8 divide-y divide-gray-200">
-        <div class="pt-8 pb-8">
+        <div class="pt-8 pb-4">
           <div>
-            <h3 class="text-lg leading-6 font-large text-white text-2xl mb-4">Education</h3>
-            <p class="mt-1 text-sm text-white">Use a permanent address where you can receive mail.</p>
+            <h3 class="text-lg leading-6 text-bold font-large text-white text-3xl mb-4">Education</h3>
+            <p *ngIf="mode === 'add'" class="mt-1 text-lg text-white">add a new education to your CV <span class="text-sm">(added educations are automatically set to active)</span></p>
+            <p *ngIf="mode === 'edit'" class="mt-1 text-lg text-white">change one of your educations <span class="text-sm">(be sure to submit your changes)</span></p>
           </div>
 
           <hr>
@@ -13,16 +14,21 @@
           <div class="sm:col-span-3 mt-4">
             <label for="diploma" class="block text-sm font-medium text-white">Diploma</label>
             <div class="mt-1">
-              <input type="text" name="diploma" id="diploma" formControlName="diploma" autocomplete="given-name" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+              <input placeholder="name of diploma"
+                     required type="text" name="diploma" id="diploma" formControlName="diploma"
+                     class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+              <div *ngIf="educationForm.get('diploma')?.dirty && educationForm.get('diploma')?.touched && educationForm.get('diploma')?.hasError('required')"
+                class="text-white text-sm italic">
+                Diploma name is required.
+              </div>
             </div>
           </div>
 
           <div class="sm:col-span-6 mt-4">
-            <label for="description" class="block text-sm font-medium text-white"> Description </label>
+            <label for="description" class="block text-sm font-medium text-white"> Description<span class="text-sm text-white/75">(optional)</span> </label>
             <div class="mt-1">
-              <textarea id="description" name="description" formControlName="description" rows="3" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md"></textarea>
+              <textarea placeholder="some extra information about your education" id="description" name="description" formControlName="description" rows="3" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md"></textarea>
             </div>
-            <p class="mt-2 text-sm text-white">Write a few sentences about yourself.</p>
           </div>
 
           <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
@@ -31,67 +37,99 @@
             <div class="sm:col-span-3">
               <label for="school" class="block text-sm font-medium text-white"> School </label>
               <div class="mt-1">
-                <input type="text" name="school" id="school" formControlName="school" autocomplete="family-name" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <input placeholder="name of the school" type="text" name="school" id="school" formControlName="school" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <div *ngIf="educationForm.get('school')?.dirty && educationForm.get('school')?.touched && educationForm.get('school')?.hasError('required')"
+                     class="text-white text-sm italic">
+                  School name is required.
+                </div>
               </div>
             </div>
 
             <div class="sm:col-span-3">
               <label for="fieldOfStudy" class="block text-sm font-medium text-white"> Field of study </label>
               <div class="mt-1">
-                <input id="fieldOfStudy" name="fieldOfStudy" type="email" formControlName="fieldOfStudy" autocomplete="email" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <input placeholder="name of your field of study" id="fieldOfStudy" name="fieldOfStudy" type="email" formControlName="fieldOfStudy" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <div *ngIf="educationForm.get('fieldOfStudy')?.dirty && educationForm.get('fieldOfStudy')?.touched && educationForm.get('fieldOfStudy')?.hasError('required')"
+                     class="text-white text-sm italic">
+                  Field of study is required.
+                </div>
               </div>
             </div>
 
             <div class="sm:col-span-3">
               <label for="country" class="block text-sm font-medium text-white"> Country </label>
               <div class="mt-1">
-                <select id="country" name="country" formControlName="country"  autocomplete="country-name" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
-                  <option>United States</option>
-                  <option>Canada</option>
-                  <option>Mexico</option>
-                </select>
+                <input placeholder="country where you finished your study" type="text" name="country" id="country" formControlName="country" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <div *ngIf="educationForm.get('country')?.dirty && educationForm.get('country')?.touched && educationForm.get('country')?.hasError('required')"
+                     class="text-white text-sm italic">
+                  Country name is required.
+                </div>
               </div>
             </div>
 
             <div class="sm:col-span-3">
-              <label for="website" class="block text-sm font-medium text-white"> Website </label>
+              <label for="website" class="block text-sm font-medium text-white"> Website<span class="text-sm text-white/75">(optional)</span> </label>
               <div class="mt-1">
-                <input type="text" name="website" id="website" formControlName="website"  autocomplete="given-name" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <input placeholder="school website"  type="text" name="website" id="website" formControlName="website"  class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
               </div>
             </div>
 
             <div class="sm:col-span-3">
               <label for="street" class="block text-sm font-medium text-white"> Street </label>
               <div class="mt-1">
-                <input type="text" name="street" id="street" formControlName="street"  autocomplete="street-address" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <input placeholder="school street"  type="text" name="street" id="street" formControlName="street" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <div *ngIf="educationForm.get('street')?.dirty && educationForm.get('street')?.touched && educationForm.get('street')?.hasError('required')"
+                     class="text-white text-sm italic">
+                  Street name is required.
+                </div>
               </div>
             </div>
 
             <div class="sm:col-span-3">
               <label for="number" class="block text-sm font-medium text-white"> House number </label>
               <div class="mt-1">
-                <input type="text" name="street" id="number" formControlName="number"  autocomplete="street-address" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <input placeholder="school number"  type="text" name="number" id="number" formControlName="number"  class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <div *ngIf="educationForm.get('number')?.dirty && educationForm.get('number')?.touched && educationForm.get('number')?.hasError('required')"
+                     class="text-white text-sm italic">
+                  House number is required.
+                </div>
               </div>
             </div>
 
             <div class="sm:col-span-2">
               <label for="city" class="block text-sm font-medium text-white"> City </label>
               <div class="mt-1">
-                <input type="text" name="city" id="city" formControlName="city"  autocomplete="address-level2" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <input placeholder="school city" type="text" name="city" id="city" formControlName="city" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <div *ngIf="educationForm.get('city')?.dirty && educationForm.get('city')?.touched && educationForm.get('city')?.hasError('required')"
+                     class="text-white text-sm italic">
+                  City name is required.
+                </div>
               </div>
             </div>
 
             <div class="sm:col-span-2">
               <label for="province" class="block text-sm font-medium text-white"> State / Province </label>
               <div class="mt-1">
-                <input type="text" name="province" id="province" formControlName="province"  autocomplete="address-level1" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <input placeholder="school province"  type="text" name="province" id="province" formControlName="province" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <div *ngIf="educationForm.get('province')?.dirty && educationForm.get('province')?.touched && educationForm.get('province')?.hasError('required')"
+                     class="text-white text-sm italic">
+                  Province name is required.
+                </div>
               </div>
             </div>
 
             <div class="sm:col-span-2">
               <label for="postalCode" class="block text-sm font-medium text-white"> ZIP / Postal code </label>
               <div class="mt-1">
-                <input type="text" name="postalCode" id="postalCode" formControlName="postalCode" autocomplete="postal-code" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <input placeholder="school Postal code"  type="text" name="postalCode" id="postalCode" formControlName="postalCode" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <div *ngIf="educationForm.get('postalCode')?.dirty && educationForm.get('postalCode')?.touched && educationForm.get('postalCode')?.hasError('required')"
+                     class="text-white text-sm italic">
+                  Postal code name is required.
+                </div>
+                <div *ngIf="educationForm.get('postalCode')?.dirty && educationForm.get('postalCode')?.touched && educationForm.get('postalCode')?.hasError('pattern')"
+                     class="text-white text-sm italic">
+                  Postal code must be a number.
+                </div>
               </div>
             </div>
           </div>
@@ -103,14 +141,22 @@
             <div class="sm:col-span-3">
               <label for="startDate" class="block text-sm font-medium text-white"> From </label>
               <div class="mt-1">
-                <input type="date" name="startDate" id="startDate" formControlName="startDate" autocomplete="given-name" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <input type="date" name="startDate" id="startDate" formControlName="startDate" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <div *ngIf="educationForm.get('startDate')?.dirty && educationForm.get('startDate')?.touched && educationForm.get('startDate')?.hasError('required')"
+                     class="text-white text-sm italic">
+                  Start date is required.
+                </div>
               </div>
             </div>
 
             <div class="sm:col-span-3">
               <label for="endDate" class="block text-sm font-medium text-white"> To </label>
               <div class="mt-1">
-                <input type="date" name="endDate" id="endDate" formControlName="endDate" autocomplete="given-name" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <input type="date" name="endDate" id="endDate" formControlName="endDate" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <div *ngIf="educationForm.get('endDate')?.dirty && educationForm.get('endDate')?.touched && educationForm.get('endDate')?.hasError('required')"
+                     class="text-white text-sm italic">
+                  End date name is required.
+                </div>
               </div>
             </div>
 
@@ -119,9 +165,19 @@
             <input type="checkbox"  name="active" id="active" formControlName="active">
             </diV>
 
-            <button type="submit" [disabled]="!educationForm.valid"  class="flex bg-white items-center h-10 w-40 rounded-xl mb-4">
-                <p class="ml-10 text-Jblue font-bold text-2xl">Submit</p>
+          </div>
+          <div class="flex justify-around mt-8">
+            <div>
+              <button type="submit" [disabled]="!educationForm.valid"  class="justify-center hover:bg-Jorange bg-white items-center h-10 w-48 rounded-xl mb-4">
+                <p class="text-Jblue hover:text-white font-bold text-2xl">Submit</p>
               </button>
+            </div>
+
+            <div>
+              <button (click)="cancel()" class="justify-center bg-white hover:bg-Jorange  items-center h-10 w-48 rounded-xl mb-4">
+                <p class="text-red-600 hover:text-white font-bold text-2xl">Cancel</p>
+              </button>
+            </div>
           </div>
         </div>
       </div>

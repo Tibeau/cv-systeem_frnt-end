@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { faPencil } from '@fortawesome/free-solid-svg-icons';
+import { faPencil, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import {Observable} from "rxjs";
 import {Education} from "../../models/education";
 import {Store} from '@ngrx/store';
 import {selectMyEducations} from "../education.selector";
 import {Router} from "@angular/router";
-import {loadEducations, changeEducation} from "../../store/actions/education.actions";
-import {FormBuilder, FormGroup, FormGroupDirective, Validators} from "@angular/forms";
+import {loadEducations, changeEducation, removeEducation} from "../../store/actions/education.actions";
+import {FormBuilder, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-education',
@@ -16,6 +16,7 @@ import {FormBuilder, FormGroup, FormGroupDirective, Validators} from "@angular/f
 export class EducationComponent implements OnInit {
   educations$: Observable<Education[] | null> = this.educationStore.select(selectMyEducations);
   faPencil = faPencil
+  faTrashCan = faTrashCan
   active: boolean = false;
 
   educationForm = this.fb.group({
@@ -52,8 +53,8 @@ export class EducationComponent implements OnInit {
     this.router.navigate(['/educationform']);
   }
 
-  onSubmit() {
-
+  onRemove(myId: number) {
+    this.educationStore.dispatch(removeEducation({id: myId}));
   }
 
   toggleActive(myEducation: Education){

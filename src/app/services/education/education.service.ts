@@ -26,8 +26,6 @@ export class EducationService {
   createEducation(education: Education){
     const url = `${this.BASE_URL}`;
     console.log("created on " + url);
-    console.log(education)
-    console.log(education.school)
     return this.httpClient.post<Education>(url, education
     );
   }
@@ -35,9 +33,15 @@ export class EducationService {
   putEducation(education: Education, id: number){
     const url = `${this.BASE_URL}/` + id;
     console.log("changed on " +url);
-    console.log(education)
-    console.log(education.school)
     return this.httpClient.put<Education>(url, education
     );
   }
+
+  deleteEducation(id: number){
+    const url = `${this.BASE_URL}/` + id;
+    console.log("deleted on " +url);
+    return this.httpClient.delete<Education>(url);
+  }
+
+
 }

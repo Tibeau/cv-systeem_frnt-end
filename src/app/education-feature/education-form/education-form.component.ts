@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {filter, Observable, Subscription, take, tap} from "rxjs";
+import {filter, Observable,take, tap} from "rxjs";
 import {Education} from "../../models/education";
+import { faArrowLeft} from '@fortawesome/free-solid-svg-icons';
 import {Store} from "@ngrx/store";
-import {FormBuilder, Validators} from "@angular/forms";
-import * as educationActions from "../../store/actions/education.actions";
+import {FormBuilder, FormControl, Validators} from "@angular/forms";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {selectMyEducations} from "../education.selector";
 import {map} from "rxjs/operators";
@@ -18,25 +18,25 @@ export class EducationFormComponent implements OnInit {
   education$: Observable<Education | undefined> = this.educationStore.select(selectMyEducations)
     .pipe(map(educations => educations?.find(education => education.id == this.educationId)));
 
-  isAdd: boolean = false;
-  isEdit: boolean = false;
+  faArrowLeft = faArrowLeft;
+  mode: string = "";
   educationId: number = 0;
   isActive: boolean = false
   candidateId: number = Number(localStorage.getItem("id"));
 
   educationForm = this.fb.group({
-    id: [0, Validators.required],
-    diploma: ['', Validators.required],
-    description: ['', Validators.required],
+    id: [0, Validators.required,],
+    diploma: ['', [Validators.required,]],
+    description: [''],
     school: ['', Validators.required],
     fieldOfStudy: ['', Validators.required],
     country: ['', Validators.required],
-    website: ['', Validators.required],
+    website: [''],
     street: ['', Validators.required],
-    number: ['', Validators.required],
+    number: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
     city: ['', Validators.required],
     province: ['', Validators.required],
-    postalCode: ['', Validators.required],
+    postalCode: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
     startDate: ['', Validators.required],
     endDate: ['', Validators.required],
     active: [true, Validators.required],
@@ -51,7 +51,7 @@ export class EducationFormComponent implements OnInit {
     this.educationStore.dispatch(loadEducations());
 
     if (this.educationId) {
-      this.isEdit = true
+      this.mode = "edit";
       this.education$.pipe(
         filter((education): education is Education => education !== undefined),
         tap((education) => {
@@ -59,18 +59,23 @@ export class EducationFormComponent implements OnInit {
         }),
         take(1)).subscribe();
     } else {
-      this.isAdd = true
+      this.mode = "add";
     }
-    console.log("add " + this.isAdd, "edit " + this.isEdit, "id " + this.educationId)
+    console.log(this.mode + this.educationId)
   }
 
   onSubmit(): void {
-    if (this.isAdd) {
+    if ( this.mode === "add") {
       this.educationStore.dispatch(addEducation({education: this.educationForm.value}));
 
-    } else if (this.isEdit) {
+    } else if (this.mode === "edit") {
       this.educationStore.dispatch(changeEducation({education: this.educationForm.value, id: this.educationId}));
     }
     this.router.navigate(['/educations']);
   }
+
+  cancel(){
+    this.router.navigate(['/educations']);
+  }
+
 }

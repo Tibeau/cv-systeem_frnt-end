@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faPencil, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { faPencil, faTrashCan, faXmark, faTriangleExclamation} from '@fortawesome/free-solid-svg-icons';
 import {Observable} from "rxjs";
 import {Education} from "../../models/education";
 import {Store} from '@ngrx/store';
@@ -17,7 +17,11 @@ export class EducationComponent implements OnInit {
   educations$: Observable<Education[] | null> = this.educationStore.select(selectMyEducations);
   faPencil = faPencil
   faTrashCan = faTrashCan
+  faXmark = faXmark
+  faTriangleExclamation = faTriangleExclamation;
+
   active: boolean = false;
+  showModal: boolean = false;
 
   educationForm = this.fb.group({
     id: [0, Validators.required],
@@ -54,7 +58,17 @@ export class EducationComponent implements OnInit {
   }
 
   onRemove(myId: number) {
+    this.showModal = false;
     this.educationStore.dispatch(removeEducation({id: myId}));
+  }
+
+  showDeleteModal(myEducation: Education){
+    this.educationForm.setValue(myEducation);
+    this.showModal = true;
+  }
+
+ closeDeleteModal(){
+    this.showModal = false;
   }
 
   toggleActive(myEducation: Education){

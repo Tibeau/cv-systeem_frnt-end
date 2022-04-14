@@ -1,5 +1,5 @@
-<div class="max-w-7xl mt-8 mb-12 mx-auto px-4 sm:px-6 lg:px-8 bg-Jblue rounded-3xl mr-6 ml-6">
-  <div class="max-w-3xl mx-auto">
+ <div class="max-w-5xl mx-auto">
+<div class="mt-8 mb-12 mx-auto px-4 sm:px-6 lg:px-8 bg-Jblue rounded-3xl mr-6 ml-6">
     <form [formGroup]="educationForm" (ngSubmit)="onSubmit()" class="space-y-8 divide-y divide-gray-200 ">
       <div class="space-y-8 divide-y divide-gray-200">
         <div class="pt-8 pb-4">
@@ -71,65 +71,6 @@
               <label for="website" class="block text-sm font-medium text-white"> Website<span class="text-sm text-white/75">(optional)</span> </label>
               <div class="mt-1">
                 <input placeholder="school website"  type="text" name="website" id="website" formControlName="website"  class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
-              </div>
-            </div>
-
-            <div class="sm:col-span-3">
-              <label for="street" class="block text-sm font-medium text-white"> Street </label>
-              <div class="mt-1">
-                <input placeholder="school street"  type="text" name="street" id="street" formControlName="street" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
-                <div *ngIf="educationForm.get('street')?.dirty && educationForm.get('street')?.touched && educationForm.get('street')?.hasError('required')"
-                     class="text-white text-sm italic">
-                  Street name is required.
-                </div>
-              </div>
-            </div>
-
-            <div class="sm:col-span-3">
-              <label for="number" class="block text-sm font-medium text-white"> House number </label>
-              <div class="mt-1">
-                <input placeholder="school number"  type="text" name="number" id="number" formControlName="number"  class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
-                <div *ngIf="educationForm.get('number')?.dirty && educationForm.get('number')?.touched && educationForm.get('number')?.hasError('required')"
-                     class="text-white text-sm italic">
-                  House number is required.
-                </div>
-              </div>
-            </div>
-
-            <div class="sm:col-span-2">
-              <label for="city" class="block text-sm font-medium text-white"> City </label>
-              <div class="mt-1">
-                <input placeholder="school city" type="text" name="city" id="city" formControlName="city" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
-                <div *ngIf="educationForm.get('city')?.dirty && educationForm.get('city')?.touched && educationForm.get('city')?.hasError('required')"
-                     class="text-white text-sm italic">
-                  City name is required.
-                </div>
-              </div>
-            </div>
-
-            <div class="sm:col-span-2">
-              <label for="province" class="block text-sm font-medium text-white"> State / Province </label>
-              <div class="mt-1">
-                <input placeholder="school province"  type="text" name="province" id="province" formControlName="province" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
-                <div *ngIf="educationForm.get('province')?.dirty && educationForm.get('province')?.touched && educationForm.get('province')?.hasError('required')"
-                     class="text-white text-sm italic">
-                  Province name is required.
-                </div>
-              </div>
-            </div>
-
-            <div class="sm:col-span-2">
-              <label for="postalCode" class="block text-sm font-medium text-white"> ZIP / Postal code </label>
-              <div class="mt-1">
-                <input placeholder="school Postal code"  type="text" name="postalCode" id="postalCode" formControlName="postalCode" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
-                <div *ngIf="educationForm.get('postalCode')?.dirty && educationForm.get('postalCode')?.touched && educationForm.get('postalCode')?.hasError('required')"
-                     class="text-white text-sm italic">
-                  Postal code name is required.
-                </div>
-                <div *ngIf="educationForm.get('postalCode')?.dirty && educationForm.get('postalCode')?.touched && educationForm.get('postalCode')?.hasError('pattern')"
-                     class="text-white text-sm italic">
-                  Postal code must be a number.
-                </div>
               </div>
             </div>
           </div>

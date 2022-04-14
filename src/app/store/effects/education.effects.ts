@@ -14,7 +14,7 @@ import {
   loadEducationsFail,
   loadEducations,
   removeEducationFail,
-  removeEducation
+  removeEducation, removeEducationSuccess
 } from "../actions/education.actions";
 import {candidateId} from "../../education-feature/education.selector";
 
@@ -29,7 +29,7 @@ export class EducationEffects {
 
   getEducations$ = createEffect(() => this.actions$.pipe(
     ofType(loadEducations),
-    switchMap(((educations) => this.educationService.getEducationsByCandidateId(candidateId)
+    switchMap((({page}) => this.educationService.getEducationsByCandidateId(candidateId, page)
       .pipe(
         map(educations => ( loadEducationsSuccess({educations}) )),
         catchError(() => of(loadEducationsFail))
@@ -41,8 +41,9 @@ export class EducationEffects {
     ofType(addEducation),
     switchMap(({education}) => this.educationService.createEducation(education)
       .pipe(
-        map(education => ( loadEducations() )),
-        catchError(() => of(addEducationFail))
+        map(education => ( addEducationSuccess())),
+        catchError(() => of(addEducationFail)),
+        map(education => (loadEducations({page: 0})))
       )))
   );
 
@@ -51,8 +52,9 @@ export class EducationEffects {
     ofType(changeEducation),
     switchMap((({education, id}) => this.educationService.putEducation(education, id)
       .pipe(
-        map(education => ( loadEducations() )),
-        catchError(() => of(changeEducationFail))
+        map(education => ( changeEducationSuccess())),
+        catchError(() => of(changeEducationFail)),
+        map(education => (loadEducations({page: 0})))
       )))
   ));
 
@@ -60,8 +62,9 @@ export class EducationEffects {
     ofType(removeEducation),
     switchMap(({id}) => this.educationService.deleteEducation(id)
       .pipe(
-        map(education => ( loadEducations() )),
-        catchError(() => of(removeEducationFail))
+        map(education => ( removeEducationSuccess() )),
+        catchError(() => of(removeEducationFail)),
+        map(education => (loadEducations({page: 0})))
       )))
   );
 }

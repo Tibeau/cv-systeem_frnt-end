@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../security/auth.service';
-import { faIdCard, faGraduationCap, faBriefcase, faRightFromBracket, faGear,  faCertificate, faFile, faMessage, faEarthEurope, faLightbulb} from '@fortawesome/free-solid-svg-icons';
+import { faIdCard, faGraduationCap, faBriefcase, faRightFromBracket, faGear,  faCertificate, faFile, faMessage, faEarthEurope, faLightbulb, faAngleLeft, faAngleRight} from '@fortawesome/free-solid-svg-icons';
 import {LogOut} from "../store/actions/auth.actions";
 import {AppState} from "../store/app.states";
 import { Store } from '@ngrx/store';
@@ -24,10 +24,12 @@ export class NavigationComponent implements OnInit {
   faGear = faGear;
   faCertificate = faCertificate;
   faFile =faFile;
+  faAngleLeft= faAngleLeft
+  faAngleRight =faAngleRight
 
   isLoggedIn: boolean = false;
   isShownNav: boolean = false; // hidden by default
-  isExtendSideBar: boolean = false;
+  isExtendSideBar: boolean = true;
 
   constructor(private authService: AuthService,
               private store: Store<AppState>
@@ -35,6 +37,7 @@ export class NavigationComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoggedIn = this.authService.isLoggedIn();
+    this.isExtendSideBar = JSON.parse(localStorage.getItem('sideBar') || 'true');
   }
 
   closeNav() {
@@ -45,8 +48,9 @@ export class NavigationComponent implements OnInit {
     this.isShownNav = true;
   }
 
-  extendSideBar() {
-    this.isExtendSideBar = true;
+  toggleSideBar() {
+    this.isExtendSideBar = !this.isExtendSideBar;
+    localStorage.setItem('sideBar', JSON.stringify(this.isExtendSideBar));
   }
 
   logOut(): void {

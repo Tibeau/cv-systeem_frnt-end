@@ -21,6 +21,7 @@ import { CertificationComponent } from './certification-feature/certification/ce
 import {CommonModule} from "@angular/common";
 import {EducationEffects} from "./store/effects/education.effects";
 
+import {NgxPaginationModule} from 'ngx-pagination';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import {environment} from "../environments/environment.prod";
@@ -41,6 +42,7 @@ import {educationReducer} from "./store/reducers/education.reducers";
   ],
   imports: [
     BrowserModule,
+    NgxPaginationModule,
     AppRoutingModule,
     FontAwesomeModule,
     HttpClientModule,

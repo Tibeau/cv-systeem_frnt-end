@@ -1,5 +1,6 @@
 import {createAction, props} from '@ngrx/store';
 import {Education} from "../../models/education";
+import {EducationPagination} from "../../models/education-pagination";
 
 let type = "[Education]"
 
@@ -39,10 +40,11 @@ export const addEducationFail = createAction(
 //LOAD EDUCATIONS
 export const loadEducations = createAction(
   `${type} loadEducations`,
+  props<{page: number}>(),
 )
 export const loadEducationsSuccess = createAction(
   `${type} loadEducations SUCCESS`,
-  props<{educations: Education[]}>(),
+  props<{educations: EducationPagination}>(),
 )
 
 export const loadEducationsFail = createAction(

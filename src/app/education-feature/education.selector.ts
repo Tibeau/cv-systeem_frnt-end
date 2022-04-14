@@ -1,5 +1,5 @@
 import {createFeatureSelector, createSelector} from "@ngrx/store";
-import {educationFeatureKey, selectEducation, selectEducations, State} from "../store/reducers/education.reducers";
+import {educationFeatureKey, selectEducations, State} from "../store/reducers/education.reducers";
 
 export const selectEducationFeature = createFeatureSelector<State>(educationFeatureKey);
 

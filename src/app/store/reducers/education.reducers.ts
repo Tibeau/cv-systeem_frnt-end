@@ -3,8 +3,9 @@ import {createReducer, on} from "@ngrx/store";
 import {
   loadEducations,
   loadEducationsFail,
-  loadEducationsSuccess, changeEducation,
+  loadEducationsSuccess, changeEducation, changeEducationSuccess, changeEducationFail,
 } from '../actions/education.actions';
+import {EducationPagination} from "../../models/education-pagination";
 
 export const educationFeatureKey = "educations";
 
@@ -14,7 +15,7 @@ export const selectEducation = (state: State) => state.educations
 
 
 export interface State {
-  educations: Education[] | null;
+  educations: EducationPagination | null;
   errorMessage: string | null;
 }
 
@@ -25,9 +26,14 @@ export const initialState: State = {
 
 export const educationReducer = createReducer(
   initialState,
-  on(loadEducations, (state) => ({educations: null, errorMessage: "still loading educations"})),
-  on(loadEducationsSuccess, (state, props) => ({educations: props.educations, errorMessage: "loaded educations"})),
+  on(loadEducations, (state) => ({educations: null, errorMessage: "loading educations"})),
+  on(loadEducationsSuccess, (state, props) => ({educations: props.educations, errorMessage: "loaded educations successfully"})),
   on(loadEducationsFail, (state) => ({educations: null, errorMessage: "failed to load educations"})),
+
+  on(changeEducation, (state) => ({educations: null, errorMessage: "changing education"})),
+  on(changeEducationSuccess, (state) => ({educations: null, errorMessage: "changed education successfully"})),
+  on(changeEducationFail, (state) => ({educations: null, errorMessage: "failed to change education"})),
+
 );
 
 

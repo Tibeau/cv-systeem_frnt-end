@@ -16,12 +16,11 @@ import {addEducation, changeEducation, loadEducations} from "../../store/actions
 })
 export class EducationFormComponent implements OnInit {
   education$: Observable<Education | undefined> = this.educationStore.select(selectMyEducations)
-    .pipe(map(educations => educations?.find(education => education.id == this.educationId)));
+    .pipe(map(educations => educations?.content.find(education => education.id == this.educationId)));
 
   faArrowLeft = faArrowLeft;
   mode: string = "";
   educationId: number = 0;
-  isActive: boolean = false
   candidateId: number = Number(localStorage.getItem("id"));
 
   educationForm = this.fb.group({
@@ -32,11 +31,6 @@ export class EducationFormComponent implements OnInit {
     fieldOfStudy: ['', Validators.required],
     country: ['', Validators.required],
     website: [''],
-    street: ['', Validators.required],
-    number: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
-    city: ['', Validators.required],
-    province: ['', Validators.required],
-    postalCode: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
     startDate: ['', Validators.required],
     endDate: ['', Validators.required],
     active: [true, Validators.required],
@@ -48,7 +42,7 @@ export class EducationFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => this.educationId = params['id']);
-    this.educationStore.dispatch(loadEducations());
+    this.educationStore.dispatch(loadEducations({page: 0}));
 
     if (this.educationId) {
       this.mode = "edit";
@@ -61,13 +55,11 @@ export class EducationFormComponent implements OnInit {
     } else {
       this.mode = "add";
     }
-    console.log(this.mode + this.educationId)
   }
 
   onSubmit(): void {
     if ( this.mode === "add") {
       this.educationStore.dispatch(addEducation({education: this.educationForm.value}));
-
     } else if (this.mode === "edit") {
       this.educationStore.dispatch(changeEducation({education: this.educationForm.value, id: this.educationId}));
     }
@@ -77,5 +69,4 @@ export class EducationFormComponent implements OnInit {
   cancel(){
     this.router.navigate(['/educations']);
   }
-
 }

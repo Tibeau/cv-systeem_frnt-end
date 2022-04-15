@@ -26,6 +26,8 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import {environment} from "../environments/environment.prod";
 import {educationReducer} from "./store/reducers/education.reducers";
+import { DeleteModalComponent } from './delete-modal/delete-modal.component';
+import { PaginationComponent } from './pagination/pagination.component';
 
 
 @NgModule({
@@ -38,6 +40,8 @@ import {educationReducer} from "./store/reducers/education.reducers";
     EducationComponent,
     EducationFormComponent,
     CertificationComponent,
+    DeleteModalComponent,
+    PaginationComponent,
 
   ],
   imports: [

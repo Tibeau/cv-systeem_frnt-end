@@ -127,7 +127,7 @@
       </div>
     </nav>
 
-    <div class="bgImage hidden md:block md:flex-shrink-0">
+    <div class="bgImage hidden md:block md:flex-shrink-0 md:bg-Jorange">
     <button *ngIf="isLoggedIn" (click)="toggleSideBar()" class="ontop bg-Jorange hover:bg-white hover:border-Jorange border-white border-2 hover:text-Jorange text-white h-8 w-8 justify-center rounded-lg">
       <fa-icon *ngIf="isExtendSideBar" [icon]="faAngleLeft"></fa-icon>
       <fa-icon *ngIf="!isExtendSideBar" [icon]="faAngleRight"></fa-icon>

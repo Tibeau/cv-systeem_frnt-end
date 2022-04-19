@@ -1,13 +1,11 @@
  <div class="max-w-5xl mx-auto">
-<div class="mt-8 mb-12 mx-auto px-4 sm:px-6 lg:px-8 bg-Jblue rounded-3xl mr-6 ml-6">
+<div class="mt-8 mb-12 mx-auto px-4 sm:px-6 lg:px-8 bg-Jblue rounded-3xl mr-6 ml-6 border-white border-2 bg-gradient-to-b from-indigo-600 to-Jblue ">
     <form [formGroup]="educationForm" (ngSubmit)="onSubmit()" class="space-y-8 divide-y divide-gray-200 ">
-      <div class="space-y-8 divide-y divide-gray-200">
+      <div class="space-y-8 divide-y divide-gray-200 ">
         <div class="pt-8 pb-4">
-          <div>
             <h3 class="text-lg leading-6 text-bold font-large text-white text-3xl mb-4">Education</h3>
             <p *ngIf="mode === 'add'" class="mt-1 text-lg text-white">add a new education to your CV <span class="text-sm">(added educations are automatically set to active)</span></p>
             <p *ngIf="mode === 'edit'" class="mt-1 text-lg text-white">change one of your educations <span class="text-sm">(be sure to submit your changes)</span></p>
-          </div>
 
           <hr>
 
@@ -109,7 +107,7 @@
           </div>
           <div class="flex justify-around mt-8">
             <div>
-              <button type="submit" [disabled]="!educationForm.valid"  class="justify-center hover:bg-Jorange bg-white items-center h-10 w-48 rounded-xl mb-4">
+              <button type="submit" name="submitButton" [disabled]="!educationForm.valid"  class="justify-center hover:bg-Jorange bg-white items-center h-10 w-48 rounded-xl mb-4">
                 <p class="text-Jblue hover:text-white font-bold text-2xl">Submit</p>
               </button>
             </div>

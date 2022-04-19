@@ -60,20 +60,14 @@ export class EducationComponent implements OnInit {
 
   onEdit(education: Education) {
     this.router.navigate(['/educationform/' + education.id]);
-    //temp
-    this.currentPage = 0
   }
   onAdd(){
     this.router.navigate(['/educationform']);
-    //temp
-    this.currentPage = 0
   }
 
   onRemove(myId: number) {
     this.showModal = false;
     this.educationStore.dispatch(removeEducation({id: myId}));
-    //temp
-    this.currentPage = 0
   }
 
   showDeleteModal(myEducation: Education){
@@ -92,8 +86,6 @@ export class EducationComponent implements OnInit {
     this.active = !this.active;
     this.educationForm.patchValue({ active: this.active })
     this.educationStore.dispatch(changeEducation({education: this.educationForm.value, id: myEducation.id}));
-    //temp
-    this.currentPage = 0
   }
 
   pageChanged(page: number) {

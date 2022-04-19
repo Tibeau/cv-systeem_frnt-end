@@ -22,6 +22,8 @@ export class EducationFormComponent implements OnInit {
   mode: string = "";
   educationId: number = 0;
   candidateId: number = Number(localStorage.getItem("id"));
+  currentPage = 0;
+  isCancel: boolean = false;
 
   educationForm = this.fb.group({
     id: [0, Validators.required,],
@@ -42,7 +44,8 @@ export class EducationFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => this.educationId = params['id']);
-    this.educationStore.dispatch(loadEducations({page: 0}));
+
+    console.log(this.educationId)
 
     if (this.educationId) {
       this.mode = "edit";
@@ -55,18 +58,25 @@ export class EducationFormComponent implements OnInit {
     } else {
       this.mode = "add";
     }
+    console.log(this.mode)
   }
 
   onSubmit(): void {
-    if ( this.mode === "add") {
-      this.educationStore.dispatch(addEducation({education: this.educationForm.value}));
-    } else if (this.mode === "edit") {
-      this.educationStore.dispatch(changeEducation({education: this.educationForm.value, id: this.educationId}));
+    if (!this.educationForm.valid && this.isCancel === false) {
+      window.alert("please fill in all required fields before submitting the form");
+    } else {
+      if ( this.mode === "add") {
+        this.educationStore.dispatch(addEducation({education: this.educationForm.value}));
+      } else if (this.mode === "edit") {
+        this.educationStore.dispatch(changeEducation({education: this.educationForm.value, id: this.educationId}));
+      }
+      this.router.navigate(['/educations']);
     }
-    this.router.navigate(['/educations']);
+
   }
 
   cancel(){
+    this.isCancel = true
     this.router.navigate(['/educations']);
   }
 }

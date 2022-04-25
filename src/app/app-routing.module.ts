@@ -14,6 +14,7 @@ const routes: Routes = [
   { path: 'contactInfo', component: ContactInfoComponent },
   { path: 'educations', component: EducationComponent },
   { path: 'educationform', component: EducationFormComponent },
+  { path: 'educationform/:id', component: EducationFormComponent },
   { path: 'certifications', component: CertificationComponent },
   { path: 'certificationform', component: CertificationFormComponent },
 

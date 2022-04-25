@@ -2,6 +2,7 @@ import {User} from "../../security/user";
 import { AuthActionTypes, All } from '../actions/auth.actions';
 
 
+
 export interface State {
   // is a user authenticated?
   isAuthenticated: boolean;

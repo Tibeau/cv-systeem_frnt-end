@@ -4,7 +4,7 @@
 
         <div class="md:flex-shrink-0 flex items-center justify-end h-20 w-60 rounded-br-full rounded-tr-full bg-indigo-500 ">
      <h1 class="font-bold text-white mr-4">My name</h1>
-      <a href="/" class="mr-4">
+      <a href="/src" class="mr-4">
         <img class="h-12 w-auto" src="../../assets/logo_round.png" alt="Workflow">
       </a>
     </div>
@@ -36,7 +36,7 @@
 
 
         <div class="max-w-8xl mx-auto py-3 px-2 sm:px-4">
-          <a href="/" class="block rounded-md py-2 px-3 text-base font-medium text-gray-900 hover:bg-gray-100">CV</a>
+          <a href="/src" class="block rounded-md py-2 px-3 text-base font-medium text-gray-900 hover:bg-gray-100">CV</a>
 
           <a href="/contactInfo" class="block rounded-md py-2 px-3 text-base font-medium text-gray-900 hover:bg-gray-100">Contact info</a>
 
@@ -60,77 +60,87 @@
   <!-- Bottom section -->
   <div  class="min-h-0 flex-1 flex overflow-hidden">
     <!-- Narrow sidebar-->
-    <nav *ngIf="isLoggedIn" aria-label="Sidebar" class="hidden md:block md:flex-shrink-0 md:bg-Jorange md:overflow-y-auto">
+    <nav *ngIf="isLoggedIn" [ngClass]="!isExtendSideBar ? '': 'w-60 sidebar'" class="hidden md:block md:flex-shrink-0 md:bg-Jorange md:overflow-y-auto" aria-label="Sidebar">
       <div class="relative w-20 flex flex-col p-3 space-y-3">
 
-        <a href="/" class="hover:bg-JorangeSelect text-white flex-shrink-0 inline-flex items-center justify-center h-14 w-14 mt-1 rounded-lg">
-          <span class="sr-only ">CV</span>
+        <a href="/src" [ngClass]="!isExtendSideBar ? 'w-14': 'w-52'" class="hover:bg-JorangeSelect text-white flex-shrink-0 inline-flex items-center justify-center h-14 mt-1 rounded-lg">
           <fa-icon transform="grow-18" [icon]="faFile"></fa-icon>
-
-          <!-- Heroicon name: outline/inbox -->
+          <span *ngIf="isExtendSideBar" class="ml-6">CV</span>
         </a>
 
-        <a href="/contactInfo" class="text-white hover:bg-JorangeSelect flex-shrink-0 inline-flex items-center justify-center h-14 w-14 mt-1 rounded-lg">
+
+
+        <a href="/contactInfo" [ngClass]="!isExtendSideBar ? 'w-14': 'w-52'"  class="text-white hover:bg-JorangeSelect flex-shrink-0 inline-flex items-center justify-center h-14 w-14 mt-1 rounded-lg">
           <span class="sr-only">Contact info</span>
-          <!-- Heroicon name: outline/archive -->
           <fa-icon transform="grow-18" [icon]="faIdCard"></fa-icon>
+          <span *ngIf="isExtendSideBar" class="ml-6">Contact info</span>
         </a>
 
-        <a href="/educations" class="text-white hover:bg-JorangeSelect flex-shrink-0 inline-flex items-center justify-center h-14 w-14 mt-1 rounded-lg">
+        <a href="/educations" [ngClass]="!isExtendSideBar ? 'w-14': 'w-52'"  class="text-white hover:bg-JorangeSelect flex-shrink-0 inline-flex items-center justify-center h-14 w-14 mt-1 rounded-lg">
           <span class="sr-only">Educations</span>
-          <!-- Heroicon name: outline/ban -->
           <fa-icon transform="grow-18" [icon]="faGraduationCap"></fa-icon>
+          <span *ngIf="isExtendSideBar" class="ml-6">Educations</span>
+
 
         </a>
 
-        <a href="/certifications" class="text-white hover:bg-JorangeSelect flex-shrink-0 inline-flex items-center justify-center h-14 w-14 mt-1 rounded-lg">
+        <a href="/certifications" [ngClass]="!isExtendSideBar ? 'w-14': 'w-52'"  class="text-white hover:bg-JorangeSelect flex-shrink-0 inline-flex items-center justify-center h-14 w-14 mt-1 rounded-lg">
           <span class="sr-only">Certificates</span>
-          <!-- Heroicon name: outline/flag -->
           <fa-icon transform="grow-18" [icon]="faCertificate"></fa-icon>
+          <span *ngIf="isExtendSideBar" class="ml-6">Certifications</span>
+
         </a>
 
-        <a href="/experiences" class="text-white hover:bg-JorangeSelect flex-shrink-0 inline-flex items-center justify-center h-14 w-14 mt-1 rounded-lg">
+        <a href="/experiences" [ngClass]="!isExtendSideBar ? 'w-14': 'w-52'"  class="text-white hover:bg-JorangeSelect flex-shrink-0 inline-flex items-center justify-center h-14 w-14 mt-1 rounded-lg">
           <span class="sr-only">Experiences</span>
-          <!-- Heroicon name: outline/pencil-alt -->
           <fa-icon transform="grow-18" [icon]="faBriefcase"></fa-icon>
+          <span *ngIf="isExtendSideBar" class="ml-6">Experiences</span>
+
 
         </a>
 
-        <a href="/skills" class="text-white hover:bg-JorangeSelect flex-shrink-0 inline-flex items-center justify-center h-14 w-14 mt-1 rounded-lg">
+        <a href="/skills" [ngClass]="!isExtendSideBar ? 'w-14': 'w-52'"  class="text-white hover:bg-JorangeSelect flex-shrink-0 inline-flex items-center justify-center h-14 w-14 mt-1 rounded-lg">
           <span class="sr-only">Skills</span>
-          <!-- Heroicon name: outline/ban -->
           <fa-icon transform="grow-18" [icon]="faLightbulb"></fa-icon>
+          <span *ngIf="isExtendSideBar" class="ml-6">Skills</span>
+
 
         </a>
 
-        <a href="/languages" class="text-white hover:bg-JorangeSelect flex-shrink-0 inline-flex items-center justify-center h-14 w-14 mt-1 rounded-lg">
+        <a href="/languages" [ngClass]="!isExtendSideBar ? 'w-14': 'w-52'"  class="text-white hover:bg-JorangeSelect flex-shrink-0 inline-flex items-center justify-center h-14 w-14 mt-1 rounded-lg">
           <span class="sr-only">Languages</span>
-          <!-- Heroicon name: outline/ban -->
           <fa-icon transform="grow-18" [icon]="faEarthEurope"></fa-icon>
-
+          <span *ngIf="isExtendSideBar" class="ml-6">Languages</span>
         </a>
 
-        <a href="/settings" class="text-white hover:bg-JorangeSelect flex-shrink-0 inline-flex items-center justify-center h-14 w-14 mt-1 rounded-lg">
+        <a href="/settings" [ngClass]="!isExtendSideBar ? 'w-14': 'w-52'"  class="text-white hover:bg-JorangeSelect flex-shrink-0 inline-flex items-center justify-center h-14 w-14 mt-1 rounded-lg">
           <span class="sr-only">Settings</span>
-          <!-- Heroicon name: outline/ban -->
           <fa-icon transform="grow-18" [icon]="faGear"></fa-icon>
-
+          <span *ngIf="isExtendSideBar" class="ml-6">Settings</span>
         </a>
 
-        <a href="/login" class="text-white hover:bg-JorangeSelect flex-shrink-0 inline-flex items-center justify-center h-14 w-14 mt-1 rounded-lg" (click)="logOut()">
+        <a href="/login" [ngClass]="!isExtendSideBar ? 'w-14': 'w-52'"  class="text-white hover:bg-JorangeSelect flex-shrink-0 inline-flex items-center justify-center h-14 w-14 mt-1 rounded-lg" (click)="logOut()">
           <span class="sr-only">Logout</span>
-          <!-- Heroicon name: outline/ban -->
           <fa-icon transform="grow-18" [icon]="faRightFromBracket"></fa-icon>
+          <span *ngIf="isExtendSideBar" class="ml-6">Logout</span>
         </a>
       </div>
     </nav>
 
+    <div class="bgImage hidden md:block md:flex-shrink-0 md:bg-Jorange">
+    <button *ngIf="isLoggedIn" (click)="toggleSideBar()" class="ontop bg-Jorange hover:bg-white hover:border-Jorange border-white border-2 hover:text-Jorange text-white h-8 w-8 justify-center rounded-lg">
+      <fa-icon *ngIf="isExtendSideBar" [icon]="faAngleLeft"></fa-icon>
+      <fa-icon *ngIf="!isExtendSideBar" [icon]="faAngleRight"></fa-icon>
+    </button>
+    </div>
+
     <!-- Main area -->
-    <main class="min-w-0 flex-1 border-t border-gray-200 lg:flex">
+    <main class="min-w-0 flex-1 border-t border-gray-200 lg:flex bgImage">
       <!-- Primary column -->
       <section aria-labelledby="primary-heading" class="min-w-0 flex-1 h-full flex flex-col overflow-y-auto lg:order-last">
         <h1 id="primary-heading" class="sr-only">Home</h1>
-        <router-outlet></router-outlet>
+          <router-outlet></router-outlet>
+
 
       </section>
     </main>

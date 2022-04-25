@@ -9,7 +9,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { StoreModule } from '@ngrx/store';
 import {AuthService} from "./security/auth.service";
 import {AuthEffects} from "./store/effects/auth.effects";
 import { EffectsModule } from '@ngrx/effects';
@@ -19,6 +18,16 @@ import { ContactInfoComponent } from './contact-info/contact-info.component';
 import { EducationComponent } from './education-feature/education/education.component';
 import { EducationFormComponent } from './education-feature/education-form/education-form.component';
 import { CertificationComponent } from './certification-feature/certification/certification.component';
+import {CommonModule} from "@angular/common";
+import {EducationEffects} from "./store/effects/education.effects";
+
+import {NgxPaginationModule} from 'ngx-pagination';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import {environment} from "../environments/environment.prod";
+import {educationReducer} from "./store/reducers/education.reducers";
+import { DeleteModalComponent } from './delete-modal/delete-modal.component';
+import { PaginationComponent } from './pagination/pagination.component';
 
 
 @NgModule({
@@ -31,19 +40,28 @@ import { CertificationComponent } from './certification-feature/certification/ce
     EducationComponent,
     EducationFormComponent,
     CertificationComponent,
+    DeleteModalComponent,
+    PaginationComponent,
 
   ],
   imports: [
     BrowserModule,
+    NgxPaginationModule,
     AppRoutingModule,
     FontAwesomeModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    EffectsModule.forRoot([AuthEffects]),
-    StoreModule.forRoot({}),
+    EffectsModule.forRoot([AuthEffects, EducationEffects]),
+    EffectsModule.forFeature(),
+    StoreModule.forRoot({educations: educationReducer}),
     BrowserAnimationsModule,
     LayoutModule,
+    CommonModule,
+    StoreDevtoolsModule.instrument({
+      name: 'Cv systeem',
+      logOnly: environment.production
+    })
     //reducers
   ],
   providers: [AuthService],

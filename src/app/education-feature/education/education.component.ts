@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { faPencil, faTrashCan, faXmark, faTriangleExclamation} from '@fortawesome/free-solid-svg-icons';
-import {filter, Observable, take} from "rxjs";
+import {filter, Observable, pipe, take} from "rxjs";
 import {Education} from "../../models/education";
 import {Store} from '@ngrx/store';
 import {selectMyEducations} from "../education.selector";
@@ -21,6 +21,8 @@ export class EducationComponent implements OnInit {
   myEducations$: Observable<Education[]> = this.educations$.pipe(
     filter((education): education is EducationPagination => education !== undefined),
     map(educations => educations?.content));
+
+
   faPencil = faPencil
   faTrashCan = faTrashCan
   faXmark = faXmark
@@ -54,12 +56,12 @@ export class EducationComponent implements OnInit {
 
   ngOnInit(): void {
     this.educationStore.dispatch(loadEducations({page: this.currentPage}));
-    this.myEducations$.subscribe()
-    this.pageAmountSub$.subscribe((page:number) => {this.pageAmount = page})
+    this.myEducations$.pipe(take(1)).subscribe();
+    this.pageAmountSub$.pipe(take(1)).subscribe((page:number) => {this.pageAmount = page})
   }
 
   onEdit(education: Education) {
-    this.router.navigate(['/educationform/' + education.id]);
+    this.router.navigate([`/educationform/${education.id}`]);
   }
   onAdd(){
     this.router.navigate(['/educationform']);
@@ -73,7 +75,6 @@ export class EducationComponent implements OnInit {
   showDeleteModal(myEducation: Education){
     this.educationForm.setValue(myEducation);
     this.showModal = true;
-    console.log(this.showModal)
   }
 
  closeDeleteModal(modal: boolean){
@@ -90,7 +91,6 @@ export class EducationComponent implements OnInit {
 
   pageChanged(page: number) {
     this.currentPage = page;
-    console.log(this.currentPage)
     this.educationStore.dispatch(loadEducations({page: this.currentPage}));
   }
 }

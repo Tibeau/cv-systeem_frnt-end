@@ -4,7 +4,7 @@
 
         <div class="md:flex-shrink-0 flex items-center justify-end h-20 w-60 rounded-br-full rounded-tr-full bg-indigo-500 ">
      <h1 class="font-bold text-white mr-4">My name</h1>
-      <a href="/" class="mr-4">
+      <a href="/src" class="mr-4">
         <img class="h-12 w-auto" src="../../assets/logo_round.png" alt="Workflow">
       </a>
     </div>
@@ -36,7 +36,7 @@
 
 
         <div class="max-w-8xl mx-auto py-3 px-2 sm:px-4">
-          <a href="/" class="block rounded-md py-2 px-3 text-base font-medium text-gray-900 hover:bg-gray-100">CV</a>
+          <a href="/src" class="block rounded-md py-2 px-3 text-base font-medium text-gray-900 hover:bg-gray-100">CV</a>
 
           <a href="/contactInfo" class="block rounded-md py-2 px-3 text-base font-medium text-gray-900 hover:bg-gray-100">Contact info</a>
 
@@ -63,7 +63,7 @@
     <nav *ngIf="isLoggedIn" [ngClass]="!isExtendSideBar ? '': 'w-60 sidebar'" class="hidden md:block md:flex-shrink-0 md:bg-Jorange md:overflow-y-auto" aria-label="Sidebar">
       <div class="relative w-20 flex flex-col p-3 space-y-3">
 
-        <a href="/"  [ngClass]="!isExtendSideBar ? 'w-14': 'w-52'"  class="hover:bg-JorangeSelect text-white flex-shrink-0 inline-flex items-center justify-center h-14 mt-1 rounded-lg">
+        <a href="/src" [ngClass]="!isExtendSideBar ? 'w-14': 'w-52'" class="hover:bg-JorangeSelect text-white flex-shrink-0 inline-flex items-center justify-center h-14 mt-1 rounded-lg">
           <fa-icon transform="grow-18" [icon]="faFile"></fa-icon>
           <span *ngIf="isExtendSideBar" class="ml-6">CV</span>
         </a>

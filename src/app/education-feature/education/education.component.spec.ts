@@ -1,5 +1,5 @@
 import {ComponentFixture, TestBed, fakeAsync, tick} from '@angular/core/testing';
-import {EducationComponent} from "../education/education.component";
+import {EducationComponent} from "./education.component";
 import {BrowserModule, By} from "@angular/platform-browser";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { RouterTestingModule } from '@angular/router/testing';
@@ -7,10 +7,10 @@ import {EffectsModule} from "@ngrx/effects";
 import {EducationEffects} from "../../store/effects/education.effects";
 import {StoreModule} from "@ngrx/store";
 import {educationReducer} from "../../store/reducers/education.reducers";
-import { HttpClientModule } from '@angular/common/http';
 import {Router} from "@angular/router";
 import {Location} from "@angular/common";
 import {Education} from "../../models/education";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
 
 
 
@@ -46,7 +46,7 @@ describe('EducationFormComponent', () => {
         RouterTestingModule.withRoutes(
           [ { path: 'educationform', component: EducationComponent },]
         ),
-        HttpClientModule,
+        HttpClientTestingModule,
         EffectsModule.forRoot([ EducationEffects]),
         EffectsModule.forFeature(),
         StoreModule.forRoot({educations: educationReducer}),
@@ -60,16 +60,17 @@ describe('EducationFormComponent', () => {
   });
 
 
-  describe('Candidate is logged in', () => {
+
     describe('Show first education page from candidate', () => {
-
-
       describe('working edit button', () => {
       });
       describe('working toggle active button', () => {
         it('toggle active should change the active state of the education', function () {
+
+
           component.toggleActive(education)
           fixture.detectChanges()
+
           expect(component.active).toEqual(!education.active)
           expect(component.educationForm.value.active).toEqual(!education.active)
         });
@@ -77,19 +78,31 @@ describe('EducationFormComponent', () => {
     });
     describe('working delete button',  () => {
       it('on education removal, modal should close',  ()=> {
+
+
         component.onRemove(1);
+
+
         expect(component.showModal).toEqual(false);
       });
       it('when delete button is pressed a modal should be shown', () => {
+
+
         fixture.detectChanges()
         component.showDeleteModal(education)
+
+
         expect(component.educationForm.value).toEqual(education)
         expect(component.showModal).toBeTrue()
       });
 
       it('close modal button should set show modal false',  () => {
+
+
         component.closeDeleteModal(false)
         fixture.detectChanges()
+
+
         expect(component.showModal).toBeFalse()
       });
     });
@@ -100,10 +113,13 @@ describe('EducationFormComponent', () => {
 
     describe('working pagination', () => {
       it('page should become same as input',  () => {
+
+
         component.pageChanged(1)
         fixture.detectChanges()
+
+
         expect(component.currentPage).toEqual(1)
       });
     });
-  });
 });

@@ -8,16 +8,16 @@ import {EffectsModule} from "@ngrx/effects";
 import {EducationEffects} from "../../store/effects/education.effects";
 import {StoreModule} from "@ngrx/store";
 import {educationReducer} from "../../store/reducers/education.reducers";
-import { HttpClientModule } from '@angular/common/http';
 import {Router} from "@angular/router";
 import {Location} from "@angular/common";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
 
 
 
 describe('EducationFormComponent', () => {
   let component: EducationFormComponent;
   let fixture: ComponentFixture<EducationFormComponent>;
-  let el: HTMLElement;
+  let element: HTMLElement;
   let location: Location;
   let router: Router;
 
@@ -36,11 +36,11 @@ describe('EducationFormComponent', () => {
           [ { path: 'educationform', component: EducationFormComponent },
             { path: 'educationform/:id', component: EducationFormComponent },]
         ),
-        HttpClientModule,
+        HttpClientTestingModule,
         EffectsModule.forRoot([ EducationEffects]),
         EffectsModule.forFeature(),
         StoreModule.forRoot({educations: educationReducer}),
-      ]
+      ],
     }).compileComponents().then(() => {
       fixture = TestBed.createComponent(EducationFormComponent);
       component = fixture.componentInstance;
@@ -52,14 +52,22 @@ describe('EducationFormComponent', () => {
 
   describe('show edit form', () => {
     // it('mode should be edit', function () {
+    //   const router = TestBed.inject(Router);
+    //
+    //   spyOnProperty(router, 'url', 'get').and.returnValue('/educationForm/2')
+    //
     //   fixture.detectChanges();
     //   expect(component.mode).toEqual('edit')
     // });
   })
 
   describe('show add form', () => {
-    it('mode should be add', function () {
+    it('mode should be add', () => {
+
+
       fixture.detectChanges();
+
+
       expect(component.mode).toEqual('add')
 
     });
@@ -78,7 +86,10 @@ describe('EducationFormComponent', () => {
         component.educationForm.controls['active'].setValue('');
         component.educationForm.controls['candidateId'].setValue('');
         component.educationForm.controls['school'].setValue('');
-        expect(component.educationForm.valid).toBeFalsy();
+
+
+
+        expect(component.educationForm.valid).toBeFalse();
       })
     );
 
@@ -94,15 +105,20 @@ describe('EducationFormComponent', () => {
         component.educationForm.controls['active'].setValue(false);
         component.educationForm.controls['candidateId'].setValue(1);
         component.educationForm.controls['school'].setValue('thomasmore');
-        expect(component.educationForm.valid).toBeTruthy();
+
+
+        expect(component.educationForm.valid).toBeTrue();
       })
     );
 
     it('should call the submit method', (() => {
-        fixture.detectChanges();
         spyOn(component, 'onSubmit');
-        el = fixture.debugElement.query(By.css('button')).nativeElement;
-        el.click();
+        element = fixture.debugElement.query(By.css('button')).nativeElement;
+
+        fixture.detectChanges();
+        element.click();
+
+
         expect(component.onSubmit).toHaveBeenCalledTimes(0)
       })
     );
@@ -111,14 +127,17 @@ describe('EducationFormComponent', () => {
   describe('form submit', () => {
 
     it('should display alert message when onSubmit is called but is not valid',  () => {
-    const fnc = spyOn(window, 'alert')
+      const alert = spyOn(window, 'alert')
+
+
       component.onSubmit();
 
 
-      expect(fnc).toHaveBeenCalledOnceWith('please fill in all required fields before submitting the form')
+      expect(alert).toHaveBeenCalledOnceWith('please fill in all required fields before submitting the form')
     });
 
     it('should not display alert message when onSubmit is called and is valid',  () => {
+      const alert = spyOn(window, 'alert');
       component.educationForm.controls['id'].setValue(0);
       component.educationForm.controls['diploma'].setValue('bachelor diploma');
       component.educationForm.controls['description'].setValue('some description');
@@ -130,13 +149,13 @@ describe('EducationFormComponent', () => {
       component.educationForm.controls['active'].setValue(false);
       component.educationForm.controls['candidateId'].setValue(1);
       component.educationForm.controls['school'].setValue('thomasmore');
+
+
       fixture.detectChanges()
-
-      const fnc = spyOn(window, 'alert');
-
       component.onSubmit();
-      expect(fnc).not.toHaveBeenCalled();
 
+
+      expect(alert).not.toHaveBeenCalled();
     });
 
     // it('/educationform/2 should return educationId 2', fakeAsync(() => {
@@ -156,8 +175,12 @@ describe('EducationFormComponent', () => {
   describe('cancel changes', () => {
 
     it('cancel button pressed',  () => {
+
+
       component.cancel()
       fixture.detectChanges()
+
+
       expect(component.isCancel).toEqual(true);
     });
 

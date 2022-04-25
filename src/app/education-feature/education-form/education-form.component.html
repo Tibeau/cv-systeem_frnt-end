@@ -81,7 +81,7 @@
               <label for="startDate" class="block text-sm font-medium text-white"> From </label>
               <div class="mt-1">
                 <input type="date" name="startDate" id="startDate" formControlName="startDate" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
-                <div *ngIf="educationForm.get('startDate')?.dirty && educationForm.get('startDate')?.touched && educationForm.get('startDate')?.hasError('required')"
+                <div *ngIf="educationForm.get('startDate')?.dirty && educationForm.get('startDate')?.touched && educationForm.get('startDate')?.hasError('required')&& educationForm.get('startDate')?.invalid"
                      class="text-white text-sm italic">
                   Start date is required.
                 </div>

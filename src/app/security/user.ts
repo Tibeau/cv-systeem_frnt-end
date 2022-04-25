@@ -17,4 +17,6 @@ export interface User {
   linkedIn?: string;
   imgUrl?: string;
   driversLicence?: string;
+  candidateId?: number;
+  companyId?: number;
 }

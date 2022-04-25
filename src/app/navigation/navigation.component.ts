@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../security/auth.service';
 import { faIdCard, faGraduationCap, faBriefcase, faRightFromBracket, faGear,  faCertificate, faFile, faMessage, faEarthEurope, faLightbulb, faAngleLeft, faAngleRight} from '@fortawesome/free-solid-svg-icons';
-import {LogOut} from "../store/actions/auth.actions";
-import {AppState} from "../store/app.states";
 import { Store } from '@ngrx/store';
+import {logout} from "../store/actions/auth.actions";
+import {User} from "../security/user";
 
 
 @Component({
@@ -32,7 +32,7 @@ export class NavigationComponent implements OnInit {
   isExtendSideBar: boolean = true;
 
   constructor(private authService: AuthService,
-              private store: Store<AppState>
+              private store: Store<{ user: User }>
   ) {}
 
   ngOnInit(): void {
@@ -54,7 +54,7 @@ export class NavigationComponent implements OnInit {
   }
 
   logOut(): void {
-    this.store.dispatch(new LogOut);
+    this.store.dispatch(logout());
   }
 
 }

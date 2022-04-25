@@ -1,14 +1,19 @@
 import {User} from "../../security/user";
-import { AuthActionTypes, All } from '../actions/auth.actions';
+import {createReducer, on} from "@ngrx/store";
+import {
+  changeEducation, changeEducationFail,
+  changeEducationSuccess,
+  loadEducations,
+  loadEducationsFail,
+  loadEducationsSuccess
+} from "../actions/education.actions";
+import {login, logInFailure, logInSuccess, logout} from "../actions/auth.actions";
 
 
 
 export interface State {
-  // is a user authenticated?
   isAuthenticated: boolean;
-  // if authenticated, there should be a user object
   user: User | null;
-  // error message
   errorMessage: string | null;
 }
 
@@ -18,33 +23,25 @@ export const initialState: State = {
   errorMessage: null
 };
 
-export function reducer(state = initialState, action: All): State {
-  switch (action.type) {
-    case AuthActionTypes.LOGIN_SUCCESS: { //login success
-      return {
-        ...state,
-        isAuthenticated: true,
-        user: {
-          token: action.payload.token,
-          email: action.payload.email
-        },
-        errorMessage: null
-      };
-    }
-    case AuthActionTypes.LOGIN_FAILURE: { //login fail
-      return {
-        ...state,
-        errorMessage: 'Incorrect email and/or password.'
-      };
-    }
-    case AuthActionTypes.LOGOUT: { //logout
-      return initialState;
-    }
-    default: {
-      return state;
-    }
-  }
-}
+export const authReducer = createReducer(
+  initialState,
+  on(logInSuccess, (state, props) => ({
+    isAuthenticated: true,
+    user: {
+      token: props.token,
+      email: props.email
+    },
+    errorMessage: null})),
+  on(logInFailure, (state) => ({
+    isAuthenticated: false,
+    user: null,
+    errorMessage: 'Incorrect email and/or password.'})),
+  on(logout, (state) => ({
+    isAuthenticated: false,
+    user: null,
+    errorMessage: null})),
+
+);
 
 
 

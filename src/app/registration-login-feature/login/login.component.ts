@@ -4,7 +4,7 @@ import { AuthService } from 'src/app/security/auth.service';
 import { User } from 'src/app/security/user';
 import {Observable} from "rxjs";
 import { Store } from '@ngrx/store';
-import {LogIn} from "../../store/actions/auth.actions";
+import {login} from "../../store/actions/auth.actions";
 
 @Component({
   selector: 'app-login',
@@ -54,6 +54,6 @@ export class LoginComponent implements OnInit {
       email: this.user.email,
       password: this.user.password
     };
-    this.store.dispatch(new LogIn(payload))
+    this.store.dispatch(login({payload}))
   }
 }

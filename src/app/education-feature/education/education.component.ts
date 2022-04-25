@@ -57,7 +57,7 @@ export class EducationComponent implements OnInit {
   ngOnInit(): void {
     this.educationStore.dispatch(loadEducations({page: this.currentPage}));
     this.myEducations$.pipe(take(1)).subscribe();
-    this.pageAmountSub$.pipe(take(1)).subscribe((page:number) => {this.pageAmount = page})
+    this.pageAmountSub$.subscribe((page:number) => {this.pageAmount = page})
   }
 
   onEdit(education: Education) {

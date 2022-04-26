@@ -1,4 +1,4 @@
-import {AbstractControl, ValidationErrors, ValidatorFn} from "@angular/forms";
+import {AbstractControl, ValidatorFn} from "@angular/forms";
 
 export class CustomeDateValidators {
 static invalidDateValidator(startDate: string, endDate: string): ValidatorFn {

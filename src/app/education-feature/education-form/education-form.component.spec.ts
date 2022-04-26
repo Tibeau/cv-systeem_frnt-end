@@ -11,6 +11,8 @@ import {educationReducer} from "../../store/reducers/education.reducers";
 import {Router} from "@angular/router";
 import {Location} from "@angular/common";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {AuthEffects} from "../../store/effects/auth.effects";
+import {authReducer} from "../../store/reducers/auth.reducers";
 
 
 
@@ -37,9 +39,9 @@ describe('EducationFormComponent', () => {
             { path: 'educationform/:id', component: EducationFormComponent },]
         ),
         HttpClientTestingModule,
-        EffectsModule.forRoot([ EducationEffects]),
+        EffectsModule.forRoot([AuthEffects, EducationEffects]),
         EffectsModule.forFeature(),
-        StoreModule.forRoot({educations: educationReducer}),
+        StoreModule.forRoot({educations: educationReducer, user: authReducer}),
       ],
     }).compileComponents().then(() => {
       fixture = TestBed.createComponent(EducationFormComponent);
@@ -115,9 +117,7 @@ describe('EducationFormComponent', () => {
         spyOn(component, 'onSubmit');
         element = fixture.debugElement.query(By.css('button')).nativeElement;
 
-        fixture.detectChanges();
         element.click();
-
 
         expect(component.onSubmit).toHaveBeenCalledTimes(0)
       })

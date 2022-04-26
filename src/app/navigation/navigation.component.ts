@@ -41,7 +41,7 @@ export class NavigationComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    //this.authStore.dispatch(loadUser({id: this.userId}));
+    this.authStore.dispatch(loadUser({id: this.userId}));
     this.isLoggedIn = !!localStorage.getItem('token');
     this.isExtendSideBar = JSON.parse(localStorage.getItem('sideBar') || 'true');
     this.user$.pipe(take(1)).subscribe();

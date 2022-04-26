@@ -14,6 +14,7 @@ import {login} from "../../store/actions/auth.actions";
 export class LoginComponent implements OnInit {
   user$: Observable<User> = this.store.select(state => state.user)
   user: User = {
+    authorities: "", candidateId: 0, companyId: 0, username: "",
     id: '',
     password: '',
     email: '',
@@ -27,11 +28,11 @@ export class LoginComponent implements OnInit {
     description: '',
     city: '',
     number: '',
-    postcode: '',
+    postalcode: '',
     phone: '',
     linkedIn: '',
     imgUrl: '',
-    driversLicence: '',
+    driversLicence: ''
   };
 
   isSubmitted: boolean = false;

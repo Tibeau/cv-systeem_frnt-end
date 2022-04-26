@@ -1,4 +1,5 @@
 import {createAction, props} from '@ngrx/store';
+import {User} from "../../security/user";
 
 
 let type = "[Auth]";
@@ -6,7 +7,7 @@ let type = "[Auth]";
 //LOGIN
 export const logInSuccess = createAction(
   `${type} Login SUCCESS`,
-  props<{token: any, email: any, id: any}>()
+  props<{user: User}>()
 )
 
 export const login = createAction(
@@ -23,3 +24,19 @@ export const logout = createAction(
   `${type} Logout`,
 )
 
+
+//GET USER
+export const loadUser = createAction(
+  `${type} get user`,
+  props<{id: number}>()
+)
+
+export const loadUserSuccess = createAction(
+  `${type} get user SUCCESS `,
+  props<{user: User}>()
+)
+
+export const loadUserFailure = createAction(
+  `${type} get user FAILURE`,
+  props<{payload: any}>()
+)

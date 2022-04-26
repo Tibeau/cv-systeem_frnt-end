@@ -27,6 +27,7 @@ import {environment} from "../environments/environment.prod";
 import {educationReducer} from "./store/reducers/education.reducers";
 import { DeleteModalComponent } from './delete-modal/delete-modal.component';
 import {AuthEffects} from "./store/effects/auth.effects";
+import {authReducer} from "./store/reducers/auth.reducers";
 
 
 @NgModule({
@@ -52,7 +53,7 @@ import {AuthEffects} from "./store/effects/auth.effects";
     ReactiveFormsModule,
     EffectsModule.forRoot([AuthEffects, EducationEffects]),
     EffectsModule.forFeature(),
-    StoreModule.forRoot({educations: educationReducer}),
+    StoreModule.forRoot({educations: educationReducer, user: authReducer}),
     BrowserAnimationsModule,
     LayoutModule,
     CommonModule,

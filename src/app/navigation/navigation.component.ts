@@ -2,8 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../security/auth.service';
 import { faIdCard, faGraduationCap, faBriefcase, faRightFromBracket, faGear,  faCertificate, faFile, faMessage, faEarthEurope, faLightbulb, faAngleLeft, faAngleRight} from '@fortawesome/free-solid-svg-icons';
 import { Store } from '@ngrx/store';
-import {logout} from "../store/actions/auth.actions";
+import {loadUser, logout} from "../store/actions/auth.actions";
 import {User} from "../security/user";
+import {Observable, take} from "rxjs";
+import {selectMyUser} from "../security/user.selector";
+import {loadEducations} from "../store/actions/education.actions";
 
 
 @Component({
@@ -13,6 +16,7 @@ import {User} from "../security/user";
 
 })
 export class NavigationComponent implements OnInit {
+  user$: Observable<User | null> = this.authStore.select(selectMyUser);
 
   faLightbulb = faLightbulb;
   faEarthEurope = faEarthEurope;
@@ -30,14 +34,17 @@ export class NavigationComponent implements OnInit {
   isLoggedIn: boolean = false;
   isShownNav: boolean = false; // hidden by default
   isExtendSideBar: boolean = true;
+  userId: number = Number(localStorage.getItem('id') || '');
 
   constructor(private authService: AuthService,
-              private store: Store<{ user: User }>
+              private authStore: Store<{ user: User }>
   ) {}
 
   ngOnInit(): void {
-    this.isLoggedIn = this.authService.isLoggedIn();
+    //this.authStore.dispatch(loadUser({id: this.userId}));
+    this.isLoggedIn = !!localStorage.getItem('token');
     this.isExtendSideBar = JSON.parse(localStorage.getItem('sideBar') || 'true');
+    this.user$.pipe(take(1)).subscribe();
   }
 
   closeNav() {
@@ -54,7 +61,8 @@ export class NavigationComponent implements OnInit {
   }
 
   logOut(): void {
-    this.store.dispatch(logout());
+    this.authStore.dispatch(logout());
   }
+
 
 }

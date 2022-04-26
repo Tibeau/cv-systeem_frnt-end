@@ -1,13 +1,6 @@
 import {User} from "../../security/user";
 import {createReducer, on} from "@ngrx/store";
-import {
-  changeEducation, changeEducationFail,
-  changeEducationSuccess,
-  loadEducations,
-  loadEducationsFail,
-  loadEducationsSuccess
-} from "../actions/education.actions";
-import {login, logInFailure, logInSuccess, logout} from "../actions/auth.actions";
+import {loadUserSuccess, login, logInFailure, logInSuccess, logout} from "../actions/auth.actions";
 
 
 
@@ -23,15 +16,13 @@ export const initialState: State = {
   errorMessage: null
 };
 
+export const userFeatureKey = "user";
+
+export const selectUser = (state: State) => state.user
+
+
 export const authReducer = createReducer(
   initialState,
-  on(logInSuccess, (state, props) => ({
-    isAuthenticated: true,
-    user: {
-      token: props.token,
-      email: props.email
-    },
-    errorMessage: null})),
   on(logInFailure, (state) => ({
     isAuthenticated: false,
     user: null,
@@ -39,6 +30,33 @@ export const authReducer = createReducer(
   on(logout, (state) => ({
     isAuthenticated: false,
     user: null,
+    errorMessage: null})),
+  on(loadUserSuccess, (state, props) => ({
+    isAuthenticated: true,
+    user: {
+      id: props.user.id,
+      password: props.user.password,
+      email: props.user.email,
+      token: props.user.token,
+      firstname: props.user.firstname,
+      lastname: props.user.lastname,
+      street: props.user.street,
+      country: props.user.country,
+      active: props.user.active,
+      role: props.user.role,
+      description: props.user.description,
+      city: props.user.city,
+      number: props.user.number,
+      postalcode: props.user.postalcode,
+      phone: props.user.phone,
+      linkedIn: props.user.linkedIn,
+      imgUrl: props.user.imgUrl,
+      driversLicence: props.user.driversLicence,
+      candidateId: props.user.candidateId,
+      companyId: props.user.companyId,
+      username: props.user.username,
+      authorities: props.user.authorities,
+    },
     errorMessage: null})),
 
 );

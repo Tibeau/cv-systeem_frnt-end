@@ -63,7 +63,7 @@
     <nav *ngIf="isLoggedIn" [ngClass]="!isExtendSideBar ? '': 'w-60 sidebar'" class="hidden md:block md:flex-shrink-0 md:bg-Jorange md:overflow-y-auto" aria-label="Sidebar">
       <div class="relative w-20 flex flex-col p-3 space-y-3">
 
-        <a *ngIf="(user$ | async)?.role === 'CANDIDATE'" href="/src" [ngClass]="!isExtendSideBar ? 'w-14': 'w-52'" class="hover:bg-JorangeSelect text-white flex-shrink-0 inline-flex items-center justify-center h-14 mt-1 rounded-lg">
+        <a *ngIf="(user$ | async)?.role === 'CANDIDATE'" href="/" [ngClass]="!isExtendSideBar ? 'w-14': 'w-52'" class="hover:bg-JorangeSelect text-white flex-shrink-0 inline-flex items-center justify-center h-14 mt-1 rounded-lg">
           <fa-icon transform="grow-18" [icon]="faFile"></fa-icon>
           <span *ngIf="isExtendSideBar" class="ml-6">CV</span>
         </a>

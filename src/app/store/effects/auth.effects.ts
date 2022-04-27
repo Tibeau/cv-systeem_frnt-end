@@ -11,6 +11,7 @@ import {of} from 'rxjs';
 import {EducationService} from "../../services/education/education.service";
 import {loadEducations, loadEducationsFail, loadEducationsSuccess} from "../actions/education.actions";
 import {candidateId} from "../../education-feature/education.selector";
+import {User} from "../../security/user";
 
 @Injectable()
 export class AuthEffects {
@@ -25,13 +26,13 @@ export class AuthEffects {
 
   login$ = createEffect(() => this.actions$.pipe(
     ofType(login),
-    tap(() => {
-    }),
     switchMap((({payload}) => this.authService.logIn(payload.email, payload.password)
       .pipe(
-        map((user) => (logInSuccess({user}))),
+        map((user: User) =>
+          (logInSuccess({user})
+          )),
         catchError(() => of(logInFailure))
-      )))
+    )))
   ));
 
 

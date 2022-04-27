@@ -13,7 +13,6 @@ import {FormBuilder, Validators} from "@angular/forms";
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  user$: Observable<User> = this.store.select(state => state.user)
 userForm = this.fb.group({
   email: ["", Validators.required],
   password: ["", Validators.required],
@@ -28,7 +27,6 @@ userForm = this.fb.group({
   constructor( private fb: FormBuilder
     ,private router: Router,
               private store: Store<{ user: User}>) {
-    this.user$ = store.select('user')
   }
 
   ngOnInit(): void {

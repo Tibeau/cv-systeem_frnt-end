@@ -4,7 +4,8 @@ import { AuthService } from 'src/app/security/auth.service';
 import { User } from 'src/app/security/user';
 import {Observable} from "rxjs";
 import { Store } from '@ngrx/store';
-import {LogIn} from "../../store/actions/auth.actions";
+import {login} from "../../store/actions/auth.actions";
+import {FormBuilder, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-login',
@@ -12,27 +13,10 @@ import {LogIn} from "../../store/actions/auth.actions";
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  user$: Observable<User> = this.store.select(state => state.user)
-  user: User = {
-    id: '',
-    password: '',
-    email: '',
-    token: '',
-    firstname: '',
-    lastname: '',
-    street: '',
-    country: '',
-    active: '',
-    role: '',
-    description: '',
-    city: '',
-    number: '',
-    postcode: '',
-    phone: '',
-    linkedIn: '',
-    imgUrl: '',
-    driversLicence: '',
-  };
+userForm = this.fb.group({
+  email: ["", Validators.required],
+  password: ["", Validators.required],
+})
 
   isSubmitted: boolean = false;
   errorMessage: string = '';
@@ -40,9 +24,9 @@ export class LoginComponent implements OnInit {
   isLogin: boolean = false;
   isLogout: boolean = false;
 
-  constructor(private router: Router,
+  constructor( private fb: FormBuilder
+    ,private router: Router,
               private store: Store<{ user: User}>) {
-    this.user$ = store.select('user')
   }
 
   ngOnInit(): void {
@@ -51,9 +35,9 @@ export class LoginComponent implements OnInit {
 
   onSubmit(): void {
     const payload = {
-      email: this.user.email,
-      password: this.user.password
+      email: this.userForm.value.email,
+      password: this.userForm.value.password
     };
-    this.store.dispatch(new LogIn(payload))
+    this.store.dispatch(login({payload}))
   }
 }

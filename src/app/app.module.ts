@@ -10,7 +10,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {AuthService} from "./security/auth.service";
-import {AuthEffects} from "./store/effects/auth.effects";
 import { EffectsModule } from '@ngrx/effects';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from '@angular/cdk/layout';
@@ -27,6 +26,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import {environment} from "../environments/environment.prod";
 import {educationReducer} from "./store/reducers/education.reducers";
 import { DeleteModalComponent } from './delete-modal/delete-modal.component';
+import {AuthEffects} from "./store/effects/auth.effects";
+import {authReducer} from "./store/reducers/auth.reducers";
 
 
 @NgModule({
@@ -52,7 +53,7 @@ import { DeleteModalComponent } from './delete-modal/delete-modal.component';
     ReactiveFormsModule,
     EffectsModule.forRoot([AuthEffects, EducationEffects]),
     EffectsModule.forFeature(),
-    StoreModule.forRoot({educations: educationReducer}),
+    StoreModule.forRoot({educations: educationReducer, user: authReducer}),
     BrowserAnimationsModule,
     LayoutModule,
     CommonModule,

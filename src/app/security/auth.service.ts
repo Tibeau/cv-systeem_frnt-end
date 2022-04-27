@@ -19,13 +19,13 @@ export class AuthService {
     localStorage.clear();
   }
 
-  isLoggedIn(): boolean {
-    return !!localStorage.getItem('token');
+
+  getUserById(id: number): Observable<User> {
+    return this.httpClient.get<User>(`${this.api}/users/${id}`);
   }
 
   logIn(email: string, password: string): Observable<any> {
-    const url = `${this.api}/authenticate`;
-    return this.httpClient.post<User>(url, {email, password}
+    return this.httpClient.post<User>(`${this.api}/authenticate`, {email, password}
     );
   }
 }

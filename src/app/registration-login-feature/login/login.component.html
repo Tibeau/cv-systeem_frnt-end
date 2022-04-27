@@ -7,18 +7,14 @@
               <img class="pl-16 h-28 w-auto justify-self-center" src="../../assets/jarchitects.png" alt="Workflow">
               <div class="mt-8">
                 <div class="mt-6">
-                  <form (ngSubmit)="onSubmit()" #authForm="ngForm" class="space-y-6">
+                  <form [formGroup]="userForm" (ngSubmit)="onSubmit()" #authForm="ngForm" class="space-y-6">
                     <div>
                       <label for="email" class="block text-sm font-medium text-gray-700"> Email address </label>
                       <div class="mt-1">
                         <input email
                         required
-                        [(ngModel)]="user.email"
-                        id="email"
-                        name="email"
-                        type="email"
-                        autocomplete="email"
-                        required
+                               placeholder="email"
+                               required type="text" name="email" id="email" formControlName="email"
  class="appearance-none block w-full h-12 px-3 py-2 border border-gray-300 rounded-full shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                       </div>
                     </div>
@@ -27,13 +23,12 @@
                       <label for="password" class="block text-sm font-medium text-gray-700"> Password </label>
                       <div class="mt-1">
                         <input
-                        required
-                        [(ngModel)]="user.password"
-                        id="password"
-                        name="password"
-                        type="password"
-                        autocomplete="current-password"
-                        required class="appearance-none block w-full h-12 px-3 py-2 border border-gray-300 rounded-full shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                          password
+                          required
+                          placeholder="password"
+                          required type="password" name="password" id="password" formControlName="password"
+                          autocomplete="current-password"
+                          class="appearance-none block w-full h-12 px-3 py-2 border border-gray-300 rounded-full shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                       </div>
                     </div>
 

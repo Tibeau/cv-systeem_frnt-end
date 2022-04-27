@@ -1,33 +1,42 @@
-import { Action } from '@ngrx/store';
+import {createAction, props} from '@ngrx/store';
+import {User} from "../../security/user";
 
-export enum AuthActionTypes{
-  LOGIN = "[Auth] Login",
-  LOGIN_SUCCESS = '[Auth] Login Success',
-  LOGIN_FAILURE = '[Auth] Login Failure',
-  LOGOUT = "[Auth] Logout",
 
-}
-export class LogInSuccess implements Action {
-  readonly type = AuthActionTypes.LOGIN_SUCCESS;
-  constructor(public payload: any) {}
-}
+let type = "[Auth]";
 
-export class LogIn implements Action{
-  readonly type = AuthActionTypes.LOGIN;
-  constructor(public payload: any) {
-  }
-}
+//LOGIN
+export const logInSuccess = createAction(
+  `${type} Login SUCCESS`,
+  props<{user: User}>()
+)
 
-export class LogInFailure implements Action {
-  readonly type = AuthActionTypes.LOGIN_FAILURE;
-  constructor(public payload: any) {}
-}
+export const login = createAction(
+  `${type} Login`,
+  props<{payload: any}>()
+)
 
-export class LogOut implements Action {
-  readonly type = AuthActionTypes.LOGOUT;
-}
+export const logInFailure = createAction(
+  `${type} Login FAILURE`,
+  props<{payload: any}>()
+)
 
-export type All =   | LogIn
-  | LogInSuccess
-  | LogInFailure
-  | LogOut;
+export const logout = createAction(
+  `${type} Logout`,
+)
+
+
+//GET USER
+export const loadUser = createAction(
+  `${type} get user`,
+  props<{id: number}>()
+)
+
+export const loadUserSuccess = createAction(
+  `${type} get user SUCCESS `,
+  props<{user: User}>()
+)
+
+export const loadUserFailure = createAction(
+  `${type} get user FAILURE`,
+  props<{payload: any}>()
+)

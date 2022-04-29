@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { LoginComponent } from './registration-login-feature/login/login.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardComponent } from './dashboard-feature/dashboard/dashboard.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -28,6 +28,9 @@ import {educationReducer} from "./store/reducers/education.reducers";
 import { DeleteModalComponent } from './delete-modal/delete-modal.component';
 import {AuthEffects} from "./store/effects/auth.effects";
 import {authReducer} from "./store/reducers/auth.reducers";
+import { CvTemplateComponent } from './dashboard-feature/cv-template/cv-template.component';
+import { CvItemsComponent } from './dashboard-feature/cv-items/cv-items.component';
+import {NgxPrintModule} from "ngx-print";
 
 
 @NgModule({
@@ -41,6 +44,8 @@ import {authReducer} from "./store/reducers/auth.reducers";
     EducationFormComponent,
     CertificationComponent,
     DeleteModalComponent,
+    CvTemplateComponent,
+    CvItemsComponent,
 
   ],
   imports: [
@@ -60,7 +65,8 @@ import {authReducer} from "./store/reducers/auth.reducers";
     StoreDevtoolsModule.instrument({
       name: 'Cv systeem',
       logOnly: environment.production
-    })
+    }),
+    NgxPrintModule,
     //reducers
   ],
   providers: [AuthService],

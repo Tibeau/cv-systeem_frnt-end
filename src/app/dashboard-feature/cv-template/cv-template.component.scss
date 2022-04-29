@@ -1,0 +1,12 @@
+.cv {
+   background-image: url("../../../assets/cv-themplate.svg");
+   background-repeat: repeat-y;
+   background-size: cover ;
+ }
+
+* {
+  outline: none;
+  color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}

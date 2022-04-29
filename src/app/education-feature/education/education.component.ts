@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { faPencil, faTrashCan, faXmark, faTriangleExclamation} from '@fortawesome/free-solid-svg-icons';
 import {filter, Observable, pipe, take} from "rxjs";
-import {Education} from "../../models/education";
+import {Education} from "../../models/education/education";
 import {Store} from '@ngrx/store';
 import {selectMyEducations} from "../education.selector";
 import {Router} from "@angular/router";
 import {loadEducations, changeEducation, removeEducation} from "../../store/actions/education.actions";
 import {FormBuilder, Validators} from "@angular/forms";
-import {EducationPagination} from "../../models/education-pagination";
+import {EducationPagination} from "../../models/education/education-pagination";
 import {map} from "rxjs/operators";
 
 @Component({

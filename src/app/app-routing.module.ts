@@ -5,8 +5,8 @@ import { LoginComponent } from './registration-login-feature/login/login.compone
 import {ContactInfoComponent} from "./contact-info/contact-info.component";
 import {EducationComponent} from "./education-feature/education/education.component";
 import {EducationFormComponent} from "./education-feature/education-form/education-form.component";
-import {CertificationComponent} from "./certification-feature/certification/certification.component";
-import {CertificationFormComponent} from "./certification-feature/certification-form/certification-form.component";
+import {CertificateComponent} from "./certificate-feature/certificate/certificate.component";
+import {CertificateFormComponent} from "./certificate-feature/certificate-form/certificate-form.component";
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
@@ -15,8 +15,10 @@ const routes: Routes = [
   { path: 'educations', component: EducationComponent },
   { path: 'educationform', component: EducationFormComponent },
   { path: 'educationform/:id', component: EducationFormComponent },
-  { path: 'certifications', component: CertificationComponent },
-  { path: 'certificationform', component: CertificationFormComponent },
+  { path: 'certificates', component: CertificateComponent },
+  { path: 'certificateform', component: CertificateFormComponent },
+  { path: 'certificateform/:id', component: CertificateFormComponent },
+
 
 
 ];

@@ -84,7 +84,7 @@
 
         </a>
 
-        <a *ngIf="(user$ | async)?.role === 'CANDIDATE'" href="/certifications" [ngClass]="!isExtendSideBar ? 'w-14': 'w-52'"  class="text-white hover:bg-JorangeSelect flex-shrink-0 inline-flex items-center justify-center h-14 w-14 mt-1 rounded-lg">
+        <a *ngIf="(user$ | async)?.role === 'CANDIDATE'" href="/certificates" [ngClass]="!isExtendSideBar ? 'w-14': 'w-52'"  class="text-white hover:bg-JorangeSelect flex-shrink-0 inline-flex items-center justify-center h-14 w-14 mt-1 rounded-lg">
           <span class="sr-only">Certificates</span>
           <fa-icon transform="grow-18" [icon]="faCertificate"></fa-icon>
           <span *ngIf="isExtendSideBar" class="ml-6">Certifications</span>

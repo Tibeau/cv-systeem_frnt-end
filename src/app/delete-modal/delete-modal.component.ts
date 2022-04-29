@@ -10,6 +10,8 @@ import { faPencil, faTrashCan, faXmark, faTriangleExclamation} from '@fortawesom
 export class DeleteModalComponent implements OnChanges {
   @Input() modal = false;
   @Input() id = 0;
+  @Input() item = "";
+  @Input() category = "";
 
   @Output() deleteItemEvent = new EventEmitter<number>();
   @Output() closeModalEvent = new EventEmitter<boolean>();

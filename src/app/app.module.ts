@@ -16,7 +16,6 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { ContactInfoComponent } from './contact-info/contact-info.component';
 import { EducationComponent } from './education-feature/education/education.component';
 import { EducationFormComponent } from './education-feature/education-form/education-form.component';
-import { CertificationComponent } from './certification-feature/certification/certification.component';
 import {CommonModule} from "@angular/common";
 import {EducationEffects} from "./store/effects/education.effects";
 
@@ -31,6 +30,10 @@ import {authReducer} from "./store/reducers/auth.reducers";
 import { CvTemplateComponent } from './dashboard-feature/cv-template/cv-template.component';
 import { CvItemsComponent } from './dashboard-feature/cv-items/cv-items.component';
 import {NgxPrintModule} from "ngx-print";
+import { CertificateComponent } from './certificate-feature/certificate/certificate.component';
+import { CertificateFormComponent } from './certificate-feature/certificate-form/certificate-form.component';
+import {CertificateEffects} from "./store/effects/certificate.effects";
+import {certificateReducer} from "./store/reducers/certificate.reducers";
 
 
 @NgModule({
@@ -42,10 +45,11 @@ import {NgxPrintModule} from "ngx-print";
     ContactInfoComponent,
     EducationComponent,
     EducationFormComponent,
-    CertificationComponent,
     DeleteModalComponent,
     CvTemplateComponent,
     CvItemsComponent,
+    CertificateComponent,
+    CertificateFormComponent,
 
   ],
   imports: [
@@ -56,9 +60,9 @@ import {NgxPrintModule} from "ngx-print";
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    EffectsModule.forRoot([AuthEffects, EducationEffects]),
+    EffectsModule.forRoot([AuthEffects, EducationEffects, CertificateEffects]),
     EffectsModule.forFeature(),
-    StoreModule.forRoot({educations: educationReducer, user: authReducer}),
+    StoreModule.forRoot({educations: educationReducer, user: authReducer, certificates: certificateReducer}),
     BrowserAnimationsModule,
     LayoutModule,
     CommonModule,

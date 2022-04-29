@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {filter, Observable,take, tap} from "rxjs";
-import {Education} from "../../models/education";
+import {Education} from "../../models/education/education";
 import { faArrowLeft} from '@fortawesome/free-solid-svg-icons';
 import {Store} from "@ngrx/store";
 import {AbstractControl, FormBuilder, FormControl, Validators} from "@angular/forms";

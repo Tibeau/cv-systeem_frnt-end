@@ -34,6 +34,14 @@ import { CertificateComponent } from './certificate-feature/certificate/certific
 import { CertificateFormComponent } from './certificate-feature/certificate-form/certificate-form.component';
 import {CertificateEffects} from "./store/effects/certificate.effects";
 import {certificateReducer} from "./store/reducers/certificate.reducers";
+import { ExperienceFormComponent } from './experience-feature/experience-form/experience-form.component';
+import { LanguageComponent } from './language-feature/language/language.component';
+import { LanguageFormComponent } from './language-feature/language-form/language-form.component';
+import { SkillComponent } from './skill-feature/skill/skill.component';
+import { SkillFormComponent } from './skill-feature/skill-form/skill-form.component';
+import {ExperienceComponent} from "./experience-feature/experience/experience.component";
+import {ExperienceEffects} from "./store/effects/experience.effects";
+import {experienceReducer} from "./store/reducers/experience.reducers";
 
 
 @NgModule({
@@ -50,6 +58,12 @@ import {certificateReducer} from "./store/reducers/certificate.reducers";
     CvItemsComponent,
     CertificateComponent,
     CertificateFormComponent,
+    ExperienceComponent,
+    ExperienceFormComponent,
+    LanguageComponent,
+    LanguageFormComponent,
+    SkillComponent,
+    SkillFormComponent,
 
   ],
   imports: [
@@ -60,9 +74,9 @@ import {certificateReducer} from "./store/reducers/certificate.reducers";
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    EffectsModule.forRoot([AuthEffects, EducationEffects, CertificateEffects]),
+    EffectsModule.forRoot([AuthEffects, EducationEffects, CertificateEffects, ExperienceEffects]),
     EffectsModule.forFeature(),
-    StoreModule.forRoot({educations: educationReducer, user: authReducer, certificates: certificateReducer}),
+    StoreModule.forRoot({educations: educationReducer, user: authReducer, certificates: certificateReducer, experiences: experienceReducer}),
     BrowserAnimationsModule,
     LayoutModule,
     CommonModule,

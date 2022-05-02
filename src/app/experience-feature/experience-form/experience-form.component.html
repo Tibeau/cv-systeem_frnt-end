@@ -1,0 +1,134 @@
+<div class="max-w-5xl mx-auto">
+  <div class="mt-8 mb-12 mx-auto px-4 sm:px-6 lg:px-8 bg-Jblue rounded-3xl mr-6 ml-6 border-white border-2 bg-gradient-to-b from-indigo-600 to-Jblue ">
+    <form [formGroup]="experienceForm" (ngSubmit)="onSubmit()" class="space-y-8 divide-y divide-gray-200 ">
+      <div class="space-y-8 divide-y divide-gray-200 ">
+        <div class="pt-8 pb-4">
+          <h3 class="text-lg leading-6 text-bold font-large text-white text-3xl mb-4">Education</h3>
+          <p *ngIf="mode === 'add'" class="mt-1 text-lg text-white">add a new education to your CV <span class="text-sm">(added educations are automatically set to active)</span></p>
+          <p *ngIf="mode === 'edit'" class="mt-1 text-lg text-white">change one of your educations <span class="text-sm">(be sure to submit your changes)</span></p>
+
+          <hr>
+
+          <div class="sm:col-span-3 mt-4">
+            <label for="profession" class="block text-sm font-medium text-white">Profession or function</label>
+            <div class="mt-1">
+              <input placeholder="name of diploma"
+                     required type="text" name="profession" id="profession" formControlName="profession"
+                     class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+              <div *ngIf="experienceForm.get('profession')?.dirty && experienceForm.get('profession')?.touched && experienceForm.get('profession')?.hasError('required')"
+                   class="text-white text-sm italic">
+                Profession name is required.
+              </div>
+            </div>
+          </div>
+
+          <div class="sm:col-span-6 mt-4">
+            <label for="description" class="block text-sm font-medium text-white"> Description<span class="text-sm text-white/75">(optional)</span> </label>
+            <div class="mt-1">
+              <textarea placeholder="some extra information about your education" id="description" name="description" formControlName="description" rows="3" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md"></textarea>
+            </div>
+          </div>
+
+          <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+
+
+            <div class="sm:col-span-3">
+              <label for="employer" class="block text-sm font-medium text-white"> employer </label>
+              <div class="mt-1">
+                <input placeholder="name of the employer" type="text" name="employer" id="employer" formControlName="employer" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <div *ngIf="experienceForm.get('employer')?.dirty && experienceForm.get('employer')?.touched && experienceForm.get('employer')?.hasError('required')"
+                     class="text-white text-sm italic">
+                  Employer name is required.
+                </div>
+              </div>
+            </div>
+
+            <div class="sm:col-span-3">
+              <label for="company" class="block text-sm font-medium text-white"> Company </label>
+              <div class="mt-1">
+                <input placeholder="name of the company" type="text" name="company" id="company" formControlName="company" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <div *ngIf="experienceForm.get('company')?.dirty && experienceForm.get('company')?.touched && experienceForm.get('company')?.hasError('required')"
+                     class="text-white text-sm italic">
+                  Employer name is required.
+                </div>
+              </div>
+            </div>
+
+
+            <div class="sm:col-span-3">
+              <label for="country" class="block text-sm font-medium text-white"> Country </label>
+              <div class="mt-1">
+                <input placeholder="country where you finished your study" type="text" name="country" id="country" formControlName="country" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <div *ngIf="experienceForm.get('country')?.dirty && experienceForm.get('country')?.touched && experienceForm.get('country')?.hasError('required')"
+                     class="text-white text-sm italic">
+                  Country name is required.
+                </div>
+              </div>
+            </div>
+
+            <div class="sm:col-span-3">
+              <label for="city" class="block text-sm font-medium text-white"> City </label>
+              <div class="mt-1">
+                <input placeholder="city where you worked" type="text" name="city" id="city" formControlName="city" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <div *ngIf="experienceForm.get('city')?.dirty && experienceForm.get('city')?.touched && experienceForm.get('city')?.hasError('required')"
+                     class="text-white text-sm italic">
+                  City name is required.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+
+
+
+            <div class="sm:col-span-3">
+              <label for="startDate" class="block text-sm font-medium text-white"> From </label>
+              <div class="mt-1">
+                <input type="date" name="startDate" id="startDate" formControlName="startDate" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <div *ngIf="experienceForm.get('startDate')?.dirty && experienceForm.get('startDate')?.touched && experienceForm.get('startDate')?.hasError('required')&& experienceForm.get('startDate')?.invalid"
+                     class="text-white text-sm italic">
+                  Start date is required.
+                </div>
+              </div>
+            </div>
+
+            <div class="sm:col-span-3">
+              <label for="endDate" class="block text-sm font-medium text-white"> To </label>
+              <div class="mt-1">
+                <input type="date" name="endDate" id="endDate" formControlName="endDate" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <div *ngIf="experienceForm.get('endDate')?.dirty && experienceForm.get('endDate')?.touched && experienceForm.get('endDate')?.hasError('required')"
+                     class="text-white text-sm italic">
+                  End date name is required.
+                </div>
+              </div>
+            </div>
+
+            <diV hidden>
+              <input type="text"  name="candidateId" id="candidateId" formControlName="candidateId">
+              <input type="checkbox"  name="active" id="active" formControlName="active">
+            </diV>
+
+          </div>
+          <div class="flex justify-around mt-8">
+            <div>
+              <button type="submit" name="submitButton" [disabled]="!experienceForm.valid"  class="justify-center hover:bg-Jorange bg-white items-center h-10 w-48 rounded-xl mb-4">
+                <p class="text-Jblue hover:text-white font-bold text-2xl">Submit</p>
+              </button>
+            </div>
+
+            <div>
+              <button (click)="cancel()" class="justify-center bg-white hover:bg-Jorange  items-center h-10 w-48 rounded-xl mb-4">
+                <p class="text-red-600 hover:text-white font-bold text-2xl">Cancel</p>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+
+

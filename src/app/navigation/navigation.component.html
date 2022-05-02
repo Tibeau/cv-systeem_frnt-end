@@ -1,6 +1,6 @@
 <div class="h-full flex flex-col">
   <!-- Top nav-->
-  <header *ngIf="isLoggedIn == true" class="flex-shrink-0 relative h-20 bg-Jblue flex items-center">
+  <header *ngIf="isLoggedIn == true ||(user$ | async)?.role === 'CANDIDATE' || (user$ | async)?.role === 'COMPANY'" class="flex-shrink-0 relative h-20 bg-Jblue flex items-center">
 
         <div class="md:flex-shrink-0 flex items-center justify-end h-20 w-60 rounded-br-full rounded-tr-full bg-indigo-500 ">
      <h1 class="font-bold text-white mr-4">{{ (user$ | async)?.username }}</h1>
@@ -60,23 +60,23 @@
   <!-- Bottom section -->
   <div  class="min-h-0 flex-1 flex overflow-hidden">
     <!-- Narrow sidebar-->
-    <nav *ngIf="isLoggedIn" [ngClass]="!isExtendSideBar ? '': 'w-60 sidebar'" class="hidden md:block md:flex-shrink-0 md:bg-Jorange md:overflow-y-auto" aria-label="Sidebar">
+    <nav *ngIf="isLoggedIn == true ||(user$ | async)?.role === 'CANDIDATE' || (user$ | async)?.role === 'COMPANY'" [ngClass]="!isExtendSideBar ? '': 'w-60 sidebar'" class="hidden md:block md:flex-shrink-0 md:bg-Jorange md:overflow-y-auto" aria-label="Sidebar">
       <div class="relative w-20 flex flex-col p-3 space-y-3">
 
-        <a *ngIf="(user$ | async)?.role === 'CANDIDATE'" href="/" [ngClass]="!isExtendSideBar ? 'w-14': 'w-52'" class="hover:bg-JorangeSelect text-white flex-shrink-0 inline-flex items-center justify-center h-14 mt-1 rounded-lg">
+        <a *ngIf="(user$ | async)?.role === 'CANDIDATE'" [routerLink]="'/'" [ngClass]="!isExtendSideBar ? 'w-14': 'w-52'" class="hover:bg-JorangeSelect text-white flex-shrink-0 inline-flex items-center justify-center h-14 mt-1 rounded-lg">
           <fa-icon transform="grow-18" [icon]="faFile"></fa-icon>
           <span *ngIf="isExtendSideBar" class="ml-6">CV</span>
         </a>
 
 
 
-        <a *ngIf="(user$ | async)?.role === 'CANDIDATE'" href="/contactInfo" [ngClass]="!isExtendSideBar ? 'w-14': 'w-52'"  class="text-white hover:bg-JorangeSelect flex-shrink-0 inline-flex items-center justify-center h-14 w-14 mt-1 rounded-lg">
+        <a *ngIf="(user$ | async)?.role === 'CANDIDATE'" [routerLink]="'/contactinfo'" [ngClass]="!isExtendSideBar ? 'w-14': 'w-52'"  class="text-white hover:bg-JorangeSelect flex-shrink-0 inline-flex items-center justify-center h-14 w-14 mt-1 rounded-lg">
           <span class="sr-only">Contact info</span>
           <fa-icon transform="grow-18" [icon]="faIdCard"></fa-icon>
           <span *ngIf="isExtendSideBar" class="ml-6">Contact info</span>
         </a>
 
-        <a *ngIf="(user$ | async)?.role === 'CANDIDATE'" href="/educations" [ngClass]="!isExtendSideBar ? 'w-14': 'w-52'"  class="text-white hover:bg-JorangeSelect flex-shrink-0 inline-flex items-center justify-center h-14 w-14 mt-1 rounded-lg">
+        <a *ngIf="(user$ | async)?.role === 'CANDIDATE'" [routerLink]="'/educations'" [ngClass]="!isExtendSideBar ? 'w-14': 'w-52'"  class="text-white hover:bg-JorangeSelect flex-shrink-0 inline-flex items-center justify-center h-14 w-14 mt-1 rounded-lg">
           <span class="sr-only">Educations</span>
           <fa-icon transform="grow-18" [icon]="faGraduationCap"></fa-icon>
           <span *ngIf="isExtendSideBar" class="ml-6">Educations</span>
@@ -84,14 +84,14 @@
 
         </a>
 
-        <a *ngIf="(user$ | async)?.role === 'CANDIDATE'" href="/certificates" [ngClass]="!isExtendSideBar ? 'w-14': 'w-52'"  class="text-white hover:bg-JorangeSelect flex-shrink-0 inline-flex items-center justify-center h-14 w-14 mt-1 rounded-lg">
+        <a *ngIf="(user$ | async)?.role === 'CANDIDATE'" [routerLink]="'/certificates'"  [ngClass]="!isExtendSideBar ? 'w-14': 'w-52'"  class="text-white hover:bg-JorangeSelect flex-shrink-0 inline-flex items-center justify-center h-14 w-14 mt-1 rounded-lg">
           <span class="sr-only">Certificates</span>
           <fa-icon transform="grow-18" [icon]="faCertificate"></fa-icon>
           <span *ngIf="isExtendSideBar" class="ml-6">Certifications</span>
 
         </a>
 
-        <a *ngIf="(user$ | async)?.role === 'CANDIDATE'" href="/experiences" [ngClass]="!isExtendSideBar ? 'w-14': 'w-52'"  class="text-white hover:bg-JorangeSelect flex-shrink-0 inline-flex items-center justify-center h-14 w-14 mt-1 rounded-lg">
+        <a *ngIf="(user$ | async)?.role === 'CANDIDATE'" [routerLink]="'/experiences'" [ngClass]="!isExtendSideBar ? 'w-14': 'w-52'"  class="text-white hover:bg-JorangeSelect flex-shrink-0 inline-flex items-center justify-center h-14 w-14 mt-1 rounded-lg">
           <span class="sr-only">Experiences</span>
           <fa-icon transform="grow-18" [icon]="faBriefcase"></fa-icon>
           <span *ngIf="isExtendSideBar" class="ml-6">Experiences</span>
@@ -99,7 +99,7 @@
 
         </a>
 
-        <a *ngIf="(user$ | async)?.role === 'CANDIDATE'" href="/skills" [ngClass]="!isExtendSideBar ? 'w-14': 'w-52'"  class="text-white hover:bg-JorangeSelect flex-shrink-0 inline-flex items-center justify-center h-14 w-14 mt-1 rounded-lg">
+        <a *ngIf="(user$ | async)?.role === 'CANDIDATE'" [routerLink]="'/skills'" [ngClass]="!isExtendSideBar ? 'w-14': 'w-52'"  class="text-white hover:bg-JorangeSelect flex-shrink-0 inline-flex items-center justify-center h-14 w-14 mt-1 rounded-lg">
           <span class="sr-only">Skills</span>
           <fa-icon transform="grow-18" [icon]="faLightbulb"></fa-icon>
           <span *ngIf="isExtendSideBar" class="ml-6">Skills</span>
@@ -107,19 +107,19 @@
 
         </a>
 
-        <a *ngIf="(user$ | async)?.role === 'CANDIDATE'" href="/languages" [ngClass]="!isExtendSideBar ? 'w-14': 'w-52'"  class="text-white hover:bg-JorangeSelect flex-shrink-0 inline-flex items-center justify-center h-14 w-14 mt-1 rounded-lg">
+        <a *ngIf="(user$ | async)?.role === 'CANDIDATE'" [routerLink]="'/languages'" [ngClass]="!isExtendSideBar ? 'w-14': 'w-52'"  class="text-white hover:bg-JorangeSelect flex-shrink-0 inline-flex items-center justify-center h-14 w-14 mt-1 rounded-lg">
           <span class="sr-only">Languages</span>
           <fa-icon transform="grow-18" [icon]="faEarthEurope"></fa-icon>
           <span *ngIf="isExtendSideBar" class="ml-6">Languages</span>
         </a>
 
-        <a href="/settings" [ngClass]="!isExtendSideBar ? 'w-14': 'w-52'"  class="text-white hover:bg-JorangeSelect flex-shrink-0 inline-flex items-center justify-center h-14 w-14 mt-1 rounded-lg">
+        <a *ngIf="(user$ | async)?.role === 'CANDIDATE' || (user$ | async)?.role === 'COMPANY'" [routerLink]="'/settings'" [ngClass]="!isExtendSideBar ? 'w-14': 'w-52'"  class="text-white hover:bg-JorangeSelect flex-shrink-0 inline-flex items-center justify-center h-14 w-14 mt-1 rounded-lg">
           <span class="sr-only">Settings</span>
           <fa-icon transform="grow-18" [icon]="faGear"></fa-icon>
           <span *ngIf="isExtendSideBar" class="ml-6">Settings</span>
         </a>
 
-        <a href="/login" [ngClass]="!isExtendSideBar ? 'w-14': 'w-52'"  class="text-white hover:bg-JorangeSelect flex-shrink-0 inline-flex items-center justify-center h-14 w-14 mt-1 rounded-lg" (click)="logOut()">
+        <a *ngIf="(user$ | async)?.role === 'CANDIDATE' || (user$ | async)?.role === 'COMPANY'" [routerLink]="'/login'" [ngClass]="!isExtendSideBar ? 'w-14': 'w-52'"  class="text-white hover:bg-JorangeSelect flex-shrink-0 inline-flex items-center justify-center h-14 w-14 mt-1 rounded-lg" (click)="logOut()">
           <span class="sr-only">Logout</span>
           <fa-icon transform="grow-18" [icon]="faRightFromBracket"></fa-icon>
           <span *ngIf="isExtendSideBar" class="ml-6">Logout</span>

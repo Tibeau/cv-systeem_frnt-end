@@ -60,6 +60,7 @@ export class AuthEffects {
   logout$ = createEffect(() => this.actions$.pipe(
     ofType(logout),
     tap(() => {
+      console.log('print')
       localStorage.removeItem('token');
       localStorage.removeItem('id');
       this.router.navigate(['/login']);

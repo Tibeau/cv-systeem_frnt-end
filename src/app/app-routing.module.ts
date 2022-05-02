@@ -7,14 +7,15 @@ import {EducationComponent} from "./education-feature/education/education.compon
 import {EducationFormComponent} from "./education-feature/education-form/education-form.component";
 import {CertificateComponent} from "./certificate-feature/certificate/certificate.component";
 import {CertificateFormComponent} from "./certificate-feature/certificate-form/certificate-form.component";
+import {CertificateResolverService} from "./certificate-feature/certificate-resolver.service";
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'contactInfo', component: ContactInfoComponent },
+  { path: 'contactinfo', component: ContactInfoComponent },
   { path: 'educations', component: EducationComponent },
   { path: 'educationform', component: EducationFormComponent },
-  { path: 'educationform/:id', component: EducationFormComponent },
+  { path: 'educationform/:id', component: EducationFormComponent, resolve: { certificate: CertificateResolverService } },
   { path: 'certificates', component: CertificateComponent },
   { path: 'certificateform', component: CertificateFormComponent },
   { path: 'certificateform/:id', component: CertificateFormComponent },

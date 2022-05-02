@@ -4,9 +4,10 @@ import { faIdCard, faGraduationCap, faBriefcase, faRightFromBracket, faGear,  fa
 import { Store } from '@ngrx/store';
 import {loadUser, logout} from "../store/actions/auth.actions";
 import {User} from "../security/user";
-import {Observable, take} from "rxjs";
+import {filter, Observable, take} from "rxjs";
 import {selectMyUser} from "../security/user.selector";
 import {loadEducations} from "../store/actions/education.actions";
+import {FormBuilder, Validators} from "@angular/forms";
 
 
 @Component({

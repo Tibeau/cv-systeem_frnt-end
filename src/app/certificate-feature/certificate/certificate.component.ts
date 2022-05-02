@@ -9,9 +9,6 @@ import {map} from "rxjs/operators";
 import {Certificate} from "../../models/certificate/certificate";
 import {selectMyCertificates} from "../certificate.selector";
 import {changeCertificate, loadCertificates, removeCertificate} from "../../store/actions/certificate.actions";
-import {changeEducation, loadEducations, removeEducation} from "../../store/actions/education.actions";
-import {Education} from "../../models/education/education";
-
 
 @Component({
   selector: 'app-certificate',
@@ -38,6 +35,8 @@ export class CertificateComponent implements OnInit {
     filter((certificate): certificate is CertificatePagination => certificate !== undefined),
     map(certificates => certificates?.totalPages));
   pageAmount: number = 0;
+  candidateId: number = Number(localStorage.getItem("id"));
+
 
   certificateForm = this.fb.group({
     id: [0, Validators.required],
@@ -45,8 +44,8 @@ export class CertificateComponent implements OnInit {
     description: ['', Validators.required],
     length: ['', Validators.required],
     dateEarned: ['', Validators.required],
-    active: [false, Validators.required],
-    candidateId: ['', Validators.required]
+    active: [true, Validators.required],
+    candidateId: [this.candidateId, Validators.required]
   })
 
 

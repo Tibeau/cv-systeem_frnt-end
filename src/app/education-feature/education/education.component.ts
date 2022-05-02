@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { faPencil, faTrashCan, faXmark, faTriangleExclamation} from '@fortawesome/free-solid-svg-icons';
-import {filter, Observable, pipe, take} from "rxjs";
+import {filter, Observable, take} from "rxjs";
 import {Education} from "../../models/education/education";
 import {Store} from '@ngrx/store';
 import {selectMyEducations} from "../education.selector";
@@ -19,9 +19,8 @@ export class EducationComponent implements OnInit {
 
   educations$: Observable<EducationPagination | null> = this.educationStore.select(selectMyEducations);
   myEducations$: Observable<Education[]> = this.educations$.pipe(
-    filter((education): education is EducationPagination => education !== undefined),
+    filter((educations): educations is EducationPagination => educations !== undefined),
     map(educations => educations?.content));
-
 
   faPencil = faPencil
   faTrashCan = faTrashCan

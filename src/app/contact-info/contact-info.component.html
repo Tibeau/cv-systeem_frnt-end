@@ -1,6 +1,6 @@
 <div class="max-w-7xl mt-8 mb-12 mx-auto px-4 sm:px-6 lg:px-8 bg-Jblue rounded-3xl">
 <div class="max-w-3xl mx-auto">
-    <form class="space-y-8 divide-y divide-gray-200">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="space-y-8 divide-y divide-gray-200">
       <div class="space-y-8 divide-y divide-gray-200">
         <div class="pt-8 pb-8">
           <div>
@@ -24,9 +24,9 @@
 
           <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
             <div class="sm:col-span-3">
-              <label for="first-name" class="block text-sm font-medium text-white"> First name </label>
+              <label for="firstname" class="block text-sm font-medium text-white"> First name </label>
               <div class="mt-1">
-                <input type="text" name="first-name" id="first-name" autocomplete="given-name" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <input name="firstname" id="firstname" formControlName="firstname" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 h-5 block w-full sm:text-sm border-gray-300 rounded-md">
               </div>
             </div>
 
@@ -40,7 +40,7 @@
             <div class="sm:col-span-4">
               <label for="email" class="block text-sm font-medium text-white"> Email address </label>
               <div class="mt-1">
-                <input id="email" name="email" type="email" autocomplete="email" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <input name="email" id="email" formControlName="email" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
               </div>
             </div>
 

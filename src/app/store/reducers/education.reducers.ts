@@ -1,11 +1,11 @@
-import {Education} from "../../models/education";
+import {Education} from "../../models/education/education";
 import {createReducer, on} from "@ngrx/store";
 import {
   loadEducations,
   loadEducationsFail,
   loadEducationsSuccess, changeEducation, changeEducationSuccess, changeEducationFail,
 } from '../actions/education.actions';
-import {EducationPagination} from "../../models/education-pagination";
+import {EducationPagination} from "../../models/education/education-pagination";
 
 export const educationFeatureKey = "educations";
 

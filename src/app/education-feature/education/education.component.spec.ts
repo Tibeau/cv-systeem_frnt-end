@@ -9,7 +9,7 @@ import {StoreModule} from "@ngrx/store";
 import {educationReducer} from "../../store/reducers/education.reducers";
 import {Router} from "@angular/router";
 import {Location} from "@angular/common";
-import {Education} from "../../models/education";
+import {Education} from "../../models/education/education";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 
 

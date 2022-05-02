@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {filter, Observable,take, tap} from "rxjs";
-import {Education} from "../../models/education";
+import {Education} from "../../models/education/education";
 import { faArrowLeft} from '@fortawesome/free-solid-svg-icons';
 import {Store} from "@ngrx/store";
-import {AbstractControl, FormBuilder, FormControl, Validators} from "@angular/forms";
+import { FormBuilder, Validators} from "@angular/forms";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {selectMyEducations} from "../education.selector";
 import {map} from "rxjs/operators";
-import {addEducation, changeEducation, loadEducations} from "../../store/actions/education.actions";
+import {addEducation, changeEducation} from "../../store/actions/education.actions";
 import {
   CustomeDateValidators,
 } from "../../shared/directives/date-validation.directive";
@@ -63,7 +63,7 @@ export class EducationFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (!this.educationForm.valid && this.isCancel === false) {
+    if (!this.educationForm.valid && !this.isCancel) {
       window.alert("please fill in all required fields before submitting the form");
     } else {
       if ( this.mode === "add") {

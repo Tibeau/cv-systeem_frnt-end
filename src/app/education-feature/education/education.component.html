@@ -85,7 +85,7 @@
   </nav>
 </div>
 
-<app-delete-modal [modal]=showModal [id]="educationForm.value.id" (deleteItemEvent)="onRemove($event)" (closeModalEvent)="closeDeleteModal($event)">
+<app-delete-modal [modal]=showModal [item]="educationForm.value.diploma" [category]="'Educations'" [id]="educationForm.value.id" (deleteItemEvent)="onRemove($event)" (closeModalEvent)="closeDeleteModal($event)">
 </app-delete-modal>
 
 

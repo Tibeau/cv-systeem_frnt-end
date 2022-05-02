@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import {Observable} from "rxjs";
-import {User} from "../../security/user";
 import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
-import * as educationActions from "../../store/actions/education.actions"
-import {Education} from "../../models/education";
-import {EducationPagination} from "../../models/education-pagination";
+import {Education} from "../../models/education/education";
+import {EducationPagination} from "../../models/education/education-pagination";
 
 
 @Injectable({

@@ -1,6 +1,6 @@
 import {createAction, props} from '@ngrx/store';
-import {Education} from "../../models/education";
-import {EducationPagination} from "../../models/education-pagination";
+import {Education} from "../../models/education/education";
+import {EducationPagination} from "../../models/education/education-pagination";
 
 let type = "[Education]"
 

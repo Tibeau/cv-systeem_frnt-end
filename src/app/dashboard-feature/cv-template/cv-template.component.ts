@@ -3,10 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { jsPDF } from "jspdf";
 import html2canvas from 'html2canvas';
 import {Store} from "@ngrx/store";
-import {EducationPagination} from "../../models/education-pagination";
+import {EducationPagination} from "../../models/education/education-pagination";
 import {filter, Observable, take} from "rxjs";
 import {selectMyEducations} from "../../education-feature/education.selector";
-import {Education} from "../../models/education";
+import {Education} from "../../models/education/education";
 import {map} from "rxjs/operators";
 import {loadEducations} from "../../store/actions/education.actions";
 

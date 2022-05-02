@@ -1,1 +1,118 @@
-<p>language-form works!</p>
+<div class="max-w-5xl mx-auto">
+  <div class="mt-8 mb-12 mx-auto px-4 sm:px-6 lg:px-8 bg-Jblue rounded-3xl mr-6 ml-6 border-white border-2 bg-gradient-to-b from-indigo-600 to-Jblue ">
+    <form [formGroup]="languageForm" (ngSubmit)="onSubmit()" class="space-y-8 divide-y divide-gray-200 ">
+      <div class="space-y-8 divide-y divide-gray-200 ">
+        <div class="pt-8 pb-4">
+          <h3 class="text-lg leading-6 text-bold font-large text-white text-3xl mb-4">Language</h3>
+          <p *ngIf="mode === 'add'" class="mt-1 text-lg text-white">add a new education to your CV <span class="text-sm">(added educations are automatically set to active)</span></p>
+          <p *ngIf="mode === 'edit'" class="mt-1 text-lg text-white">change one of your educations <span class="text-sm">(be sure to submit your changes)</span></p>
+
+          <hr>
+
+          <div class="sm:col-span-3 mt-4">
+            <label for="name" class="block text-sm font-medium text-white">Name</label>
+            <div class="mt-1">
+              <input placeholder="name of name"
+                     required type="text" name="name" id="name" formControlName="name"
+                     class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+              <div *ngIf="languageForm.get('name')?.dirty && languageForm.get('name')?.touched && languageForm.get('name')?.hasError('required')"
+                   class="text-white text-sm italic">
+                 Name is required.
+              </div>
+            </div>
+          </div>
+
+          <div class="sm:col-span-3 mt-4">
+            <label for="reading" class="block text-sm font-medium text-white">Reading</label>
+            <div class="mt-1">
+              <select placeholder="level of reading"
+                      required type="text" name="reading" id="reading" formControlName="reading" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
+                <option>A1(Breakthrough)</option>
+                <option>A2(Waystage)</option>
+                <option>B1(Threshold)</option>
+                <option>B2(Vandage)</option>
+                <option>C1(Advanced)</option>
+                <option>C2(Mastery)</option>
+              </select>
+              <div *ngIf="languageForm.get('reading')?.dirty && languageForm.get('reading')?.touched && languageForm.get('reading')?.hasError('required')"
+                   class="text-white text-sm italic">
+                Reading level is required.
+              </div>
+            </div>
+          </div>
+
+          <div class="sm:col-span-3 mt-4">
+            <label for="reading" class="block text-sm font-medium text-white">Reading</label>
+            <div class="mt-1">
+              <select placeholder="level of writing"
+                      required type="text" name="writing" id="writing" formControlName="writing" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
+                <option>A1(Breakthrough)</option>
+                <option>A2(Waystage)</option>
+                <option>B1(Threshold)</option>
+                <option>B2(Vandage)</option>
+                <option>C1(Advanced)</option>
+                <option>C2(Mastery)</option>
+              </select>
+              <div *ngIf="languageForm.get('writing')?.dirty && languageForm.get('writing')?.touched && languageForm.get('writing')?.hasError('required')"
+                   class="text-white text-sm italic">
+                Writing level is required.
+              </div>
+            </div>
+          </div>
+
+          <div class="sm:col-span-3 mt-4">
+            <label for="reading" class="block text-sm font-medium text-white">Reading</label>
+            <div class="mt-1">
+              <select placeholder="level of speaking"
+                      required type="text" name="speaking" id="speaking" formControlName="speaking" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
+                <option>A1(Breakthrough)</option>
+                <option>A2(Waystage)</option>
+                <option>B1(Threshold)</option>
+                <option>B2(Vandage)</option>
+                <option>C1(Advanced)</option>
+                <option>C2(Mastery)</option>
+              </select>
+              <div *ngIf="languageForm.get('speaking')?.dirty && languageForm.get('speaking')?.touched && languageForm.get('speaking')?.hasError('speaking')"
+                   class="text-white text-sm italic">
+                Speaking level is required.
+              </div>
+            </div>
+          </div>
+
+          <div class="flex bg-white items-center h-10 w-80 rounded-xl mt-8 mb-4">
+            <input type="checkbox" name="nativeLanguage" id="nativeLanguage" formControlName="nativeLanguage"
+                   class="ml-6 bg-gray-300 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 text-Jorange focus:ring-offset-2 focus:ring-Jorange" role="switch">
+            <span class="ml-8">
+          <span  *ngIf="languageForm.value.nativeLanguage === false" class="text-lg font-bold text-Jblue ">Native Language </span>
+          <span  *ngIf="languageForm.value.nativeLanguage === true" class="text-lg font-bold text-Jorange ">Native Language </span></span>
+          </div>
+
+
+          <diV hidden>
+            <input type="text"  name="candidateId" id="candidateId" formControlName="candidateId">
+            <input type="checkbox"  name="active" id="active" formControlName="active">
+          </diV>
+
+          <div class="flex justify-around mt-8">
+            <div>
+              <button type="submit" name="submitButton" [disabled]="!languageForm.valid"  class="justify-center hover:bg-Jorange bg-white items-center h-10 w-48 rounded-xl mb-4">
+                <p class="text-Jblue hover:text-white font-bold text-2xl">Submit</p>
+              </button>
+            </div>
+
+            <div>
+              <button (click)="cancel()" class="justify-center bg-white hover:bg-Jorange  items-center h-10 w-48 rounded-xl mb-4">
+                <p class="text-red-600 hover:text-white font-bold text-2xl">Cancel</p>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+
+

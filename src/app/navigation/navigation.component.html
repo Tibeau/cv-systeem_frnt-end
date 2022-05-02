@@ -119,7 +119,7 @@
           <span *ngIf="isExtendSideBar" class="ml-6">Settings</span>
         </a>
 
-        <a *ngIf="(user$ | async)?.role === 'CANDIDATE' || (user$ | async)?.role === 'COMPANY'" [routerLink]="'/login'" [ngClass]="!isExtendSideBar ? 'w-14': 'w-52'"  class="text-white hover:bg-JorangeSelect flex-shrink-0 inline-flex items-center justify-center h-14 w-14 mt-1 rounded-lg" (click)="logOut()">
+        <a *ngIf="(user$ | async)?.role === 'CANDIDATE' || (user$ | async)?.role === 'COMPANY'" href="/login" [ngClass]="!isExtendSideBar ? 'w-14': 'w-52'"  class="text-white hover:bg-JorangeSelect flex-shrink-0 inline-flex items-center justify-center h-14 w-14 mt-1 rounded-lg" (click)="logOut()">
           <span class="sr-only">Logout</span>
           <fa-icon transform="grow-18" [icon]="faRightFromBracket"></fa-icon>
           <span *ngIf="isExtendSideBar" class="ml-6">Logout</span>

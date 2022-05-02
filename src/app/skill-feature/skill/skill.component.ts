@@ -1,4 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import {filter, Observable, take} from "rxjs";
+import {SkillPagination} from "../../models/skill/skill-pagination";
+import {selectMySkills} from "../../skill-feature/skill.selector";
+import {Skill} from "../../models/skill/skill";
+import {map} from "rxjs/operators";
+import {FormBuilder, Validators} from "@angular/forms";
+import {Router} from "@angular/router";
+import { faPencil, faTrashCan, faXmark, faTriangleExclamation} from '@fortawesome/free-solid-svg-icons';
+import {Store} from "@ngrx/store";
+import {changeSkill, loadSkills, removeSkill} from "../../store/actions/skill.actions";
 
 @Component({
   selector: 'app-skill',
@@ -7,9 +17,75 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SkillComponent implements OnInit {
 
-  constructor() { }
+
+  skills$: Observable<SkillPagination | null> = this.skillStore.select(selectMySkills);
+  mySkills$: Observable<Skill[]> = this.skills$.pipe(
+    filter((skills): skills is SkillPagination => skills !== undefined),
+    map(skills => skills?.content));
+
+  faPencil = faPencil
+  faTrashCan = faTrashCan
+  faXmark = faXmark
+  faTriangleExclamation = faTriangleExclamation;
+
+  active: boolean = false;
+  showModal: boolean = false;
+
+  currentPage = 0;
+  pageAmountSub$: Observable<number> = this.skills$.pipe(
+    filter((skill): skill is SkillPagination => skill !== undefined),
+    map(skills => skills?.totalPages));
+  pageAmount: number = 0;
+
+  skillForm = this.fb.group({
+    id: [0, Validators.required],
+    name: ['', Validators.required],
+    description: ['', Validators.required],
+    active: [false, Validators.required],
+    candidateId: ['', Validators.required]
+  })
+
+  constructor(private router: Router, private fb: FormBuilder, private skillStore: Store<{ skills: SkillPagination }>) {
+  }
 
   ngOnInit(): void {
+    this.skillStore.dispatch(loadSkills({page: this.currentPage}));
+    this.mySkills$.pipe(take(1)).subscribe();
+    this.pageAmountSub$.subscribe((page:number) => {this.pageAmount = page})
+  }
+
+  onEdit(skill: Skill) {
+    this.router.navigate([`/skillform/${skill.id}`]);
+  }
+  onAdd(){
+    this.router.navigate(['/skillform']);
+  }
+
+  onRemove(myId: number) {
+    this.showModal = false;
+    this.skillStore.dispatch(removeSkill({id: myId}));
+  }
+
+  showDeleteModal(mySkill: Skill){
+    this.skillForm.setValue(mySkill);
+    this.showModal = true;
+  }
+
+  closeDeleteModal(modal: boolean){
+    this.showModal = modal;
+  }
+
+  toggleActive(mySkill: Skill){
+    this.active = mySkill.active
+    this.skillForm.setValue(mySkill)
+    this.active = !this.active;
+    this.skillForm.patchValue({ active: this.active })
+    this.skillStore.dispatch(changeSkill({skill: this.skillForm.value, id: mySkill.id}));
+  }
+
+  pageChanged(page: number) {
+    this.currentPage = page;
+    this.skillStore.dispatch(loadSkills({page: this.currentPage}));
   }
 
 }

@@ -14,6 +14,7 @@ import {SkillComponent} from "./skill-feature/skill/skill.component";
 import {SkillFormComponent} from "./skill-feature/skill-form/skill-form.component";
 import {LanguageComponent} from "./language-feature/language/language.component";
 import {LanguageFormComponent} from "./language-feature/language-form/language-form.component";
+import {SettingsComponent} from "./settings-feature/settings.component";
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
@@ -34,9 +35,7 @@ const routes: Routes = [
   { path: 'languages', component: LanguageComponent },
   { path: 'languageform', component: LanguageFormComponent },
   { path: 'languageform/:id', component: LanguageFormComponent },
-
-
-
+  { path: 'settings', component: SettingsComponent },
 
 ];
 

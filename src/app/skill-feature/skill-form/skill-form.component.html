@@ -1,1 +1,67 @@
-<p>skill-form works!</p>
+<div class="max-w-5xl mx-auto">
+  <div class="mt-8 mb-12 mx-auto px-4 sm:px-6 lg:px-8 bg-Jblue rounded-3xl mr-6 ml-6 border-white border-2 bg-gradient-to-b from-indigo-600 to-Jblue ">
+    <form [formGroup]="skillForm" (ngSubmit)="onSubmit()" class="space-y-8 divide-y divide-gray-200 ">
+      <div class="space-y-8 divide-y divide-gray-200 ">
+        <div class="pt-8 pb-4">
+          <h3 class="text-lg leading-6 text-bold font-large text-white text-3xl mb-4">Skill</h3>
+          <p *ngIf="mode === 'add'" class="mt-1 text-lg text-white">add a new education to your CV <span class="text-sm">(added educations are automatically set to active)</span></p>
+          <p *ngIf="mode === 'edit'" class="mt-1 text-lg text-white">change one of your educations <span class="text-sm">(be sure to submit your changes)</span></p>
+
+          <hr>
+
+          <div class="sm:col-span-3 mt-4">
+            <label for="name" class="block text-sm font-medium text-white">Name</label>
+            <div class="mt-1">
+              <input placeholder="name of skill"
+                     required type="text" name="name" id="name" formControlName="name"
+                     class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+              <div *ngIf="skillForm.get('name')?.dirty && skillForm.get('name')?.touched && skillForm.get('name')?.hasError('required')"
+                   class="text-white text-sm italic">
+                Skill name is required.
+              </div>
+            </div>
+          </div>
+
+          <div class="sm:col-span-6 mt-4">
+            <label for="description" class="block text-sm font-medium text-white"> Description<span class="text-sm text-white/75">(optional)</span> </label>
+            <div class="mt-1">
+              <textarea placeholder="some extra information about your education" id="description" name="description" formControlName="description" rows="3" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md"></textarea>
+            </div>
+          </div>
+
+          <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+
+            //skill Items here
+
+          </div>
+
+          <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+            <diV hidden>
+              <input type="text"  name="candidateId" id="candidateId" formControlName="candidateId">
+              <input type="checkbox"  name="active" id="active" formControlName="active">
+            </diV>
+
+          </div>
+          <div class="flex justify-around mt-8">
+            <div>
+              <button type="submit" name="submitButton" [disabled]="!skillForm.valid"  class="justify-center hover:bg-Jorange bg-white items-center h-10 w-48 rounded-xl mb-4">
+                <p class="text-Jblue hover:text-white font-bold text-2xl">Submit</p>
+              </button>
+            </div>
+
+            <div>
+              <button (click)="cancel()" class="justify-center bg-white hover:bg-Jorange  items-center h-10 w-48 rounded-xl mb-4">
+                <p class="text-red-600 hover:text-white font-bold text-2xl">Cancel</p>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+
+

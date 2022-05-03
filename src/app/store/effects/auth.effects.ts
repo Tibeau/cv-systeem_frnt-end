@@ -5,12 +5,10 @@ import {catchError, map, mergeMap, switchMap, tap} from 'rxjs/operators';
 import {AuthService} from "../../security/auth.service";
 import {
   loadUser, loadUserSuccess, loadUserFailure,
-  login, logInFailure, logInSuccess, logout,
+  login, logInFailure, logInSuccess, logout, changeUserSuccess, changeUser, changeUserFail
 } from '../actions/auth.actions';
 import {of} from 'rxjs';
 import {EducationService} from "../../services/education/education.service";
-import {loadEducations, loadEducationsFail, loadEducationsSuccess} from "../actions/education.actions";
-import {candidateId} from "../../education-feature/education.selector";
 import {User} from "../../security/user";
 
 @Injectable()
@@ -34,6 +32,17 @@ export class AuthEffects {
         catchError(() => of(logInFailure))
     )))
   ));
+
+
+  changeUser$ = createEffect(() => this.actions$.pipe(
+    ofType(changeUser),
+    switchMap((({user, id}) => this.authService.putUser(user, id)
+      .pipe(
+        map(user => (loadUser({id: Number(user.id)})),
+        catchError(() => of(changeUserFail))
+
+      )))
+  )));
 
 
 

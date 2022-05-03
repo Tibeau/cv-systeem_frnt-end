@@ -46,7 +46,7 @@ import {LanguageEffects} from "./store/effects/language.effects";
 import {languageReducer} from "./store/reducers/language.reducers";
 import {SkillEffects} from "./store/effects/skill.effects";
 import {skillReducer} from "./store/reducers/skill.reducers";
-import { SettingsComponent } from './settings/settings.component';
+import { SettingsComponent } from './settings-feature/settings/settings.component';
 
 
 @NgModule({

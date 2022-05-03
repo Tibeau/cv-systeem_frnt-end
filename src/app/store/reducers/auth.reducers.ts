@@ -3,6 +3,12 @@ import {createReducer, on} from "@ngrx/store";
 import {loadUserSuccess, login, logInFailure, logInSuccess, logout} from "../actions/auth.actions";
 
 
+export const userFeatureKey = "user";
+
+export const selectUser = (state: State) => state.user
+
+
+
 export interface State {
   isAuthenticated: boolean;
   user: User | null;
@@ -14,10 +20,6 @@ export const initialState: State = {
   user: null,
   errorMessage: null
 };
-
-export const userFeatureKey = "user";
-
-export const selectUser = (state: State) => state.user
 
 
 export const authReducer = createReducer(

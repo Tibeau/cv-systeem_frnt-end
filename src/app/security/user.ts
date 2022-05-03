@@ -17,10 +17,8 @@ export interface User {
   role: string;
   token: string;
   number: string;
-  postalcode: string;
+  postalCode: string;
   active: string;
-  username: string;
-  authorities: string;
 
 
 

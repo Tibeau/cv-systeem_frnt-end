@@ -4,6 +4,24 @@ import {User} from "../../security/user";
 
 let type = "[Auth]";
 
+
+//CHANGE USER
+export const changeUser = createAction(
+  `${type} changeUser`,
+  props<{user: User, id: number}>(),
+)
+
+export const changeUserSuccess = createAction(
+  `${type} changeUser SUCCESS`,
+)
+
+export const changeUserFail = createAction(
+  `${type} changeUser FAIL`,
+  props<{error: any}>()
+)
+
+
+
 //LOGIN
 export const logInSuccess = createAction(
   `${type} Login SUCCESS`,

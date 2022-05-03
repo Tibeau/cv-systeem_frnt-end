@@ -1,14 +1,12 @@
-<div class="max-w-7xl mt-8 mb-12 mx-auto px-4 sm:px-6 lg:px-8 bg-Jblue rounded-3xl">
-<div class="max-w-3xl mx-auto">
-    <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="space-y-8 divide-y divide-gray-200">
-      <div class="space-y-8 divide-y divide-gray-200">
-        <div class="pt-8 pb-8">
-          <div>
-            <h3 class="text-xl leading-6 font-bold text-white">Contact info</h3>
-            <p class="mt-1 text-sm text-white">Use a permanent address where you can receive mail.</p>
-          </div>
-
+<div class="max-w-5xl mx-auto">
+  <div class="mt-8 mb-12 mx-auto px-4 sm:px-6 lg:px-8 bg-Jblue rounded-3xl mr-6 ml-6 border-white border-2 bg-gradient-to-b from-indigo-600 to-Jblue ">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="space-y-8 divide-y divide-gray-200 ">
+      <div class="space-y-8 divide-y divide-gray-200 ">
+        <div class="pt-8 pb-4">
+          <h3 class="text-lg leading-6 text-bold font-large text-white text-3xl mb-4">Contact info</h3>
+          <p class="mt-1 text-lg text-white"> Change you personal information <span class="text-sm">(make sure to press submit after every change)</span></p>
           <hr>
+
 
           <div class="sm:col-span-6 mt-4">
             <label class="block text-sm font-medium text-white"> Photo </label>
@@ -23,99 +21,130 @@
           </div>
 
           <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+
             <div class="sm:col-span-3">
               <label for="firstname" class="block text-sm font-medium text-white"> First name </label>
               <div class="mt-1">
-                <input name="firstname" id="firstname" formControlName="firstname" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 h-5 block w-full sm:text-sm border-gray-300 rounded-md">
+                <input placeholder="your first name" type="text" name="firstname" id="firstname" formControlName="firstname" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <div *ngIf="userForm.get('firstname')?.dirty && userForm.get('firstname')?.touched && userForm.get('firstname')?.hasError('required')"
+                     class="text-white text-sm italic">
+                  First name is required.
+                </div>
               </div>
             </div>
 
             <div class="sm:col-span-3">
-              <label for="last-name" class="block text-sm font-medium text-white"> Last name </label>
+              <label for="lastname" class="block text-sm font-medium text-white"> Last name </label>
               <div class="mt-1">
-                <input type="text" name="last-name" id="last-name" autocomplete="family-name" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <input placeholder="your last name" type="text" name="lastname" id="lastname" formControlName="lastname" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <div *ngIf="userForm.get('lastname')?.dirty && userForm.get('lastname')?.touched && userForm.get('lastname')?.hasError('required')"
+                     class="text-white text-sm italic">
+                  Last name is required.
+                </div>
               </div>
             </div>
 
-            <div class="sm:col-span-4">
-              <label for="email" class="block text-sm font-medium text-white"> Email address </label>
+
+            <div class="sm:col-span-6">
+              <label for="email" class="block text-sm font-medium text-white"> Email </label>
               <div class="mt-1">
-                <input name="email" id="email" formControlName="email" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <input placeholder="your email address" type="text" name="email" id="email" formControlName="email" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <div *ngIf="userForm.get('email')?.dirty && userForm.get('email')?.touched && userForm.get('email')?.hasError('required')"
+                     class="text-white text-sm italic">
+                  Email is required.
+                </div>
               </div>
             </div>
+
 
             <div class="sm:col-span-3">
               <label for="country" class="block text-sm font-medium text-white"> Country </label>
               <div class="mt-1">
-                <select id="country" name="country" autocomplete="country-name" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
-                  <option>United States</option>
-                  <option>Canada</option>
-                  <option>Mexico</option>
-                </select>
+                <input placeholder="country you currently live in" type="text" name="country" id="country" formControlName="country" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <div *ngIf="userForm.get('country')?.dirty && userForm.get('country')?.touched && userForm.get('country')?.hasError('required')"
+                     class="text-white text-sm italic">
+                  Last name is required.
+                </div>
               </div>
             </div>
 
             <div class="sm:col-span-3">
-              <label for="first-name" class="block text-sm font-medium text-white"> Phone </label>
+              <label for="phone" class="block text-sm font-medium text-white"> Phone </label>
               <div class="mt-1">
-                <input type="text" name="phone" id="phone" autocomplete="given-name" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <input placeholder="your phone number" type="text" name="phone" id="phone" formControlName="phone" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <div *ngIf="userForm.get('phone')?.dirty && userForm.get('phone')?.touched && userForm.get('phone')?.hasError('required')"
+                     class="text-white text-sm italic">
+                  Last name is required.
+                </div>
               </div>
             </div>
 
-            <div class="sm:col-span-6">
-              <label for="street-address" class="block text-sm font-medium text-white"> Street address </label>
-              <div class="mt-1">
-                <input type="text" name="street-address" id="street-address" autocomplete="street-address" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
-              </div>
-            </div>
 
-            <div class="sm:col-span-2">
+            <div class="sm:col-span-3">
               <label for="city" class="block text-sm font-medium text-white"> City </label>
               <div class="mt-1">
-                <input type="text" name="city" id="city" autocomplete="address-level2" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <input placeholder="city you currently live in" type="text" name="city" id="city" formControlName="city" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <div *ngIf="userForm.get('city')?.dirty && userForm.get('city')?.touched && userForm.get('city')?.hasError('required')"
+                     class="text-white text-sm italic">
+                  Last name is required.
+                </div>
               </div>
             </div>
 
-            <div class="sm:col-span-2">
-              <label for="region" class="block text-sm font-medium text-white"> State / Province </label>
+            <div class="sm:col-span-3">
+              <label for="postalCode" class="block text-sm font-medium text-white"> Postal code </label>
               <div class="mt-1">
-                <input type="text" name="region" id="region" autocomplete="address-level1" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <input placeholder="city you currently live in" type="text" name="postalCode" id="postalCode" formControlName="postalCode" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <div *ngIf="userForm.get('postalCode')?.dirty && userForm.get('postalCode')?.touched && userForm.get('postalCode')?.hasError('required')"
+                     class="text-white text-sm italic">
+                  Last name is required.
+                </div>
               </div>
             </div>
 
-            <div class="sm:col-span-2">
-              <label for="postal-code" class="block text-sm font-medium text-white"> ZIP / Postal code </label>
+            <div class="sm:col-span-3">
+              <label for="street" class="block text-sm font-medium text-white"> Street </label>
               <div class="mt-1">
-                <input type="text" name="postal-code" id="postal-code" autocomplete="postal-code" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <input placeholder="city you currently live in" type="text" name="street" id="street" formControlName="street" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <div *ngIf="userForm.get('street')?.dirty && userForm.get('street')?.touched && userForm.get('street')?.hasError('required')"
+                     class="text-white text-sm italic">
+                  Last name is required.
+                </div>
+              </div>
+            </div>
+
+            <div class="sm:col-span-3">
+              <label for="number" class="block text-sm font-medium text-white"> House number </label>
+              <div class="mt-1">
+                <input placeholder="city you currently live in" type="text" name="number" id="number" formControlName="number" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <div *ngIf="userForm.get('number')?.dirty && userForm.get('number')?.touched && userForm.get('number')?.hasError('required')"
+                     class="text-white text-sm italic">
+                  Last name is required.
+                </div>
               </div>
             </div>
           </div>
-
-
-
 
           <div class="mt-8">
             <h3 class="text-lg leading-6 font-medium text-white">About</h3>
             <p class="mt-1 text-sm text-white">Use a permanent address where you can receive mail.</p>
           </div>
-
           <hr>
 
           <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
 
-            <div class="sm:col-span-6">
-              <label for="about" class="block text-sm font-medium text-white"> About </label>
+            <div class="sm:col-span-6 mt-4">
+              <label for="description" class="block text-sm font-medium text-white"> About <span class="text-sm text-white/75">(optional)</span> </label>
               <div class="mt-1">
-                <textarea id="about" name="about" rows="3" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md"></textarea>
+                <textarea placeholder="write something about yourself" id="description" name="description" formControlName="description" rows="3" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md"></textarea>
               </div>
-              <p class="mt-2 text-sm text-white">Write a few sentences about yourself.</p>
             </div>
 
             <div class="sm:col-span-3">
               <label for="country" class="block text-sm font-medium text-white"> Category </label>
               <div class="mt-1">
                 <select id="category" name="category" autocomplete="category-name" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
-                  <option>front-end</option>
+                  <option>Work in progress</option>
                   <option>back-end</option>
                   <option>cloud native</option>
                 </select>
@@ -123,32 +152,61 @@
             </div>
 
             <div class="sm:col-span-3">
-              <label for="first-name" class="block text-sm font-medium text-white"> LinkedIn </label>
+              <label for="linkedIn" class="block text-sm font-medium text-white"> LinkedIn  </label>
               <div class="mt-1">
-                <input type="text" name="LinkedIn" id="LinkedIn" autocomplete="given-name" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <input placeholder="city you currently live in" type="text" name="linkedIn" id="linkedIn" formControlName="linkedIn" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <div *ngIf="userForm.get('linkedIn')?.dirty && userForm.get('linkedIn')?.touched && userForm.get('linkedIn')?.hasError('required')"
+                     class="text-white text-sm italic">
+                  Last name is required.
+                </div>
               </div>
             </div>
 
             <div class="sm:col-span-3">
-              <label for="country" class="block text-sm font-medium text-white"> Drivers license </label>
+              <label for="driversLicence" class="block text-sm font-medium text-white"> Drivers license </label>
               <div class="mt-1">
-                <select id="driver-license" name="driver-license" autocomplete="driver-license-name" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <select id="driversLicence" name="driversLicence" formControlName="driversLicence" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
                   <option>A</option>
+                  <option>A1</option>
                   <option>B</option>
+                  <option>BE</option>
+                  <option>C1</option>
+                  <option>C1E</option>
                   <option>C</option>
+                  <option>CE</option>
+                  <option>D1</option>
+                  <option>D1E</option>
+                  <option>D</option>
+                  <option>DE</option>
                 </select>
               </div>
             </div>
-
           </div>
-          <button type="button" class="flex bg-white items-center h-10 w-40 rounded-xl mt-4">
-            <p class="ml-10 text-Jblue font-bold text-2xl">Submit</p>
-          </button>
+
+          <diV hidden>
+            <input type="text"  name="candidateId" id="candidateId" formControlName="candidateId">
+            <input type="text"  name="candidateId" id="companyId" formControlName="companyId">
+          </diV>
+
+          <div class="flex justify-around mt-8">
+            <div>
+              <button type="submit" name="submitButton" [disabled]="!userForm.valid"  class="justify-center hover:bg-Jorange bg-white items-center h-10 w-48 rounded-xl mb-4">
+                <p class="text-Jblue hover:text-white font-bold text-2xl">Submit</p>
+              </button>
+            </div>
+
+            <div>
+            </div>
+          </div>
         </div>
       </div>
     </form>
   </div>
 </div>
+
+
+
+
 
 
 

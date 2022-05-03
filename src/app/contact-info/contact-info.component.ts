@@ -5,6 +5,10 @@ import {User} from "../security/user";
 import {filter, Observable, take} from "rxjs";
 import {selectMyUser} from "../security/user.selector";
 import {FormBuilder, Validators} from "@angular/forms";
+import {addEducation, changeEducation} from "../store/actions/education.actions";
+import {Router} from "@angular/router";
+import {changeUser} from "../store/actions/auth.actions";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-contact-info',
@@ -33,28 +37,32 @@ export class ContactInfoComponent implements OnInit {
     role: ["", Validators.required,],
     token: [""],
     number: ["", Validators.required,],
-    postalcode: ["", Validators.required,],
+    postalCode: ["", Validators.required,],
     active: ["", Validators.required,],
-    username: ["", Validators.required,],
-    authorities: ["", Validators.required,],
   })
 
-  constructor(private fb: FormBuilder ,private authService: AuthService,
+  constructor(private http: HttpClient, private router: Router ,private fb: FormBuilder ,private authService: AuthService,
               private authStore: Store<{ user: User }>
   ) {}
 
   ngOnInit(): void {
     this.user$.pipe(
-      filter((user): user is User => user !== undefined),
+      filter((user): user is User => user !== null),
       take(1)).subscribe((user) => {
-      this.userForm.patchValue({role: {...user}.role})
-      console.log(user)
-      console.log(this.userForm.value)
+      this.userForm.setValue({...user})
     });
   }
 
-  onSubmit(){
+  onSubmit(): void {
+    if (!this.userForm.valid) {
+      window.alert("please fill in all required fields before submitting the form");
+    } else {
+        this.authStore.dispatch(changeUser({user: this.userForm.value, id: this.userForm.value.id}));
+    }
 
   }
+
+
+
 
 }

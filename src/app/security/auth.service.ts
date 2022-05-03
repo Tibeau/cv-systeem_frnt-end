@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from './user';
+import {Education} from "../models/education/education";
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +20,9 @@ export class AuthService {
     localStorage.clear();
   }
 
+  putUser(user: User, id: number){
+    return this.httpClient.put<User>(`${this.api}/users/${id}`, user);
+  }
 
   getUserById(id: number): Observable<User> {
     return this.httpClient.get<User>(`${this.api}/users/${id}`);

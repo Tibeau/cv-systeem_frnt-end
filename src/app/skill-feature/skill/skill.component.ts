@@ -9,6 +9,9 @@ import {Router} from "@angular/router";
 import { faPencil, faTrashCan, faXmark, faTriangleExclamation} from '@fortawesome/free-solid-svg-icons';
 import {Store} from "@ngrx/store";
 import {changeSkill, loadSkills, removeSkill} from "../../store/actions/skill.actions";
+import {SkillItem} from "../../models/skillItem/skillItem";
+import {selectMySkillItems} from "../skillItem.selector";
+import {loadSkillItems} from "../../store/actions/skillItem.actions";
 
 @Component({
   selector: 'app-skill',
@@ -22,6 +25,8 @@ export class SkillComponent implements OnInit {
   mySkills$: Observable<Skill[]> = this.skills$.pipe(
     filter((skills): skills is SkillPagination => skills !== undefined),
     map(skills => skills?.content));
+  skillItems$: Observable<SkillItem[] | null> = this.skillItemStore.select(selectMySkillItems);
+
 
   faPencil = faPencil
   faTrashCan = faTrashCan
@@ -45,12 +50,14 @@ export class SkillComponent implements OnInit {
     candidateId: ['', Validators.required]
   })
 
-  constructor(private router: Router, private fb: FormBuilder, private skillStore: Store<{ skills: SkillPagination }>) {
+  constructor(private router: Router, private fb: FormBuilder, private skillStore: Store<{ skills: SkillPagination }>, private skillItemStore: Store<{ skillItems: SkillItem[] }>) {
   }
 
   ngOnInit(): void {
-    this.skillStore.dispatch(loadSkills({page: this.currentPage}));
+    this.skillStore.dispatch(loadSkills({page: this.currentPage, items: 3}));
+    this.skillItemStore.dispatch(loadSkillItems());
     this.mySkills$.pipe(take(1)).subscribe();
+    this.skillItems$.pipe(take(1)).subscribe();
     this.pageAmountSub$.subscribe((page:number) => {this.pageAmount = page})
   }
 
@@ -85,7 +92,7 @@ export class SkillComponent implements OnInit {
 
   pageChanged(page: number) {
     this.currentPage = page;
-    this.skillStore.dispatch(loadSkills({page: this.currentPage}));
+    this.skillStore.dispatch(loadSkills({page: this.currentPage, items: 3}));
   }
 
 }

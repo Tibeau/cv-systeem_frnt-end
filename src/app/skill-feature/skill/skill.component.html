@@ -16,6 +16,12 @@
           </div>
         </div>
 
+        <ul *ngFor="let skillItem of skillItems$ | async">
+          <div *ngIf="skillItem.skillId === skill.id">
+            <li>{{skillItem.name}}</li>
+            <li>{{skillItem.description}}</li></div>
+        </ul>
+
       </div>
       <div class="flex justify-between">
         <div class="flex bg-white items-center h-10 w-40 rounded-xl mb-4 ml-4">

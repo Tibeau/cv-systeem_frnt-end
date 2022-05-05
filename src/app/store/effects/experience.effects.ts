@@ -27,7 +27,7 @@ export class ExperienceEffects{
 
   getExperiences$ = createEffect(() => this.actions$.pipe(
     ofType(loadExperiences),
-    switchMap((({page}) => this.experienceService.getExperiencesByCandidateId(candidateId, page)
+    switchMap((({page, items}) => this.experienceService.getExperiencesByCandidateId(candidateId, page, items)
       .pipe(
         map(experiences => ( loadExperiencesSuccess({experiences}) )),
         catchError(() => of(loadExperiencesFail))
@@ -41,7 +41,7 @@ export class ExperienceEffects{
       .pipe(
         map(experience => ( addExperienceSuccess())),
         catchError(() => of(addExperienceFail)),
-        map(experience => (loadExperiences({page: 0})))
+        map(experience => (loadExperiences({page: 0, items: 3})))
       )))
   );
 
@@ -52,7 +52,7 @@ export class ExperienceEffects{
       .pipe(
         map(experience => ( changeExperienceSuccess())),
         catchError(() => of(changeExperienceFail)),
-        map(experience => (loadExperiences({page: 0})))
+        map(experience => (loadExperiences({page: 0, items: 3})))
       )))
   ));
 
@@ -62,7 +62,7 @@ export class ExperienceEffects{
       .pipe(
         map(experience => ( removeExperienceSuccess() )),
         catchError(() => of(removeExperienceFail)),
-        map(experience => (loadExperiences({page: 0})))
+        map(experience => (loadExperiences({page: 0, items: 3})))
       )))
   );
 }

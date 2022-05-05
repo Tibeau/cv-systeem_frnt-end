@@ -40,7 +40,7 @@ export const addEducationFail = createAction(
 //LOAD EDUCATIONS
 export const loadEducations = createAction(
   `${type} loadEducations`,
-  props<{page: number}>(),
+  props<{page: number, items: number}>(),
 )
 export const loadEducationsSuccess = createAction(
   `${type} loadEducations SUCCESS`,
@@ -51,6 +51,7 @@ export const loadEducationsFail = createAction(
   `${type} loadEducations FAIL`,
   props<{error: any}>()
 )
+
 
 //DELETE EDUCATION
 export const removeEducation = createAction(

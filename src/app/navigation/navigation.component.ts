@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../security/auth.service';
-import { faIdCard, faGraduationCap, faBriefcase, faRightFromBracket, faGear,  faCertificate, faFile, faMessage, faEarthEurope, faLightbulb, faAngleLeft, faAngleRight} from '@fortawesome/free-solid-svg-icons';
+import { faIdCard, faGraduationCap, faBriefcase, faRightFromBracket, faGear,  faCertificate, faFile, faMessage, faEarthEurope, faBrain, faAngleLeft, faAngleRight} from '@fortawesome/free-solid-svg-icons';
 import { Store } from '@ngrx/store';
 import {loadUser, logout} from "../store/actions/auth.actions";
 import {User} from "../security/user";
@@ -19,7 +19,7 @@ import {FormBuilder, Validators} from "@angular/forms";
 export class NavigationComponent implements OnInit {
   user$: Observable<User | null> = this.authStore.select(selectMyUser);
 
-  faLightbulb = faLightbulb;
+  faBrain = faBrain;
   faEarthEurope = faEarthEurope;
   faMessage = faMessage;
   faIdCard = faIdCard;

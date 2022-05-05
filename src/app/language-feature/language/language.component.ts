@@ -52,7 +52,7 @@ export class LanguageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.languageStore.dispatch(loadLanguages({page: this.currentPage}));
+    this.languageStore.dispatch(loadLanguages({page: this.currentPage, items: 3}));
     this.myLanguages$.pipe(take(1)).subscribe();
     this.pageAmountSub$.subscribe((page:number) => {this.pageAmount = page})
   }
@@ -88,7 +88,7 @@ export class LanguageComponent implements OnInit {
 
   pageChanged(page: number) {
     this.currentPage = page;
-    this.languageStore.dispatch(loadLanguages({page: this.currentPage}));
+    this.languageStore.dispatch(loadLanguages({page: this.currentPage, items: 3}));
   }
 
 }

@@ -54,7 +54,7 @@ export class EducationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.educationStore.dispatch(loadEducations({page: this.currentPage}));
+    this.educationStore.dispatch(loadEducations({page: this.currentPage, items: 3}));
     this.myEducations$.pipe(take(1)).subscribe();
     this.pageAmountSub$.subscribe((page:number) => {this.pageAmount = page})
   }
@@ -90,6 +90,6 @@ export class EducationComponent implements OnInit {
 
   pageChanged(page: number) {
     this.currentPage = page;
-    this.educationStore.dispatch(loadEducations({page: this.currentPage}));
+    this.educationStore.dispatch(loadEducations({page: this.currentPage, items: 3}));
   }
 }

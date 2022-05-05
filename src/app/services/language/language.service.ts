@@ -14,8 +14,8 @@ export class LanguageService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getLanguagesByCandidateId(candidateId: string | null, page: number): Observable<LanguagePagination> {
-    return this.httpClient.get<LanguagePagination>(`${this.BASE_URL}/candidateId=${candidateId}/page=${page}`
+  getLanguagesByCandidateId(candidateId: string | null, page: number, items: number): Observable<LanguagePagination> {
+    return this.httpClient.get<LanguagePagination>(`${this.BASE_URL}/candidateId=${candidateId}/page=${page}/items=${items}`
     );
   }
 

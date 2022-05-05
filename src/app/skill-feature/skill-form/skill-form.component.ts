@@ -32,8 +32,8 @@ export class SkillFormComponent implements OnInit {
     id: [0, Validators.required],
     name: ['', Validators.required],
     description: ['', Validators.required],
-    active: [false, Validators.required],
-    candidateId: ['', Validators.required]
+    active: [true, Validators.required],
+    candidateId: [this.candidateId, Validators.required]
   })
 
   constructor(private router: Router, private route: ActivatedRoute, private fb: FormBuilder, private skillStore: Store<{ skills: Skill[] }>) {

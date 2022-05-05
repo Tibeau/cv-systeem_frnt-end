@@ -30,7 +30,7 @@ export class SkillEffects{
 
   getSkills$ = createEffect(() => this.actions$.pipe(
     ofType(loadSkills),
-    switchMap((({page}) => this.skillService.getSkillsByCandidateId(candidateId, page)
+    switchMap((({page, items}) => this.skillService.getSkillsByCandidateId(candidateId, page, items)
       .pipe(
         map(skills => ( loadSkillsSuccess({skills}) )),
         catchError(() => of(loadSkillsFail))
@@ -44,7 +44,7 @@ export class SkillEffects{
       .pipe(
         map(skill => ( addSkillSuccess())),
         catchError(() => of(addSkillFail)),
-        map(skill => (loadSkills({page: 0})))
+        map(skill => (loadSkills({page: 0, items: 3})))
       )))
   );
 
@@ -55,7 +55,7 @@ export class SkillEffects{
       .pipe(
         map(skill => ( changeSkillSuccess())),
         catchError(() => of(changeSkillFail)),
-        map(skill => (loadSkills({page: 0})))
+        map(skill => (loadSkills({page: 0, items: 3})))
       )))
   ));
 
@@ -65,7 +65,7 @@ export class SkillEffects{
       .pipe(
         map(skill => ( removeSkillSuccess() )),
         catchError(() => of(removeSkillFail)),
-        map(skill => (loadSkills({page: 0})))
+        map(skill => (loadSkills({page: 0, items: 3})))
       )))
   );
 }

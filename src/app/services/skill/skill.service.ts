@@ -16,8 +16,8 @@ export class SkillService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getSkillsByCandidateId(candidateId: string | null, page: number): Observable<SkillPagination> {
-    return this.httpClient.get<SkillPagination>(`${this.BASE_URL}/candidateId=${candidateId}/page=${page}`
+  getSkillsByCandidateId(candidateId: string | null, page: number, items: number): Observable<SkillPagination> {
+    return this.httpClient.get<SkillPagination>(`${this.BASE_URL}/candidateId=${candidateId}/page=${page}/items=${items}`
     );
   }
 

@@ -15,10 +15,16 @@ export class EducationService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getEducationsByCandidateId(candidateId: string | null, page: number): Observable<EducationPagination> {
-    return this.httpClient.get<EducationPagination>(`${this.BASE_URL}/candidateId=${candidateId}/page=${page}`
+  getEducationsByCandidateId(candidateId: string | null, page: number, items: number): Observable<EducationPagination> {
+    return this.httpClient.get<EducationPagination>(`${this.BASE_URL}/candidateId=${candidateId}/page=${page}/items=${items}`
     );
   }
+
+  getActiveEducationsByCandidateId(candidateId: string | null): Observable<Education[]> {
+    return this.httpClient.get<Education[]>(`${this.BASE_URL}/active/candidateId=${candidateId}`
+    );
+  }
+
 
   createEducation(education: Education){
     return this.httpClient.post<Education>(`${this.BASE_URL}`, education);

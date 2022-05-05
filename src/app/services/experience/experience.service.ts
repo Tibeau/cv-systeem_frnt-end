@@ -14,8 +14,8 @@ export class ExperienceService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getExperiencesByCandidateId(candidateId: string | null, page: number): Observable<ExperiencePagination> {
-    return this.httpClient.get<ExperiencePagination>(`${this.BASE_URL}/candidateId=${candidateId}/page=${page}`
+  getExperiencesByCandidateId(candidateId: string | null, page: number, items: number): Observable<ExperiencePagination> {
+    return this.httpClient.get<ExperiencePagination>(`${this.BASE_URL}/candidateId=${candidateId}/page=${page}/items=${items}`
     );
   }
 

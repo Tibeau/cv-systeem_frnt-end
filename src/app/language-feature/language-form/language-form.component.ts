@@ -34,7 +34,7 @@ export class LanguageFormComponent implements OnInit {
     writing: ['', Validators.required],
     speaking: ['', Validators.required],
     nativeLanguage: [false, Validators.required],
-    active: [false, Validators.required],
+    active: [true, Validators.required],
     candidateId: [this.candidateId, Validators.required]
   })
 

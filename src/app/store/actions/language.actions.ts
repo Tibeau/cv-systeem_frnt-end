@@ -42,7 +42,7 @@ export const addLanguageFail = createAction(
 //LOAD LANGUAGE
 export const loadLanguages = createAction(
   `${type} loadLanguage`,
-  props<{page: number}>(),
+  props<{page: number, items: number}>(),
 )
 export const loadLanguagesSuccess = createAction(
   `${type} loadLanguages SUCCESS`,

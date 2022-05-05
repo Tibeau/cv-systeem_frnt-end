@@ -54,7 +54,7 @@ export class ExperienceComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.experienceStore.dispatch(loadExperiences({page: this.currentPage}));
+    this.experienceStore.dispatch(loadExperiences({page: this.currentPage, items: 3}));
     this.myExperiences$.pipe(take(1)).subscribe();
     this.pageAmountSub$.subscribe((page:number) => {this.pageAmount = page})
   }
@@ -90,7 +90,7 @@ export class ExperienceComponent implements OnInit {
 
   pageChanged(page: number) {
     this.currentPage = page;
-    this.experienceStore.dispatch(loadExperiences({page: this.currentPage}));
+    this.experienceStore.dispatch(loadExperiences({page: this.currentPage, items: 3}));
   }
 
 }

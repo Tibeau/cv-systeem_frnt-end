@@ -29,7 +29,7 @@ export class EducationEffects {
 
   getEducations$ = createEffect(() => this.actions$.pipe(
     ofType(loadEducations),
-    switchMap((({page}) => this.educationService.getEducationsByCandidateId(candidateId, page)
+    switchMap((({page, items}) => this.educationService.getEducationsByCandidateId(candidateId, page, items)
       .pipe(
         map(educations => ( loadEducationsSuccess({educations}) )),
         catchError(() => of(loadEducationsFail))
@@ -37,13 +37,13 @@ export class EducationEffects {
   ));
 
 
- addEducation$ = createEffect(() => this.actions$.pipe(
+  addEducation$ = createEffect(() => this.actions$.pipe(
     ofType(addEducation),
     switchMap(({education}) => this.educationService.createEducation(education)
       .pipe(
         map(education => ( addEducationSuccess())),
         catchError(() => of(addEducationFail)),
-        map(education => (loadEducations({page: 0})))
+        map(education => (loadEducations({page: 0, items: 3})))
       )))
   );
 
@@ -54,7 +54,7 @@ export class EducationEffects {
       .pipe(
         map(education => ( changeEducationSuccess())),
         catchError(() => of(changeEducationFail)),
-        map(education => (loadEducations({page: 0})))
+        map(education => (loadEducations({page: 0, items: 3})))
       )))
   ));
 
@@ -64,7 +64,7 @@ export class EducationEffects {
       .pipe(
         map(education => ( removeEducationSuccess() )),
         catchError(() => of(removeEducationFail)),
-        map(education => (loadEducations({page: 0})))
+        map(education => (loadEducations({page: 0, items: 3})))
       )))
   );
 }

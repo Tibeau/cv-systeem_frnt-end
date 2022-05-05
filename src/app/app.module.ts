@@ -47,6 +47,8 @@ import {languageReducer} from "./store/reducers/language.reducers";
 import {SkillEffects} from "./store/effects/skill.effects";
 import {skillReducer} from "./store/reducers/skill.reducers";
 import { SettingsComponent } from './settings-feature/settings/settings.component';
+import {SkillItemEffects} from "./store/effects/skillItem.effects";
+import {skillItemReducer} from "./store/reducers/skillItem.reducers";
 
 
 @NgModule({
@@ -80,9 +82,9 @@ import { SettingsComponent } from './settings-feature/settings/settings.componen
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    EffectsModule.forRoot([AuthEffects, EducationEffects, CertificateEffects, ExperienceEffects, LanguageEffects, SkillEffects]),
+    EffectsModule.forRoot([AuthEffects, EducationEffects, CertificateEffects, ExperienceEffects, LanguageEffects, SkillEffects, SkillItemEffects]),
     EffectsModule.forFeature(),
-    StoreModule.forRoot({educations: educationReducer, user: authReducer, certificates: certificateReducer, experiences: experienceReducer, languages: languageReducer, skills: skillReducer}),
+    StoreModule.forRoot({educations: educationReducer, user: authReducer, certificates: certificateReducer, experiences: experienceReducer, languages: languageReducer, skills: skillReducer, skillItems: skillItemReducer}),
     BrowserAnimationsModule,
     LayoutModule,
     CommonModule,

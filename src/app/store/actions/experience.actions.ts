@@ -42,7 +42,7 @@ export const addExperienceFail = createAction(
 //LOAD EXPERIENCE
 export const loadExperiences = createAction(
   `${type} loadExperience`,
-  props<{page: number}>(),
+  props<{page: number, items: number}>(),
 )
 export const loadExperiencesSuccess = createAction(
   `${type} loadExperiences SUCCESS`,

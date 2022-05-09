@@ -53,7 +53,7 @@ export class CertificateComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.certificateStore.dispatch(loadCertificates({page: this.currentPage}));
+    this.certificateStore.dispatch(loadCertificates({page: this.currentPage, items: 3}));
     this.myCertificates$.pipe(take(1)).subscribe();
     this.pageAmountSub$.subscribe((page:number) => {this.pageAmount = page})
   }
@@ -80,7 +80,7 @@ export class CertificateComponent implements OnInit {
 
   pageChanged(page: number) {
     this.currentPage = page;
-    this.certificateStore.dispatch(loadCertificates({page: this.currentPage}));
+    this.certificateStore.dispatch(loadCertificates({page: this.currentPage, items: 3}));
   }
 
   onRemove(myId: number) {

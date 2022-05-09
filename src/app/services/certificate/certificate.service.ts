@@ -14,8 +14,8 @@ export class CertificateService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getCertificatesByCandidateId(candidateId: string | null, page: number): Observable<CertificatePagination> {
-    return this.httpClient.get<CertificatePagination>(`${this.BASE_URL}/candidateId=${candidateId}/page=${page}`
+  getCertificatesByCandidateId(candidateId: string | null, page: number, items: number): Observable<CertificatePagination> {
+    return this.httpClient.get<CertificatePagination>(`${this.BASE_URL}/candidateId=${candidateId}/page=${page}/items=${items}`
     );
   }
 

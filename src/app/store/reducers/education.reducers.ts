@@ -3,7 +3,10 @@ import {createReducer, on} from "@ngrx/store";
 import {
   loadEducations,
   loadEducationsFail,
-  loadEducationsSuccess, changeEducation, changeEducationSuccess, changeEducationFail,
+  loadEducationsSuccess,
+  changeEducation,
+  changeEducationSuccess,
+  changeEducationFail
 } from '../actions/education.actions';
 import {EducationPagination} from "../../models/education/education-pagination";
 
@@ -33,7 +36,6 @@ export const educationReducer = createReducer(
   on(changeEducation, (state) => ({educations: null, errorMessage: "changing education"})),
   on(changeEducationSuccess, (state) => ({educations: null, errorMessage: "changed education successfully"})),
   on(changeEducationFail, (state) => ({educations: null, errorMessage: "failed to change education"})),
-
 );
 
 

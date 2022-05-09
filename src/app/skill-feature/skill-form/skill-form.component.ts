@@ -4,11 +4,14 @@ import {filter, Observable, take} from "rxjs";
 import {Skill} from "../../models/skill/skill";
 import {selectMySkills} from "../../skill-feature/skill.selector";
 import {map} from "rxjs/operators";
-import {FormBuilder, Validators} from "@angular/forms";
+import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {CustomeDateValidators} from "../../shared/directives/date-validation.directive";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {Store} from "@ngrx/store";
 import {addSkill, changeSkill} from "../../store/actions/skill.actions";
+import {SkillItem} from "../../models/skillItem/skillItem";
+import {addSkillItem, loadSkillItems} from "../../store/actions/skillItem.actions";
+import {selectMySkillItems} from "../skillItem.selector";
 
 
 @Component({
@@ -19,6 +22,7 @@ import {addSkill, changeSkill} from "../../store/actions/skill.actions";
 export class SkillFormComponent implements OnInit {
   skill$: Observable<Skill | undefined> = this.skillStore.select(selectMySkills)
     .pipe(map(skills => skills?.content.find(skill => skill.id == this.skillId)));
+  skillItems$: Observable<SkillItem[] | null> = this.skillItemStore.select(selectMySkillItems);
 
   faArrowLeft = faArrowLeft;
   mode: string = "";
@@ -32,23 +36,24 @@ export class SkillFormComponent implements OnInit {
     id: [0, Validators.required],
     name: ['', Validators.required],
     description: ['', Validators.required],
-    active: [false, Validators.required],
-    candidateId: ['', Validators.required]
-  })
+    active: [true, Validators.required],
+    candidateId: [this.candidateId, Validators.required]
+  });
 
-  constructor(private router: Router, private route: ActivatedRoute, private fb: FormBuilder, private skillStore: Store<{ skills: Skill[] }>) {
+  constructor(private router: Router, private route: ActivatedRoute, private fb: FormBuilder, private skillStore: Store<{ skills: Skill[] }>, private skillItemStore: Store<{ skillItems: SkillItem[] }>) {
   }
 
   ngOnInit(): void {
     this.route.params.pipe(take(1)).subscribe((params: Params) => this.skillId = params['id']);
 
-
     if (this.skillId) {
       this.mode = "edit";
+      this.skillItemStore.dispatch(loadSkillItems());
       this.skill$.pipe(
         filter((skill): skill is Skill => skill !== undefined),
         take(1)).subscribe((skill) => {
         this.skillForm.setValue({...skill})
+
       });
     } else {
       this.mode = "add";
@@ -66,7 +71,6 @@ export class SkillFormComponent implements OnInit {
       }
       this.router.navigate([this.skillUrl]);
     }
-
   }
 
   cancel(){

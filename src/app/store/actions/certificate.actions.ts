@@ -42,7 +42,7 @@ export const addCertificateFail = createAction(
 //LOAD CERTIFICATEs
 export const loadCertificates = createAction(
   `${type} loadCertificates`,
-  props<{page: number}>(),
+  props<{page: number, items: number}>(),
 )
 export const loadCertificatesSuccess = createAction(
   `${type} loadCertificates SUCCESS`,

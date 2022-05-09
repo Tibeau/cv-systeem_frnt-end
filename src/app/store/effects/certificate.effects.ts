@@ -28,7 +28,7 @@ export class CertificateEffects {
 
   getCertificates$ = createEffect(() => this.actions$.pipe(
     ofType(loadCertificates),
-    switchMap((({page}) => this.certificateService.getCertificatesByCandidateId(candidateId, page)
+    switchMap((({page, items}) => this.certificateService.getCertificatesByCandidateId(candidateId, page, items)
       .pipe(
         map(certificates => ( loadCertificatesSuccess({certificates}) )),
         catchError(() => of(loadCertificatesFail))
@@ -42,7 +42,7 @@ export class CertificateEffects {
       .pipe(
         map(education => ( addCertificateSuccess())),
         catchError(() => of(addEducationFail)),
-        map(education => (loadCertificates({page: 0})))
+        map(education => (loadCertificates({page: 0, items: 3})))
       )))
   );
 
@@ -53,7 +53,7 @@ export class CertificateEffects {
       .pipe(
         map(education => ( changeEducationSuccess())),
         catchError(() => of(changeCertificateFail)),
-        map(education => (loadCertificates({page: 0})))
+        map(education => (loadCertificates({page: 0, items: 3})))
       )))
   ));
 
@@ -63,7 +63,7 @@ export class CertificateEffects {
       .pipe(
         map(education => ( removeEducationSuccess() )),
         catchError(() => of(removeEducationFail)),
-        map(education => (loadCertificates({page: 0})))
+        map(education => (loadCertificates({page: 0, items: 3})))
       )))
   );
 }

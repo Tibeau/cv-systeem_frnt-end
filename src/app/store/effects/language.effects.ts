@@ -30,7 +30,7 @@ export class LanguageEffects{
 
   getLanguages$ = createEffect(() => this.actions$.pipe(
     ofType(loadLanguages),
-    switchMap((({page}) => this.languageService.getLanguagesByCandidateId(candidateId, page)
+    switchMap((({page, items}) => this.languageService.getLanguagesByCandidateId(candidateId, page, items)
       .pipe(
         map(languages => ( loadLanguagesSuccess({languages}) )),
         catchError(() => of(loadLanguagesFail))
@@ -44,7 +44,7 @@ export class LanguageEffects{
       .pipe(
         map(language => ( addLanguageSuccess())),
         catchError(() => of(addLanguageFail)),
-        map(language => (loadLanguages({page: 0})))
+        map(language => (loadLanguages({page: 0, items: 3})))
       )))
   );
 
@@ -55,7 +55,7 @@ export class LanguageEffects{
       .pipe(
         map(language => ( changeLanguageSuccess())),
         catchError(() => of(changeLanguageFail)),
-        map(language => (loadLanguages({page: 0})))
+        map(language => (loadLanguages({page: 0, items: 3})))
       )))
   ));
 
@@ -65,7 +65,7 @@ export class LanguageEffects{
       .pipe(
         map(language => ( removeLanguageSuccess() )),
         catchError(() => of(removeLanguageFail)),
-        map(language => (loadLanguages({page: 0})))
+        map(language => (loadLanguages({page: 0, items: 3})))
       )))
   );
 }

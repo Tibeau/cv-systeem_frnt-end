@@ -11,7 +11,7 @@ export class CertificateResolverService implements Resolve<any> {
   constructor(private certificate: CertificateService) {}
   resolve(route: ActivatedRouteSnapshot): Observable<any> {
     console.log('Called Get certificate in resolver...', route);
-    return this.certificate.getCertificatesByCandidateId(localStorage.getItem('id'),0).pipe(
+    return this.certificate.getCertificatesByCandidateId(localStorage.getItem('id'),0, 3).pipe(
       catchError(error => {
         return of('No data');
       })

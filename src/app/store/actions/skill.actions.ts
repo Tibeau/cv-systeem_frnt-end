@@ -42,7 +42,7 @@ export const addSkillFail = createAction(
 //LOAD SKILL
 export const loadSkills = createAction(
   `${type} loadSkill`,
-  props<{page: number}>(),
+  props<{page: number, items: number}>(),
 )
 export const loadSkillsSuccess = createAction(
   `${type} loadSkills SUCCESS`,

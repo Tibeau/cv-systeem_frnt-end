@@ -42,14 +42,14 @@
 
     <div class="grid grid-cols-2">
       <div>
-        <div class="ml-8 mt-32">
+        <div class="ml-8 mt-40">
           <h4 class="font-bold"> <fa-icon [icon]="faDriversLicense" transform="grow-7" class="mr-2"></fa-icon> Drivers licence</h4>
           <p class="text-black ml-14 font-bold">{{(user$ | async)?.driversLicence}}</p>
         </div>
       </div>
       <div class="text-white mt-[-40px] mr-6">
         <h4 class="text-white font-bold mb-4 ml-[-30px]"> <fa-icon [icon]="faGraduationCap" transform="grow-7" class="mr-2"></fa-icon> Education</h4>
-        <div class="grid grid-cols-2" >
+        <div class="grid grid-cols-2 gap-4 ">
             <div *ngFor="let education of myEducations$  | async">
               <h4 class="font-bold">{{education.diploma}}</h4>
               <p class="mb-4 font-bold text-sm">{{education.school}}</p>
@@ -75,7 +75,7 @@
       </div>
       <div class="text-white mr-6 mt-6">
         <h4 class="text-white font-bold mb-4 ml-[-30px]"> <fa-icon [icon]="faCertificate" transform="grow-7" class="mr-2"></fa-icon> Certificates</h4>
-        <div class="grid grid-cols-2" >
+        <div class="grid grid-cols-2 gap-4 " >
           <div *ngFor="let certificate of myCertificates$  | async">
             <h4 class="font-bold">{{certificate.name}}</h4>
             <p class="mb-4 font-bold text-sm">{{certificate.description}}</p>
@@ -94,7 +94,7 @@
       </div>
       <div class="text-white mr-6 mt-6">
         <h4 class="text-white font-bold mb-4 ml-[-30px] mt-[-140px]"> <fa-icon [icon]="faBriefcase" transform="grow-7" class="mr-2"></fa-icon> Experience</h4>
-        <div class="grid grid-cols-2" >
+        <div class="grid grid-cols-2 gap-4 " >
           <div *ngFor="let experience of myExperiences$  | async">
             <h4 class="font-bold">{{experience.profession}}</h4>
             <p class="mb-4 font-bold text-sm">{{experience.description}}</p>
@@ -109,16 +109,21 @@
 
     <div class="grid grid-cols-2 gap-4 mb-[70px]">
       <div>
-        <div class="ml-8 mt-[80px]">
+        <div class="ml-8 mt-[200px]">
           <img class="w-[200px] h-auto" src="assets/jarchitects.png" alt="JARCHITECTS">
         </div>
       </div>
       <div class="text-white mr-6 mt-6">
         <h4 class="text-white font-bold mb-4 ml-[-30px]"> <fa-icon [icon]="faBrain" transform="grow-7" class="mr-2"></fa-icon> Skills</h4>
-        <div class="grid grid-cols-2" >
+        <div class="grid grid-cols-2 gap-4 " >
           <div *ngFor="let skill of mySkills$  | async">
             <h4 class="font-bold">{{skill.name}}</h4>
             <p class="mb-4 font-bold text-sm">{{skill.description}}</p>
+            <ul *ngFor="let skillItem of skillItems$ | async">
+              <div *ngIf="skillItem.skillId === skill.id">
+                <li>-{{skillItem.name}}</li>
+                <li>{{skillItem.description}}</li></div>
+            </ul>
           </div>
         </div>
       </div>

@@ -25,6 +25,9 @@ import {loadExperiences} from "../../store/actions/experience.actions";
 import {loadLanguages} from "../../store/actions/language.actions";
 import {loadSkills} from "../../store/actions/skill.actions";
 import {loadCertificates} from "../../store/actions/certificate.actions";
+import {SkillItem} from "../../models/skillItem/skillItem";
+import {selectMySkillItems} from "../../skill-feature/skillItem.selector";
+import {loadSkillItems} from "../../store/actions/skillItem.actions";
 
 
 @Component({
@@ -71,6 +74,7 @@ export class CvTemplateComponent implements OnInit {
     filter((certificates): certificates is CertificatePagination => certificates !== undefined),
     map(certificates => certificates?.content.filter(certificates => certificates.active === true)));
 
+  skillItems$: Observable<SkillItem[] | null> = this.skillItemStore.select(selectMySkillItems);
 
 
   constructor( private authStore: Store<{ user: User }>,
@@ -78,7 +82,8 @@ export class CvTemplateComponent implements OnInit {
                private experienceStore: Store<{ experiences: ExperiencePagination}>,
                private languageStore: Store<{ languages: LanguagePagination}>,
                private skillStore: Store<{ skills: SkillPagination}>,
-               private certificateStore: Store<{ certificates: CertificatePagination}>
+               private certificateStore: Store<{ certificates: CertificatePagination}>,
+               private skillItemStore: Store<{ skillItem: SkillItem[]}>
   ) { }
 
 
@@ -89,6 +94,9 @@ export class CvTemplateComponent implements OnInit {
     this.skillStore.dispatch(loadSkills({page: 0, items: 999999999}));
     this.certificateStore.dispatch(loadCertificates({page: 0, items: 999999999}));
 
+
+    this.skillItemStore.dispatch(loadSkillItems());
+    this.skillItems$.pipe(take(1)).subscribe();
     this.myEducations$.pipe(take(1)).subscribe();
     this.myExperiences$.pipe(take(1)).subscribe();
     this.myLanguages$.pipe(take(1)).subscribe();

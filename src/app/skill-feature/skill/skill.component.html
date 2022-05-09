@@ -4,7 +4,7 @@
     <div *ngFor="let skill of mySkills$ | async " class="bg-Jblue drop-shadow-2xl overflow-hidden rounded-2xl border-white border-2 mt-6">
       <div class="px-4 py-5 sm:px-6  bg-gradient-to-b from-indigo-500 to-Jblue ">
 
-        <div class="flex flex-row">
+        <div class="flex flex-row mb-8">
           <div class="basis-[97%] µ">
             <h3 class="text-xl leading-6 font-bold text-white">{{skill.name}}</h3>
             <p class="mt-1 max-w-2xl text-sm text-white">{{skill.description}}</p>
@@ -16,11 +16,16 @@
           </div>
         </div>
 
-        <ul *ngFor="let skillItem of skillItems$ | async">
-          <div *ngIf="skillItem.skillId === skill.id">
-            <li>{{skillItem.name}}</li>
-            <li>{{skillItem.description}}</li></div>
-        </ul>
+        <div class="ml-6 " *ngFor="let skillItem of skillItems$ | async">
+          <div class="mt-4" *ngIf="skillItem.skillId === skill.id">
+          <div class="flex flex-row">
+            <div class="basis-[97%] µ">
+              <h3 class="text-xl leading-6 font-bold text-white"> - {{skillItem.name}}</h3>
+              <p class="mt-1 max-w-2xl text-sm text-white">{{skillItem.description}}</p>
+            </div>
+          </div>
+          </div>
+        </div>
 
       </div>
       <div class="flex justify-between">

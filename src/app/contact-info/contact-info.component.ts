@@ -23,6 +23,7 @@ export class ContactInfoComponent implements OnInit {
     candidateId: [0],
     companyId: [0],
     email: ["", Validators.required,],
+    username: [""],
     phone: ["", Validators.required,],
     password: ["", Validators.required,],
     firstname: ["", Validators.required,],

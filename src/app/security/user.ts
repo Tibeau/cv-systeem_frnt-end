@@ -2,6 +2,7 @@ export interface User {
   id: string;
   candidateId?: number;
   companyId?: number;
+  username: string;
   email: string;
   phone: string;
   password: string;

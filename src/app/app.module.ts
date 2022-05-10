@@ -24,7 +24,6 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import {environment} from "../environments/environment.prod";
 import {educationReducer} from "./store/reducers/education.reducers";
-import { DeleteModalComponent } from './delete-modal/delete-modal.component';
 import {AuthEffects} from "./store/effects/auth.effects";
 import {authReducer} from "./store/reducers/auth.reducers";
 import { CvTemplateComponent } from './dashboard-feature/cv-template/cv-template.component';
@@ -49,7 +48,11 @@ import {skillReducer} from "./store/reducers/skill.reducers";
 import { SettingsComponent } from './settings-feature/settings/settings.component';
 import {SkillItemEffects} from "./store/effects/skillItem.effects";
 import {skillItemReducer} from "./store/reducers/skillItem.reducers";
-
+import { CandidatesComponent } from './dashboard-feature/company/candidates/candidates.component';
+import {CandidateEffects} from "./store/effects/candidate.effects";
+import {candidateReducer} from "./store/reducers/candidate.reducers";
+import {ToDashboardComponent} from "./shared/to-dashboard/to-dashboard.component";
+import {DeleteModalComponent} from "./shared/delete-modal/delete-modal.component";
 
 @NgModule({
   declarations: [
@@ -72,6 +75,8 @@ import {skillItemReducer} from "./store/reducers/skillItem.reducers";
     SkillComponent,
     SkillFormComponent,
     SettingsComponent,
+    CandidatesComponent,
+    ToDashboardComponent,
 
   ],
   imports: [
@@ -82,9 +87,9 @@ import {skillItemReducer} from "./store/reducers/skillItem.reducers";
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    EffectsModule.forRoot([AuthEffects, EducationEffects, CertificateEffects, ExperienceEffects, LanguageEffects, SkillEffects, SkillItemEffects]),
+    EffectsModule.forRoot([AuthEffects, EducationEffects, CertificateEffects, ExperienceEffects, LanguageEffects, SkillEffects, SkillItemEffects, CandidateEffects]),
     EffectsModule.forFeature(),
-    StoreModule.forRoot({educations: educationReducer, user: authReducer, certificates: certificateReducer, experiences: experienceReducer, languages: languageReducer, skills: skillReducer, skillItems: skillItemReducer}),
+    StoreModule.forRoot({educations: educationReducer, user: authReducer, certificates: certificateReducer, experiences: experienceReducer, languages: languageReducer, skills: skillReducer, skillItems: skillItemReducer, candidates: candidateReducer}),
     BrowserAnimationsModule,
     LayoutModule,
     CommonModule,

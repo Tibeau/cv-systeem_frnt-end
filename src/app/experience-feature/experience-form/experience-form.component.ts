@@ -22,7 +22,7 @@ export class ExperienceFormComponent implements OnInit {
   faArrowLeft = faArrowLeft;
   mode: string = "";
   experienceId: number = 0;
-  candidateId: number = Number(localStorage.getItem("id"));
+  candidateId: number = Number(localStorage.getItem("CANDIDATE"));
   currentPage = 0;
   isCancel: boolean = false;
  experienceUrl: string = "/experiences"

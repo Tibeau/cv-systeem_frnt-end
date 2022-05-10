@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../security/auth.service';
-import { faIdCard, faGraduationCap, faBriefcase, faRightFromBracket, faGear,  faCertificate, faFile, faMessage, faEarthEurope, faBrain, faAngleLeft, faAngleRight} from '@fortawesome/free-solid-svg-icons';
+import {  faPeopleGroup,faIdCard, faGraduationCap, faBriefcase, faRightFromBracket, faGear,  faCertificate, faFile, faMessage, faEarthEurope, faBrain, faAngleLeft, faAngleRight} from '@fortawesome/free-solid-svg-icons';
 import { Store } from '@ngrx/store';
 import {loadUser, logout} from "../store/actions/auth.actions";
 import {User} from "../security/user";
@@ -8,6 +8,7 @@ import {filter, Observable, take} from "rxjs";
 import {selectMyUser} from "../security/user.selector";
 import {loadEducations} from "../store/actions/education.actions";
 import {FormBuilder, Validators} from "@angular/forms";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -31,17 +32,24 @@ export class NavigationComponent implements OnInit {
   faFile =faFile;
   faAngleLeft= faAngleLeft
   faAngleRight =faAngleRight
+  faPeopleGroup = faPeopleGroup
 
   isLoggedIn: boolean = false;
   isShownNav: boolean = false; // hidden by default
   isExtendSideBar: boolean = true;
-  userId: number = Number(localStorage.getItem('id') || '');
+  userId: number = 0;
 
-  constructor(private authService: AuthService,
+  constructor(public router: Router,
               private authStore: Store<{ user: User }>
   ) {}
 
   ngOnInit(): void {
+    if ( localStorage.getItem('COMPANY') || '' === null){
+      this.userId =  Number(localStorage.getItem('COMPANY') || '')
+    } else {
+      this.userId =  Number(localStorage.getItem('CANDIDATE') || '')
+    }
+
     this.isLoggedIn = !!localStorage.getItem('token');
     if (this.isLoggedIn){
       this.authStore.dispatch(loadUser({id: this.userId}));

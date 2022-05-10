@@ -35,7 +35,7 @@ export class CertificateComponent implements OnInit {
     filter((certificate): certificate is CertificatePagination => certificate !== undefined),
     map(certificates => certificates?.totalPages));
   pageAmount: number = 0;
-  candidateId: number = Number(localStorage.getItem("id"));
+  candidateId: number = Number(localStorage.getItem("CANDIDATE"));
 
 
   certificateForm = this.fb.group({

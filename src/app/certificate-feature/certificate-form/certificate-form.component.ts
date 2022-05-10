@@ -23,7 +23,7 @@ export class CertificateFormComponent implements OnInit {
   mode: string = "";
   certificateId: number = 0;
   certificateId$: Observable<number | undefined> = this.route.params.pipe(shareReplay(), map(params => params['id']))
-  candidateId: number = Number(localStorage.getItem("id"));
+  candidateId: number = Number(localStorage.getItem("CANDIDATE"));
   currentPage = 0;
   isCancel: boolean = false;
   certificateUrl: string = "/certificates"

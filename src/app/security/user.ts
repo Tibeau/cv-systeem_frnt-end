@@ -19,7 +19,7 @@ export interface User {
   token: string;
   number: string;
   postalCode: string;
-  active: string;
+  active: boolean;
 
 
 

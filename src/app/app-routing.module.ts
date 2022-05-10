@@ -17,7 +17,7 @@ import {LanguageFormComponent} from "./language-feature/language-form/language-f
 import {SettingsComponent} from "./settings-feature/settings/settings.component";
 
 const routes: Routes = [
-  { path: '', component: DashboardComponent },
+  { path: 'dashboard', component: DashboardComponent },
   { path: 'login', component: LoginComponent },
   { path: 'contactinfo', component: ContactInfoComponent },
   { path: 'educations', component: EducationComponent },

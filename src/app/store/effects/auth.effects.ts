@@ -44,15 +44,17 @@ export class AuthEffects {
       )))
   )));
 
-
-
   loginSuccess$ = createEffect(() => this.actions$.pipe(
     ofType(logInSuccess),
     tap(({user}) => {
+      if (user.role === "CANDIDATE") {
+        localStorage.setItem('CANDIDATE', JSON.stringify(user.id));
+      } else if (user.role === "COMPANY") {
+        localStorage.setItem('COMPANY', JSON.stringify(user.id));
+      }
       localStorage.setItem('token', JSON.stringify(user.token));
-      localStorage.setItem('id', JSON.stringify(user.id));
       map( () => (loadUser({id: Number(user.id)})));
-        this.router.navigate(['/']).then(() => {
+        this.router.navigate(['/dashboard']).then(() => {
           window.location.reload();
         });
     },
@@ -71,8 +73,9 @@ export class AuthEffects {
     tap(() => {
       console.log('print')
       localStorage.removeItem('token');
-      localStorage.removeItem('id');
-      this.router.navigate(['/login']);
+      localStorage.removeItem('CANDIDATE');
+        localStorage.removeItem('COMPANY');
+        this.router.navigate(['/login']);
     },
       catchError(() => of(logInFailure)))
   ),

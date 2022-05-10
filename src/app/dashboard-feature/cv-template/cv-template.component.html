@@ -1,4 +1,25 @@
 <div *ngIf="
+(mySkills$ | async)?.length == 0 ||
+ (myEducations$ | async)?.length == 0 ||
+ (myExperiences$ | async)?.length == 0 ||
+ (myCertificates$ | async)?.length == 0 ||
+(myLanguages$ | async)?.length == 0">
+  <div *ngIf="company === false">
+  <p>To generate your CV make sure you have at least one element of each section activated </p>
+  <p> missing:</p>
+  <ul>
+    <li *ngIf="(mySkills$ | async)?.length == 0">Skills</li>
+    <li *ngIf="(myEducations$ | async)?.length == 0">Educations</li>
+    <li *ngIf="(myExperiences$ | async)?.length == 0">Experience</li>
+    <li *ngIf="(myCertificates$ | async)?.length == 0">Certificates</li>
+    <li *ngIf="(myLanguages$ | async)?.length == 0">Languages</li>
+  </ul>
+</div>
+  <h1>This candidate hasn't generated a CV or has (an) inactive field(s)</h1>
+</div>
+
+
+<div *ngIf="
 (mySkills$ | async)?.length !== 0 &&
  (myEducations$ | async)?.length !== 0 &&
  (myExperiences$ | async)?.length !== 0 &&
@@ -13,7 +34,7 @@
 
 <div class="ml-[-120px] mt-4 mr-24">
       <div class="text-white  font-bold grid justify-items-center">
-        <h1 class="flex text-2xl">{{(user$ | async)?.firstname}} {{(user$ | async)?.lastname}}</h1>
+        <h1 class="flex text-2xl">{{(myCandidate$ | async)?.firstname}} {{(myCandidate$ | async)?.lastname}}</h1>
         <hr class="flex w-[400px]">
       <p class="">Front-end developer</p>
       </div>
@@ -24,19 +45,19 @@
         <div class="ml-6">
         <h4 class="font-bold mb-4"> <fa-icon [icon]="faContactCard" transform="grow-7" class="mr-2"></fa-icon> Contact info</h4>
         <ul class="text-black">
-          <li class="mb-2">  <fa-icon [icon]="faPhone"></fa-icon> {{(user$ | async)?.phone}}</li>
-          <li class="mb-2 text-xs"> <fa-icon [icon]="faMailBulk"></fa-icon> {{(user$ | async)?.email}}</li>
+          <li class="mb-2">  <fa-icon [icon]="faPhone"></fa-icon> {{(myCandidate$ | async)?.phone}}</li>
+          <li class="mb-2 text-xs"> <fa-icon [icon]="faMailBulk"></fa-icon> {{(myCandidate$ | async)?.email}}</li>
           <li class="mb-2">
-            <p> <fa-icon [icon]="faLocation"></fa-icon> {{(user$ | async)?.street}} {{(user$ | async)?.number}}</p>
-            <p class="font-light text-xs ml-5">{{(user$ | async)?.postalCode}} {{(user$ | async)?.city}} {{(user$ | async)?.country}}</p>
+            <p> <fa-icon [icon]="faLocation"></fa-icon> {{(myCandidate$ | async)?.street}} {{(myCandidate$ | async)?.number}}</p>
+            <p class="font-light text-xs ml-5">{{(myCandidate$ | async)?.postalCode}} {{(myCandidate$ | async)?.city}} {{(myCandidate$ | async)?.country}}</p>
           </li>
-          <li class="mb-2"> <fa-icon [icon]="faLink"></fa-icon> {{(user$ | async)?.linkedIn}}</li>
+          <li class="mb-2"> <fa-icon [icon]="faLink"></fa-icon> {{(myCandidate$ | async)?.linkedIn}}</li>
         </ul>
         </div>
 
       <div class="text-white ml-[-135px] mt-[-40px]   mr-6">
         <h4 class="text-white font-bold">About me</h4>
-        <p class="font-light text-xs ">{{(user$ | async)?.description}}</p>
+        <p class="font-light text-xs ">{{(myCandidate$ | async)?.description}}</p>
       </div>
     </div>
 
@@ -44,14 +65,16 @@
       <div>
         <div class="ml-8 mt-40">
           <h4 class="font-bold"> <fa-icon [icon]="faDriversLicense" transform="grow-7" class="mr-2"></fa-icon> Drivers licence</h4>
-          <p class="text-black ml-14 font-bold">{{(user$ | async)?.driversLicence}}</p>
+          <p class="text-black ml-14 font-bold">{{(myCandidate$ | async)?.driversLicence}}</p>
         </div>
       </div>
       <div class="text-white mt-[-40px] mr-6">
         <h4 class="text-white font-bold mb-4 ml-[-30px]"> <fa-icon [icon]="faGraduationCap" transform="grow-7" class="mr-2"></fa-icon> Education</h4>
         <div class="grid grid-cols-2 gap-4 ">
             <div *ngFor="let education of myEducations$  | async">
+              <a [routerLink]="'/educationform/' + education.id">
               <h4 class="font-bold">{{education.diploma}}</h4>
+              </a>
               <p class="mb-4 font-bold text-sm">{{education.school}}</p>
               <p class="text-sm"><span class="font-bold">Adress: </span> <span class="font-light">{{education.country}}</span></p>
               <p class="text-sm"><span class="font-bold">Website: </span> <span class="font-light">{{education.website}}</span> </p>
@@ -66,7 +89,9 @@
         <div class="ml-8 mt-48 ">
           <h4 class="font-bold"> <fa-icon [icon]="faEarth" transform="grow-7" class="mr-2"></fa-icon> Languages</h4>
           <div *ngFor="let language of myLanguages$  | async" class="text-black">
-            <h4 class="font-bold mt-4">{{language.name}}</h4>
+            <a [routerLink]="'/languageform/' + language.id">
+            <h4 class="font-bold mt-4" >{{language.name}}</h4>
+            </a>
             <p class="text-sm"><span class="font-bold">speaking: </span> <span class="font-light">{{language.speaking}}</span></p>
             <p class="text-sm"><span class="font-bold">reading: </span> <span class="font-light">{{language.reading}}</span></p>
             <p class="text-sm"><span class="font-bold">writing: </span> <span class="font-light">{{language.writing}}</span> </p>
@@ -77,7 +102,9 @@
         <h4 class="text-white font-bold mb-4 ml-[-30px]"> <fa-icon [icon]="faCertificate" transform="grow-7" class="mr-2"></fa-icon> Certificates</h4>
         <div class="grid grid-cols-2 gap-4 " >
           <div *ngFor="let certificate of myCertificates$  | async">
+            <a [routerLink]="'/certificateform/' + certificate.id">
             <h4 class="font-bold">{{certificate.name}}</h4>
+            </a>
             <p class="mb-4 font-bold text-sm">{{certificate.description}}</p>
             <p class="text-sm"><span class="font-bold">date: </span> <span class="font-light">{{certificate.dateEarned}}</span></p>
             <p class="text-sm"><span class="font-bold">length: </span> <span class="font-light">{{certificate.length}}</span> </p>
@@ -96,7 +123,9 @@
         <h4 class="text-white font-bold mb-4 ml-[-30px] mt-[-140px]"> <fa-icon [icon]="faBriefcase" transform="grow-7" class="mr-2"></fa-icon> Experience</h4>
         <div class="grid grid-cols-2 gap-4 " >
           <div *ngFor="let experience of myExperiences$  | async">
+            <a [routerLink]="'/experienceform/' + experience.id">
             <h4 class="font-bold">{{experience.profession}}</h4>
+            </a>
             <p class="mb-4 font-bold text-sm">{{experience.description}}</p>
             <p class="text-sm"><span class="font-bold">Adress: </span> <span class="font-light">{{experience.employer}}</span></p>
             <p class="text-sm"><span class="font-bold">Website: </span> <span class="font-light">{{experience.company}}</span> </p>
@@ -117,7 +146,9 @@
         <h4 class="text-white font-bold mb-4 ml-[-30px]"> <fa-icon [icon]="faBrain" transform="grow-7" class="mr-2"></fa-icon> Skills</h4>
         <div class="grid grid-cols-2 gap-4 " >
           <div *ngFor="let skill of mySkills$  | async">
-            <h4 class="font-bold">{{skill.name}}</h4>
+            <a [routerLink]="'/skillform/' + skill.id">
+            <h4 class="font-bold">{{skill.name}} </h4>
+            </a>
             <p class="mb-4 font-bold text-sm">{{skill.description}}</p>
             <ul *ngFor="let skillItem of skillItems$ | async">
               <div *ngIf="skillItem.skillId === skill.id">
@@ -135,8 +166,15 @@
 <hr>
 
 <button
+  *ngIf="
+(mySkills$ | async)?.length !== 0 &&
+ (myEducations$ | async)?.length !== 0 &&
+ (myExperiences$ | async)?.length !== 0 &&
+ (myCertificates$ | async)?.length !== 0 &&
+(myLanguages$ | async)?.length !== 0"
+
   printSectionId="myCvId"
-  printTitle="{{(user$ | async)?.firstname}}-{{(user$ | async)?.lastname}}-CV-Jarchitects"
+  printTitle="{{(myCandidate$ | async)?.firstname}}-{{(myCandidate$ | async)?.lastname}}-CV-Jarchitects"
   ngxPrint
   [useExistingCss]="true"
 >

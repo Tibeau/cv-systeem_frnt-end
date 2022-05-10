@@ -24,7 +24,7 @@ export class EducationFormComponent implements OnInit {
   faArrowLeft = faArrowLeft;
   mode: string = "";
   educationId: number = 0;
-  candidateId: number = Number(localStorage.getItem("id"));
+  candidateId: number = Number(localStorage.getItem("CANDIDATE"));
   currentPage = 0;
   isCancel: boolean = false;
   educationUrl: string = "/educations"

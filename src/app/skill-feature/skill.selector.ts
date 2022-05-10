@@ -5,4 +5,4 @@ export const selectSkillFeature = createFeatureSelector<State>(skillFeatureKey);
 
 export const selectMySkills = createSelector(selectSkillFeature, selectSkills);
 
-export const candidateId = localStorage.getItem("id");
+export const candidateId = localStorage.getItem("CANDIDATE");

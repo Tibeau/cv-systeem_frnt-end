@@ -4,8 +4,19 @@ import {Actions, ofType, createEffect, Effect} from '@ngrx/effects';
 import {catchError, map, mergeMap, switchMap, tap} from 'rxjs/operators';
 import {AuthService} from "../../security/auth.service";
 import {
-  loadUser, loadUserSuccess, loadUserFailure,
-  login, logInFailure, logInSuccess, logout, changeUserSuccess, changeUser, changeUserFail
+  loadUser,
+  loadUserSuccess,
+  loadUserFailure,
+  login,
+  logInFailure,
+  logInSuccess,
+  logout,
+  changeUserSuccess,
+  changeUser,
+  changeUserFail,
+  addUser,
+  addUserSuccess,
+  addUserFailure
 } from '../actions/auth.actions';
 import {of} from 'rxjs';
 import {EducationService} from "../../services/education/education.service";
@@ -90,6 +101,15 @@ export class AuthEffects {
         catchError(() => of(loadUserFailure))
       )))
   ));
+
+  addUser$ = createEffect(() => this.actions$.pipe(
+    ofType(addUser),
+    switchMap(({user}) => this.authService.createUSer(user)
+      .pipe(
+        map(education => ( addUserSuccess())),
+        catchError(() => of(addUserFailure())),
+      )))
+  );
 
 }
 

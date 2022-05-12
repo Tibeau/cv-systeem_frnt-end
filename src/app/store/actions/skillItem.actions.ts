@@ -39,7 +39,7 @@ export const addSkillItemFail = createAction(
 )
 
 
-//LOAD SKILLITEM
+//LOAD SKILLITEMS
 export const loadSkillItems = createAction(
   `${type} loadSkillItem`,
 )

@@ -72,6 +72,12 @@
         </a>
 
 
+        <a *ngIf="(user$ | async)?.role === 'COMPANY'" [routerLink]="'/invite'" [routerLinkActive]="['bg-JorangeSelect']" [ngClass]="!isExtendSideBar ? 'w-14': 'w-52'"  class="hover:bg-JorangeSelect text-white flex-shrink-0 inline-flex items-center justify-center h-14 mt-1 rounded-lg">
+          <fa-icon transform="grow-18" [icon]="faMailForward"></fa-icon>
+          <span *ngIf="isExtendSideBar" class="ml-6">Invite Candidate</span>
+        </a>
+
+
         <a *ngIf="(user$ | async)?.role === 'CANDIDATE' || (user$ | async)?.role === 'COMPANY'" [routerLink]="'/contactinfo'" [routerLinkActive]="['bg-JorangeSelect']" [ngClass]="!isExtendSideBar ? 'w-14': 'w-52'"  class="text-white hover:bg-JorangeSelect flex-shrink-0 inline-flex items-center justify-center h-14 w-14 mt-1 rounded-lg">
           <span class="sr-only">Contact info</span>
           <fa-icon transform="grow-18" [icon]="faIdCard"></fa-icon>

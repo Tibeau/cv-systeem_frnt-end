@@ -1,14 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {filter, Observable, take} from "rxjs";
-import {faAngleLeft, faAngleRight,faPeopleGroup,faIdCard, faGraduationCap, faBriefcase, faRightFromBracket, faGear,  faCertificate, faFile, faMessage, faEarthEurope, faBrain,faPencil, faTrashCan, faXmark, faTriangleExclamation} from '@fortawesome/free-solid-svg-icons';
+import {
+  faAngleLeft,
+  faAngleRight,
+  faBrain,
+  faBriefcase,
+  faCertificate,
+  faEarthEurope,
+  faFile,
+  faGear,
+  faGraduationCap,
+  faIdCard,
+  faMessage,
+  faPencil,
+  faPeopleGroup,
+  faRightFromBracket,
+  faTrashCan,
+  faTriangleExclamation,
+  faXmark
+} from '@fortawesome/free-solid-svg-icons';
 import {map} from "rxjs/operators";
 import {FormBuilder} from "@angular/forms";
 import {Router} from "@angular/router";
 import {Store} from "@ngrx/store";
-import {UserPagination} from "../../../models/candidate/candidate-pagination";
+import {UserPagination} from "../../../models/user/user-pagination";
 import {User} from "../../../security/user";
-import {loadCandidates} from "../../../store/actions/candidate.actions";
-import {selectMyCandidates} from "./candidate.selector";
+import {loadCandidates} from "../../../store/actions/user.actions";
+import {selectMyCandidates} from "./user.selector";
 
 @Component({
   selector: 'app-candidates',
@@ -17,7 +35,7 @@ import {selectMyCandidates} from "./candidate.selector";
 })
 export class CandidatesComponent implements OnInit {
 
-  candidates$: Observable<UserPagination | null> = this.candidateStore.select(selectMyCandidates);
+  candidates$: Observable<UserPagination | null> = this.userStore.select(selectMyCandidates);
   myCandidates$: Observable<User[]> = this.candidates$.pipe(
     filter((candidates): candidates is UserPagination => candidates !== undefined),
     map(candidates => candidates?.content));
@@ -37,9 +55,9 @@ export class CandidatesComponent implements OnInit {
   faRightFromBracket = faRightFromBracket;
   faGear = faGear;
   faCertificate = faCertificate;
-  faFile =faFile;
-  faAngleLeft= faAngleLeft
-  faAngleRight =faAngleRight
+  faFile = faFile;
+  faAngleLeft = faAngleLeft
+  faAngleRight = faAngleRight
   faPeopleGroup = faPeopleGroup
 
   selected: boolean = false;
@@ -52,13 +70,15 @@ export class CandidatesComponent implements OnInit {
     map(candidates => candidates?.totalPages));
   pageAmount: number = 0;
 
-  constructor(private router: Router, private fb: FormBuilder, private candidateStore: Store<{ candidates: UserPagination }>) {
+  constructor(private router: Router, private fb: FormBuilder, private userStore: Store<{ users: UserPagination }>) {
   }
 
   ngOnInit(): void {
-    this.candidateStore.dispatch(loadCandidates({page: this.currentPage, items: 12}));
+    this.userStore.dispatch(loadCandidates({page: this.currentPage, items: 12}));
     this.myCandidates$.pipe(take(1)).subscribe();
-    this.pageAmountSub$.subscribe((page:number) => {this.pageAmount = page})
+    this.pageAmountSub$.subscribe((page: number) => {
+      this.pageAmount = page
+    })
 
     this.isSelected()
   }
@@ -66,8 +86,8 @@ export class CandidatesComponent implements OnInit {
   onEdit(candidate: User) {
   }
 
-  selectCandidate(candidateId: number | undefined){
-    if (this.currentCandidate != candidateId){
+  selectCandidate(candidateId: number | undefined) {
+    if (this.currentCandidate != candidateId) {
       localStorage.setItem('CANDIDATE', JSON.stringify(candidateId) || "")
     } else {
       localStorage.removeItem('CANDIDATE')
@@ -75,17 +95,17 @@ export class CandidatesComponent implements OnInit {
     window.location.reload()
   }
 
-isSelected() {
-  if (!!this.currentCandidate){
-    this.selected = true
-  } else {
-    this.selected = false
+  isSelected() {
+    if (!!this.currentCandidate) {
+      this.selected = true
+    } else {
+      this.selected = false
+    }
   }
-}
 
   pageChanged(page: number) {
     this.currentPage = page;
-    this.candidateStore.dispatch(loadCandidates({page: this.currentPage, items: 12}));
+    this.userStore.dispatch(loadCandidates({page: this.currentPage, items: 12}));
   }
 
 }

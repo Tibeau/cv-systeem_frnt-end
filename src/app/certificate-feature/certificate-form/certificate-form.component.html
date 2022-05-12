@@ -6,9 +6,9 @@
     <form [formGroup]="certificateForm" (ngSubmit)="onSubmit()" class="space-y-8 divide-y divide-gray-200 ">
       <div class="space-y-8 divide-y divide-gray-200 ">
         <div class="pt-8 pb-4">
-          <h3 class="text-lg leading-6 text-bold font-large text-white text-3xl mb-4">Education</h3>
-          <p *ngIf="mode === 'add'" class="mt-1 text-lg text-white">add a new education to your CV <span class="text-sm">(added educations are automatically set to active)</span></p>
-          <p *ngIf="mode === 'edit'" class="mt-1 text-lg text-white">change one of your educations <span class="text-sm">(be sure to submit your changes)</span></p>
+          <h3 class="text-lg leading-6 text-bold font-large text-white text-3xl mb-4">Certificate</h3>
+          <p *ngIf="mode === 'add'" class="mt-1 text-lg text-white">add a new certificate to your CV <span class="text-sm">(added certificates are automatically set to active)</span></p>
+          <p *ngIf="mode === 'edit'" class="mt-1 text-lg text-white">change one of your certificates <span class="text-sm">(be sure to submit your changes)</span></p>
 
           <hr>
 
@@ -20,7 +20,7 @@
                      class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
               <div *ngIf="certificateForm.get('name')?.dirty && certificateForm.get('name')?.touched && certificateForm.get('name')?.hasError('required')"
                    class="text-white text-sm italic">
-                Diploma name is required.
+                Certificate name is required.
               </div>
             </div>
           </div>

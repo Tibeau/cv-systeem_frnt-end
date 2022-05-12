@@ -1,6 +1,6 @@
- <div class="flex-1 relative z-0 flex overflow-hidden">
+<div class="flex-1 relative z-0 flex overflow-hidden ">
       <main class="flex-1 relative z-0 overflow-y-auto focus:outline-none xl:order-last">
-        <div [ngClass]="company === true && candidate === true ? 'grid grid-cols-2 gap-4 mb-[70px]':''">
+        <div [ngClass]="company === true && candidate === true ? 'xl:grid xl:grid-cols-2 xl:gap-4 mb-[70px]':''">
 
 
             <app-candidates [ngClass]="company === true && candidate === true ? '2xl:w-3/4 flex':''" *ngIf="company === true"></app-candidates>

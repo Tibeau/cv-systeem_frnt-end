@@ -1,15 +1,13 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
-import {User} from "../../security/user";
 import {Observable} from "rxjs";
-import {UserPagination} from "../../models/candidate/candidate-pagination";
-import {CertificatePagination} from "../../models/certificate/certificate-pagination";
+import {UserPagination} from "../../models/user/user-pagination";
 
 @Injectable({
   providedIn: 'root'
 })
-export class CandidateService {
+export class UserService {
 
   api = environment.API_URL;
 

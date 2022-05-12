@@ -1,25 +1,31 @@
+import {Candidate} from "../../models/candidate/candidate";
 import {createReducer, on} from "@ngrx/store";
-import {UserPagination} from "../../models/candidate/candidate-pagination";
-import {loadCandidates, loadCandidatesFail, loadCandidatesSuccess} from "../actions/candidate.actions";
-export const candidateFeatureKey = "candidates";
+import {addCandidate, addCandidateFail, addCandidateSuccess} from "../actions/candidate.actions";
 
-export const selectCandidates = (state: State) => state.candidates
+
+export const candidateFeatureKey = "candidate";
+
+export const selectCandidates = (state: State) => state.candidate
+
+export const selectCandidate = (state: State) => state.candidate
+
 
 export interface State {
-  candidates: UserPagination | null;
+  candidate: Candidate | null;
   errorMessage: string | null;
 }
 
 export const initialState: State = {
-  candidates: null,
+  candidate: null,
   errorMessage: null,
 };
 
 export const candidateReducer = createReducer(
   initialState,
-  on(loadCandidates, (state) => ({candidates: null, errorMessage: "loading candidates"})),
-  on(loadCandidatesSuccess, (state, props) => ({candidates: props.candidates, errorMessage: "loaded candidates successfully"})),
-  on(loadCandidatesFail, (state) => ({candidates: null, errorMessage: "failed to load candidates"})),
+  on(addCandidate, (state) => ({candidate: null, errorMessage: "loading candidate"})),
+  on(addCandidateSuccess, (state, props) => ({candidate: props.candidate, errorMessage: "loaded candidate successfully"})),
+  on(addCandidateFail, (state) => ({candidate: null, errorMessage: "failed to load candidate"})),
+
 );
 
 

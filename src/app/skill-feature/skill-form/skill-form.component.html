@@ -2,13 +2,16 @@
   <app-to-dashboard [title]="skillForm.value.name"
                     class="mt-6 flex ml-16"
   ></app-to-dashboard>
-  <div class="mt-8 mb-12 mx-auto px-4 sm:px-6 lg:px-8 bg-Jblue rounded-3xl mr-6 ml-6 border-white border-2 bg-gradient-to-b from-indigo-600 to-Jblue ">
+  <div
+    class="mt-8 mb-12 mx-auto px-4 sm:px-6 lg:px-8 bg-Jblue rounded-3xl mr-6 ml-6 border-white border-2 bg-gradient-to-b from-indigo-600 to-Jblue ">
     <form [formGroup]="skillForm" (ngSubmit)="onSubmit()" class="space-y-8 divide-y divide-gray-200 ">
       <div class="space-y-8 divide-y divide-gray-200 ">
         <div class="pt-8 pb-4">
           <h3 class="text-lg leading-6 text-bold font-large text-white text-3xl mb-4">Skill</h3>
-          <p *ngIf="mode === 'add'" class="mt-1 text-lg text-white">add a new education to your CV <span class="text-sm">(added educations are automatically set to active)</span></p>
-          <p *ngIf="mode === 'edit'" class="mt-1 text-lg text-white">change one of your educations <span class="text-sm">(be sure to submit your changes)</span></p>
+          <p *ngIf="mode === 'add'" class="mt-1 text-lg text-white">add a new education to your CV <span
+            class="text-sm">(added educations are automatically set to active)</span></p>
+          <p *ngIf="mode === 'edit'" class="mt-1 text-lg text-white">change one of your educations <span
+            class="text-sm">(be sure to submit your changes)</span></p>
 
           <hr>
 
@@ -18,41 +21,42 @@
               <input placeholder="name of skill"
                      required type="text" name="name" id="name" formControlName="name"
                      class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
-              <div *ngIf="skillForm.get('name')?.dirty && skillForm.get('name')?.touched && skillForm.get('name')?.hasError('required')"
-                   class="text-white text-sm italic">
+              <div
+                *ngIf="skillForm.get('name')?.dirty && skillForm.get('name')?.touched && skillForm.get('name')?.hasError('required')"
+                class="text-white text-sm italic">
                 Skill name is required.
               </div>
             </div>
           </div>
 
           <div class="sm:col-span-6 mt-4">
-            <label for="description" class="block text-sm font-medium text-white"> Description<span class="text-sm text-white/75">(optional)</span> </label>
+            <label for="description" class="block text-sm font-medium text-white"> Description<span
+              class="text-sm text-white/75">(optional)</span> </label>
             <div class="mt-1">
-              <textarea placeholder="some extra information about your education" id="description" name="description" formControlName="description" rows="3" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md"></textarea>
+              <textarea placeholder="some extra information about your education" id="description" name="description"
+                        formControlName="description" rows="3"
+                        class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md"></textarea>
             </div>
           </div>
 
           <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-
-
-          </div>
-
-          <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
             <diV hidden>
-              <input type="text"  name="candidateId" id="skillandidateId" formControlName="candidateId">
-              <input type="checkbox"  name="active" id="skillActive" formControlName="active">
+              <input type="text" name="candidateId" id="skillandidateId" formControlName="candidateId">
+              <input type="checkbox" name="active" id="skillActive" formControlName="active">
             </diV>
 
           </div>
           <div class="flex justify-around mt-8">
             <div>
-              <button type="submit" name="submitButton" [disabled]="!skillForm.valid"  class="justify-center hover:bg-Jorange bg-white items-center h-10 w-48 rounded-xl mb-4">
+              <button type="submit" name="submitButton" [disabled]="!skillForm.valid"
+                      class="justify-center hover:bg-Jorange bg-white items-center h-10 w-48 rounded-xl mb-4">
                 <p class="text-Jblue hover:text-white font-bold text-2xl">Submit</p>
               </button>
             </div>
 
             <div>
-              <button (click)="cancel()" class="justify-center bg-white hover:bg-Jorange  items-center h-10 w-48 rounded-xl mb-4">
+              <button (click)="cancel()"
+                      class="justify-center bg-white hover:bg-Jorange  items-center h-10 w-48 rounded-xl mb-4">
                 <p class="text-red-600 hover:text-white font-bold text-2xl">Cancel</p>
               </button>
             </div>
@@ -60,9 +64,110 @@
         </div>
       </div>
     </form>
+
+    <h3 class="text-lg leading-6 text-bold font-large text-white text-3xl mb-4">Skill Items</h3>
+    <p *ngIf="mode === 'add'" class="mt-1 text-lg text-white">add some sub skills to explain your better explain your
+      skill <span class="text-sm">(added educations are automatically set to active)</span></p>
+    <p *ngIf="mode === 'edit'" class="mt-1 text-lg text-white">change or add some sub skills to explain your better
+      explain your skill <span class="text-sm">(be sure to submit your changes)</span></p>
+
+    <hr>
+
+    <div class="mb-6">
+      <div class="ml-6 " *ngFor="let skillItem of skillItems$ | async">
+        <div class="mt-4" *ngIf="skillItem.skillId === skillForm.value.id">
+          <div class="flex flex-row">
+            <div class="basis-[97%] µ">
+              <h3 class="text-xl leading-6 font-bold text-white"> - {{skillItem.name}}</h3>
+              <p class="mt-1 max-w-2xl text-sm text-white">{{skillItem.description}}</p>
+            </div>
+          </div>
+          <button (click)="onEdit(skillItem)" class="text-white rounded-xl w-10 h-10 hover:bg-Jorange">
+            <fa-icon transform="grow-12" [icon]="faPencil"></fa-icon>
+          </button>
+
+          <!--                        skill item modal-->
+          <div *ngIf="editSkillIem" class="container flex justify-center mx-auto">
+            <div class="absolute inset-0 flex items-center justify-center bg-gray-700 bg-opacity-50">
+              <div class="max-w-2xl p-6 bg-gradient-to-b border-2 border-white from-indigo-600 to-Jblue rounded-xl">
+                <div class="flex items-center justify-between ">
+                  <form [formGroup]="skillItemForm" (ngSubmit)="onSkillItemSubmit()" class="space-y-8 divide-y divide-gray-200 ">
+                    <div class="space-y-8 divide-y divide-gray-200 ">
+                      <div class="pt-8 pb-4">
+                        <h3 (click)="onClose()" class="text-lg leading-6 text-bold font-large text-white text-3xl mb-4">
+                          {{skillItemForm.value.name}}</h3>
+                        <p *ngIf="mode === 'add'" class="mt-1 text-lg text-white">add a new education to your CV <span
+                          class="text-sm">(added educations are automatically set to active)</span></p>
+                        <p *ngIf="mode === 'edit'" class="mt-1 text-lg text-white">change one of your educations <span
+                          class="text-sm">(be sure to submit your changes)</span></p>
+
+                        <hr>
+
+                        <div class="sm:col-span-3 mt-4">
+                          <label for="name" class="block text-sm font-medium text-white">Name</label>
+                          <div class="mt-1">
+                            <input placeholder="name of skillItem"
+                                   required type="text" name="skillItemName" id="skillItemName" formControlName="name"
+                                   class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                            <div
+                              *ngIf="skillForm.get('name')?.dirty && skillForm.get('name')?.touched && skillForm.get('name')?.hasError('required')"
+                              class="text-white text-sm italic">
+                              Skill name is required.
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="sm:col-span-6 mt-4">
+                          <label for="description" class="block text-sm font-medium text-white">Description</label>
+                          <div class="mt-1">
+              <textarea placeholder="some extra information about your education" id="skillItemDescription" name="skillItemDescription"
+                        formControlName="description" rows="3"
+                        class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md"></textarea>
+                          </div>
+                        </div>
+
+                        <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+                          <diV hidden>
+                            <input type="text" name="skillItemCandidateId" id="skillItemCandidateId" formControlName="candidateId">
+                            <input type="checkbox" name="skillId" id="skillId" formControlName="skillId">
+                          </diV>
+
+                        </div>
+                        <div class="flex justify-around mt-8">
+                          <div>
+                            <button type="submit" name="submitButton" [disabled]="!skillItemForm.valid"
+                                    class="justify-center hover:bg-Jorange bg-white items-center h-10 w-48 rounded-xl mb-4">
+                              <p class="text-Jblue hover:text-white font-bold text-2xl">Submit</p>
+                            </button>
+                          </div>
+
+                          <div>
+                            <button (click)="onClose()"
+                                    class="justify-center bg-white hover:bg-Jorange  items-center h-10 w-48 rounded-xl mb-4">
+                              <p class="text-red-600 hover:text-white font-bold text-2xl">Cancel</p>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <button (click)="onAdd()" name="skillItemButton"
+              class="justify-center hover:bg-Jorange bg-white items-center h-10 w-48 rounded-xl mb-4">
+        <p class="text-Jblue hover:text-white font-bold text-2xl">Add</p>
+      </button>
+
+    </div>
+
   </div>
 </div>
-
 
 
 

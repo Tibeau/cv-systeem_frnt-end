@@ -58,3 +58,18 @@ export const loadUserFailure = createAction(
   `${type} get user FAILURE`,
   props<{payload: any}>()
 )
+
+
+//ADD USER
+export const addUser = createAction(
+  `${type} add user`,
+  props<{user: User}>()
+)
+
+export const addUserSuccess = createAction(
+  `${type} add user SUCCESS `,
+)
+
+export const addUserFailure = createAction(
+  `${type} add user FAILURE`,
+)

@@ -25,15 +25,15 @@ export class ContactInfoComponent implements OnInit {
     email: ["", Validators.required,],
     username: [""],
     phone: ["", Validators.required,],
-    password: ["", Validators.required,],
+    password: [""],
     firstname: ["", Validators.required,],
     lastname: ["", Validators.required,],
     country: ["", Validators.required,],
     street: ["", Validators.required,],
     city: ["", Validators.required,],
-    description: ["", Validators.required,],
+    description: [""],
     linkedIn: ["", Validators.required,],
-    imgUrl: ["", Validators.required,],
+    imgUrl: [""],
     driversLicence: ["", Validators.required,],
     role: ["", Validators.required,],
     token: [""],
@@ -42,7 +42,7 @@ export class ContactInfoComponent implements OnInit {
     active: ["", Validators.required,],
   })
 
-  constructor(private http: HttpClient, private router: Router ,private fb: FormBuilder ,private authService: AuthService,
+  constructor(private http: HttpClient, private router: Router ,private fb: FormBuilder ,
               private authStore: Store<{ user: User }>
   ) {}
 
@@ -58,6 +58,10 @@ export class ContactInfoComponent implements OnInit {
     if (!this.userForm.valid) {
       window.alert("please fill in all required fields before submitting the form");
     } else {
+      this.userForm.patchValue({
+        username: this.userForm.value.email
+      })
+      console.log(this.userForm.value)
         this.authStore.dispatch(changeUser({user: this.userForm.value, id: this.userForm.value.id}));
     }
 

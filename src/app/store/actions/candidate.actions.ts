@@ -1,22 +1,40 @@
 import {createAction, props} from '@ngrx/store';
-import {UserPagination} from "../../models/candidate/candidate-pagination";
-
-
-
+import {Candidate} from "../../models/candidate/candidate";
 
 let type = "[Candidate]"
 
-//LOAD CANDIDATES
-export const loadCandidates = createAction(
-  `${type} loadCandidates`,
-  props<{page: number, items: number}>(),
-)
-export const loadCandidatesSuccess = createAction(
-  `${type} loadCandidates SUCCESS`,
-  props<{candidates: UserPagination}>(),
+
+//CHANGE CANDIDATE
+export const changeCandidate = createAction(
+  `${type} changeCandidate`,
+  props<{candidate: Candidate, id: number}>(),
 )
 
-export const loadCandidatesFail = createAction(
-  `${type} loadCandidates FAIL`,
+export const changeCandidateSuccess = createAction(
+  `${type} changeCandidate SUCCESS`,
+)
+
+export const changeCandidateFail = createAction(
+  `${type} changeCandidate FAIL`,
   props<{error: any}>()
 )
+
+
+//ADD CANDIDATE
+export const addCandidate = createAction(
+  `${type} addCandidate`,
+  props<{candidate: Candidate}>(),
+)
+export const addCandidateSuccess = createAction(
+  `${type} addCandidate SUCCESS`,
+  props<{candidate: Candidate}>(),
+)
+
+export const addCandidateFail = createAction(
+  `${type} addCandidate FAIL`,
+  props<{error: any}>()
+)
+
+
+
+

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faArrowLeft} from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faPencil} from '@fortawesome/free-solid-svg-icons';
 import {filter, Observable, take} from "rxjs";
 import {Skill} from "../../models/skill/skill";
 import {selectMySkills} from "../../skill-feature/skill.selector";
@@ -24,7 +24,9 @@ export class SkillFormComponent implements OnInit {
     .pipe(map(skills => skills?.content.find(skill => skill.id == this.skillId)));
   skillItems$: Observable<SkillItem[] | null> = this.skillItemStore.select(selectMySkillItems);
 
+  faPencil = faPencil;
   faArrowLeft = faArrowLeft;
+  editSkillIem: boolean = false;
   mode: string = "";
   skillId: number = 0;
   candidateId: number = Number(localStorage.getItem("CANDIDATE"));
@@ -37,6 +39,15 @@ export class SkillFormComponent implements OnInit {
     name: ['', Validators.required],
     description: ['', Validators.required],
     active: [true, Validators.required],
+    candidateId: [this.candidateId, Validators.required]
+  });
+
+
+  skillItemForm = this.fb.group({
+    id: [0, Validators.required],
+    name: ['', Validators.required],
+    description: ['', Validators.required],
+    skillId: [this.skillId, Validators.required],
     candidateId: [this.candidateId, Validators.required]
   });
 
@@ -76,6 +87,24 @@ export class SkillFormComponent implements OnInit {
   cancel(){
     this.isCancel = true
     this.router.navigate([this.skillUrl]);
+  }
+
+  onEdit(skillItem: SkillItem) {
+    this.skillItemForm.setValue(skillItem)
+    this.editSkillIem = true
+  }
+
+  onAdd() {
+    this.editSkillIem = true
+  }
+
+  onClose() {
+    this.editSkillIem = false
+  }
+
+  onSkillItemSubmit() {
+    this.skillStore.dispatch(addSkillItem({skillItem: this.skillItemForm.value}));
+    this.onClose()
   }
 
 }

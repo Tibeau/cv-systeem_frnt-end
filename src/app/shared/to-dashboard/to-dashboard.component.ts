@@ -4,10 +4,10 @@ import {filter, Observable, take} from "rxjs";
 import {User} from "../../security/user";
 import {selectMyUser} from "../../security/user.selector";
 import {Store} from "@ngrx/store";
-import {UserPagination} from "../../models/candidate/candidate-pagination";
-import {selectMyCandidates} from "../../dashboard-feature/company/candidates/candidate.selector";
+import {UserPagination} from "../../models/user/user-pagination";
+import {selectMyCandidates} from "../../dashboard-feature/company/candidates/user.selector";
 import {map} from "rxjs/operators";
-import {loadCandidates} from "../../store/actions/candidate.actions";
+import {loadCandidates} from "../../store/actions/user.actions";
 
 
 @Component({

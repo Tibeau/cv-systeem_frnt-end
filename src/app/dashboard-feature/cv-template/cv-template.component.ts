@@ -28,9 +28,9 @@ import {loadCertificates} from "../../store/actions/certificate.actions";
 import {SkillItem} from "../../models/skillItem/skillItem";
 import {selectMySkillItems} from "../../skill-feature/skillItem.selector";
 import {loadSkillItems} from "../../store/actions/skillItem.actions";
-import {loadCandidates} from "../../store/actions/candidate.actions";
-import {UserPagination} from "../../models/candidate/candidate-pagination";
-import {selectMyCandidates} from "../company/candidates/candidate.selector";
+import {loadCandidates} from "../../store/actions/user.actions";
+import {UserPagination} from "../../models/user/user-pagination";
+import {selectMyCandidates} from "../company/candidates/user.selector";
 
 
 @Component({

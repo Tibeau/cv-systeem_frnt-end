@@ -20,6 +20,7 @@ export interface User {
   number?: string;
   postalCode?: string;
   active: boolean;
+  firstLogin?: boolean;
 
 
 

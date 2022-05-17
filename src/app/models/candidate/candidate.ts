@@ -1,5 +1,5 @@
 export interface Candidate {
-  id: number;
+  id: string;
   userId: number;
   anonymous: boolean;
 }

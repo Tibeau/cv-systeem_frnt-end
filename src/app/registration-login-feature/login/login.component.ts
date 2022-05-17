@@ -1,9 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from 'src/app/security/auth.service';
-import { User } from 'src/app/security/user';
-import {Observable} from "rxjs";
-import { Store } from '@ngrx/store';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {User} from 'src/app/security/user';
+import {Store} from '@ngrx/store';
 import {login} from "../../store/actions/auth.actions";
 import {FormBuilder, Validators} from "@angular/forms";
 
@@ -13,10 +11,10 @@ import {FormBuilder, Validators} from "@angular/forms";
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-userForm = this.fb.group({
-  email: ["", Validators.required],
-  password: ["", Validators.required],
-})
+  userForm = this.fb.group({
+    email: ["", Validators.required],
+    password: ["", Validators.required],
+  })
 
   isSubmitted: boolean = false;
   errorMessage: string = '';
@@ -24,9 +22,9 @@ userForm = this.fb.group({
   isLogin: boolean = false;
   isLogout: boolean = false;
 
-  constructor( private fb: FormBuilder
-    ,private router: Router,
-              private store: Store<{ user: User}>) {
+  constructor(private fb: FormBuilder
+    , private router: Router,
+              private store: Store<{ user: User }>) {
   }
 
   ngOnInit(): void {

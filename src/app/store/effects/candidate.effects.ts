@@ -10,6 +10,8 @@ import {
   changeCandidate, changeCandidateFail,
   changeCandidateSuccess
 } from "../actions/candidate.actions";
+import {Candidate} from "../../models/candidate/candidate";
+
 
 
 @Injectable()
@@ -20,7 +22,14 @@ export class CandidateEffects {
     private candidateService: CandidateService,
   ) {}
 
-
+  changeCandidate$ = createEffect(() => this.actions$.pipe(
+    ofType(changeCandidate),
+    switchMap((({candidate, id}) => this.candidateService.putCandidate(candidate, id)
+      .pipe(
+        map(candidate => ( changeCandidateSuccess())),
+        catchError(() => of(changeCandidateFail)),
+      )))
+  ));
 
   addCandidate$ = createEffect(() => this.actions$.pipe(
     ofType(addCandidate),
@@ -30,15 +39,5 @@ export class CandidateEffects {
         catchError(() => of(addCandidateFail))
       )))
   );
-
-
-  changeCandidate$ = createEffect(() => this.actions$.pipe(
-    ofType(changeCandidate),
-    switchMap((({candidate, id}) => this.candidateService.putCandidate(candidate, id)
-      .pipe(
-        map(candidate => ( changeCandidateSuccess())),
-        catchError(() => of(changeCandidateFail)),
-      )))
-  ));
 
 }

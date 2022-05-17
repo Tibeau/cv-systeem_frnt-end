@@ -5,4 +5,6 @@ export const selectUserFeature = createFeatureSelector<State>(userFeatureKey);
 
 export const selectMyUser = createSelector(selectUserFeature, selectUser);
 
-export const candidateId = localStorage.getItem("id");
+export const userId = localStorage.getItem("user");
+export const candidateId = localStorage.getItem("Candidate");
+export const companyId = localStorage.getItem("Company");

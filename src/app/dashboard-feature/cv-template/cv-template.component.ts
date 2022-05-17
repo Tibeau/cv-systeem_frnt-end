@@ -3,34 +3,34 @@ import { faPencil,faPhone, faMailBulk, faLocation, faLink, faEarth, faContactCar
 import {Store} from "@ngrx/store";
 import {EducationPagination} from "../../models/education/education-pagination";
 import {filter, Observable, take} from "rxjs";
-import {selectMyEducations} from "../../education-feature/education.selector";
+import {selectMyEducations} from "../../selectors/education.selector";
 import {Education} from "../../models/education/education";
 import {map} from "rxjs/operators";
 import {User} from "../../security/user";
-import {selectMyUser} from "../../security/user.selector";
+import {selectMyUser} from "../../selectors/auth.selector";
 import {loadEducations} from "../../store/actions/education.actions";
 import {ExperiencePagination} from "../../models/experience/experience-pagination";
 import {LanguagePagination} from "../../models/language/language-pagination";
 import {SkillPagination} from "../../models/skill/skill-pagination";
 import {CertificatePagination} from "../../models/certificate/certificate-pagination";
-import {selectMyExperiences} from "../../experience-feature/experience.selector";
+import {selectMyExperiences} from "../../selectors/experience.selector";
 import {Experience} from "../../models/experience/experience";
-import {selectMyLanguages} from "../../language-feature/language.selector";
+import {selectMyLanguages} from "../../selectors/language.selector";
 import {Language} from "../../models/language/language";
-import {selectMySkills} from "../../skill-feature/skill.selector";
+import {selectMySkills} from "../../selectors/skill.selector";
 import {Skill} from "../../models/skill/skill";
-import {selectMyCertificates} from "../../certificate-feature/certificate.selector";
+import {selectMyCertificates} from "../../selectors/certificate.selector";
 import {Certificate} from "../../models/certificate/certificate";
 import {loadExperiences} from "../../store/actions/experience.actions";
 import {loadLanguages} from "../../store/actions/language.actions";
 import {loadSkills} from "../../store/actions/skill.actions";
 import {loadCertificates} from "../../store/actions/certificate.actions";
 import {SkillItem} from "../../models/skillItem/skillItem";
-import {selectMySkillItems} from "../../skill-feature/skillItem.selector";
+import {selectMySkillItems} from "../../selectors/skillItem.selector";
 import {loadSkillItems} from "../../store/actions/skillItem.actions";
 import {loadCandidates} from "../../store/actions/user.actions";
 import {UserPagination} from "../../models/user/user-pagination";
-import {selectMyCandidates} from "../company/candidates/user.selector";
+import {selectMyCandidates} from "../../selectors/user.selector";
 
 
 @Component({

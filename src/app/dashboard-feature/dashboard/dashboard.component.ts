@@ -1,4 +1,6 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {candidateId} from "../../selectors/auth.selector";
+import {companyId} from "../../selectors/auth.selector";
 
 
 
@@ -7,21 +9,18 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent implements OnInit{
+export class DashboardComponent implements OnInit {
 
-  candidate: boolean = false;
-  company: boolean = false;
+  candidate: boolean = !!candidateId;
+  company: boolean = !!companyId;
 
 
-  constructor() { }
-
-  ngOnInit(): void {
-    this.candidate = !!localStorage.getItem('CANDIDATE')
-    this.company = !!localStorage.getItem('COMPANY')
-
+  constructor() {
   }
 
+  ngOnInit(): void {
 
+  }
 
 
 }

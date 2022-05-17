@@ -5,8 +5,9 @@ import { faArrowLeft} from '@fortawesome/free-solid-svg-icons';
 import {Store} from "@ngrx/store";
 import { FormBuilder, Validators} from "@angular/forms";
 import {ActivatedRoute, Params, Router} from "@angular/router";
-import {selectMyEducations} from "../education.selector";
+import {selectMyEducations} from "../../selectors/education.selector";
 import {map} from "rxjs/operators";
+import {candidateId} from "../../selectors/auth.selector";
 import {addEducation, changeEducation} from "../../store/actions/education.actions";
 import {
   CustomeDateValidators,
@@ -24,7 +25,6 @@ export class EducationFormComponent implements OnInit {
   faArrowLeft = faArrowLeft;
   mode: string = "";
   educationId: number = 0;
-  candidateId: number = Number(localStorage.getItem("CANDIDATE"));
   currentPage = 0;
   isCancel: boolean = false;
   educationUrl: string = "/educations"
@@ -40,7 +40,7 @@ export class EducationFormComponent implements OnInit {
     startDate: ['', Validators.required,],
     endDate: ['', Validators.required],
     active: [true, Validators.required],
-    candidateId: [this.candidateId, Validators.required]
+    candidateId: [candidateId, Validators.required]
   }, {Validator: [CustomeDateValidators.invalidDateValidator('startDate', 'endDate')]})
 
   constructor(private router: Router, private route: ActivatedRoute, private fb: FormBuilder, private educationStore: Store<{ educations: Education[] }>) {

@@ -14,7 +14,7 @@ import {SkillFormComponent} from "./skill-feature/skill-form/skill-form.componen
 import {LanguageComponent} from "./language-feature/language/language.component";
 import {LanguageFormComponent} from "./language-feature/language-form/language-form.component";
 import {SettingsComponent} from "./settings-feature/settings/settings.component";
-import {RegistrationComponent} from "./registration/registration.component";
+import {RegistrationComponent} from "./invites/registration.component";
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },

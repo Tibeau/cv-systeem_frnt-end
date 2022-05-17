@@ -52,10 +52,11 @@ import { CandidatesComponent } from './dashboard-feature/company/candidates/cand
 import {UserEffects} from "./store/effects/user.effects";
 import {ToDashboardComponent} from "./shared/to-dashboard/to-dashboard.component";
 import {DeleteModalComponent} from "./shared/delete-modal/delete-modal.component";
-import { RegistrationComponent } from './registration/registration.component';
+import { RegistrationComponent } from './invites/registration.component';
 import {userReducer} from "./store/reducers/user.reducers";
 import {CandidateEffects} from "./store/effects/candidate.effects";
 import {candidateReducer} from "./store/reducers/candidate.reducers";
+import {newUserReducer} from "./store/reducers/created-user.reducer";
 
 @NgModule({
   declarations: [
@@ -93,7 +94,7 @@ import {candidateReducer} from "./store/reducers/candidate.reducers";
     ReactiveFormsModule,
     EffectsModule.forRoot([AuthEffects, EducationEffects, CertificateEffects, ExperienceEffects, LanguageEffects, SkillEffects, SkillItemEffects, UserEffects, CandidateEffects]),
     EffectsModule.forFeature(),
-    StoreModule.forRoot({educations: educationReducer, user: authReducer, certificates: certificateReducer, experiences: experienceReducer, languages: languageReducer, skills: skillReducer, skillItems: skillItemReducer, users: userReducer, candidate: candidateReducer}),
+    StoreModule.forRoot({educations: educationReducer, user: authReducer, certificates: certificateReducer, experiences: experienceReducer, languages: languageReducer, skills: skillReducer, skillItems: skillItemReducer, users: userReducer, candidate: candidateReducer, newUser: newUserReducer}),
     BrowserAnimationsModule,
     LayoutModule,
     CommonModule,

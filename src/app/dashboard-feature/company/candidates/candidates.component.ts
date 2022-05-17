@@ -26,7 +26,9 @@ import {Store} from "@ngrx/store";
 import {UserPagination} from "../../../models/user/user-pagination";
 import {User} from "../../../security/user";
 import {loadCandidates} from "../../../store/actions/user.actions";
-import {selectMyCandidates} from "./user.selector";
+import {selectMyCandidates} from "../../../selectors/user.selector";
+import {candidateId} from "../../../selectors/auth.selector";
+
 
 @Component({
   selector: 'app-candidates',
@@ -62,7 +64,7 @@ export class CandidatesComponent implements OnInit {
 
   selected: boolean = false;
 
-  currentCandidate: number = Number(localStorage.getItem('CANDIDATE'))
+  currentCandidate: number = Number(candidateId)
 
   currentPage = 0;
   pageAmountSub$: Observable<number> = this.candidates$.pipe(
@@ -88,9 +90,9 @@ export class CandidatesComponent implements OnInit {
 
   selectCandidate(candidateId: number | undefined) {
     if (this.currentCandidate != candidateId) {
-      localStorage.setItem('CANDIDATE', JSON.stringify(candidateId) || "")
+      localStorage.setItem('Candidate', JSON.stringify(candidateId) || "")
     } else {
-      localStorage.removeItem('CANDIDATE')
+      localStorage.removeItem('Candidate')
     }
     window.location.reload()
   }

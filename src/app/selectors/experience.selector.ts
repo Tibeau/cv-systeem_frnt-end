@@ -5,4 +5,3 @@ export const selectExperienceFeature = createFeatureSelector<State>(experienceFe
 
 export const selectMyExperiences = createSelector(selectExperienceFeature, selectExperiences);
 
-export const candidateId = localStorage.getItem("CANDIDATE");

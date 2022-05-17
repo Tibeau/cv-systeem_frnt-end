@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {filter, Observable, take} from "rxjs";
-import {Education} from "../../models/education/education";
+import {candidateId} from "../../selectors/auth.selector";
 import { faArrowLeft} from '@fortawesome/free-solid-svg-icons';
 import {map} from "rxjs/operators";
 import {FormBuilder, Validators} from "@angular/forms";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {Store} from "@ngrx/store";
-import {selectMyExperiences} from "../experience.selector";
+import {selectMyExperiences} from "../../selectors/experience.selector";
 import {Experience} from "../../models/experience/experience";
 import {addExperience, changeExperience} from "../../store/actions/experience.actions";
 
@@ -22,14 +22,13 @@ export class ExperienceFormComponent implements OnInit {
   faArrowLeft = faArrowLeft;
   mode: string = "";
   experienceId: number = 0;
-  candidateId: number = Number(localStorage.getItem("CANDIDATE"));
   currentPage = 0;
   isCancel: boolean = false;
  experienceUrl: string = "/experiences"
 
   experienceForm = this.fb.group({
     id: [0, Validators.required],
-    description: ['', Validators.required],
+    description: [''],
     profession: ['', Validators.required],
     employer: ['', Validators.required],
     company: ['', Validators.required],
@@ -38,7 +37,7 @@ export class ExperienceFormComponent implements OnInit {
     startDate: ['', Validators.required],
     endDate: ['', Validators.required],
     active: [true, Validators.required],
-    candidateId: [this.candidateId, Validators.required]
+    candidateId: [candidateId, Validators.required]
   })
 
   constructor(private router: Router, private route: ActivatedRoute, private fb: FormBuilder, private experienceStore: Store<{ experiences: Experience[] }>) {

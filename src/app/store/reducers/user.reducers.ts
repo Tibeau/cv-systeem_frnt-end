@@ -1,7 +1,7 @@
 import {createReducer, on} from "@ngrx/store";
 import {UserPagination} from "../../models/user/user-pagination";
 import {loadCandidates, loadCandidatesFail, loadCandidatesSuccess} from "../actions/user.actions";
-export const candidateFeatureKey = "users";
+export const userFeatureKey = "users";
 
 export const selectCandidates = (state: State) => state.users
 

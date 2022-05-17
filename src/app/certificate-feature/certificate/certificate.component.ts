@@ -7,7 +7,7 @@ import {CertificatePagination} from "../../models/certificate/certificate-pagina
 import {filter, Observable, take} from "rxjs";
 import {map} from "rxjs/operators";
 import {Certificate} from "../../models/certificate/certificate";
-import {selectMyCertificates} from "../certificate.selector";
+import {selectMyCertificates} from "../../selectors/certificate.selector";
 import {changeCertificate, loadCertificates, removeCertificate} from "../../store/actions/certificate.actions";
 
 @Component({
@@ -29,13 +29,13 @@ export class CertificateComponent implements OnInit {
 
   active: boolean = false;
   showModal: boolean = false;
-
   currentPage = 0;
+
   pageAmountSub$: Observable<number> = this.certificates$.pipe(
     filter((certificate): certificate is CertificatePagination => certificate !== undefined),
     map(certificates => certificates?.totalPages));
   pageAmount: number = 0;
-  candidateId: number = Number(localStorage.getItem("CANDIDATE"));
+  candidateId: number = Number(localStorage.getItem("Candidate"));
 
 
   certificateForm = this.fb.group({

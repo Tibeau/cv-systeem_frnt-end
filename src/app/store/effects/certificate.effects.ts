@@ -6,9 +6,9 @@ import {
   changeEducationSuccess,
   addEducationFail,
   removeEducationFail,
-  removeEducation, removeEducationSuccess
+  removeEducationSuccess
 } from "../actions/education.actions";
-import {candidateId} from "../../education-feature/education.selector";
+import {candidateId} from "../../selectors/auth.selector";
 import {CertificateService} from "../../services/certificate/certificate.service";
 import {
   addCertificate, addCertificateSuccess, changeCertificate, changeCertificateFail,

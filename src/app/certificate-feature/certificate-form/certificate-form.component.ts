@@ -3,10 +3,11 @@ import {FormBuilder, Validators} from "@angular/forms";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {Store} from "@ngrx/store";
 import {faArrowLeft} from '@fortawesome/free-solid-svg-icons';
+import {candidateId} from "../../selectors/auth.selector";
 import {Certificate} from "../../models/certificate/certificate";
 import {filter, Observable, shareReplay, take} from "rxjs";
 import {map} from "rxjs/operators";
-import {selectMyCertificates} from "../certificate.selector";
+import {selectMyCertificates} from "../../selectors/certificate.selector";
 import {addCertificate, changeCertificate} from "../../store/actions/certificate.actions";
 
 @Component({
@@ -22,7 +23,6 @@ export class CertificateFormComponent implements OnInit {
   certificate$: Observable<Certificate | undefined> = this.certificateStore.select(selectMyCertificates)
     .pipe(map(certificates => certificates?.content.find(certificate => certificate.id == this.certificateId)));
   certificateId$: Observable<number | undefined> = this.route.params.pipe(shareReplay(), map(params => params['id']))
-  candidateId: number = Number(localStorage.getItem("CANDIDATE"));
   currentPage = 0;
   isCancel: boolean = false;
   certificateUrl: string = "/certificates"
@@ -36,22 +36,15 @@ export class CertificateFormComponent implements OnInit {
     length: ['', Validators.required],
     dateEarned: ['', Validators.required],
     active: [true, Validators.required],
-    candidateId: [this.candidateId, Validators.required]
+    candidateId: [candidateId, Validators.required]
   })
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router, private route: ActivatedRoute, private fb: FormBuilder, private certificateStore: Store<{ certificates: Certificate[] }>) {
   }
 
   ngOnInit(): void {
-
-    console.log(
-      'Activated route data in Component:::',
-      this.activatedRoute.data
-    );
     this.activatedRoute.data.subscribe((response: any) => {
-      console.log('Certificate FETCHING', response);
       this.certificates = response.certificates;
-      console.log('Certificate FETCHED');
     });
 
     this.certificateId$.pipe(take(1)).subscribe();

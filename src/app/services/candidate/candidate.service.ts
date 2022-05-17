@@ -19,4 +19,8 @@ export class CandidateService {
   putCandidate(candidate: Candidate, id: number){
     return this.httpClient.put<Candidate>(`${this.BASE_URL}/${id}`, candidate);
   }
+
+ loadCandidateByUser(id: number){
+    return this.httpClient.get<Candidate>(`${this.BASE_URL}/userId=${id}`);
+  }
 }

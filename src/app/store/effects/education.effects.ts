@@ -3,6 +3,7 @@ import {Actions, createEffect, Effect, ofType} from '@ngrx/effects';
 import {of} from 'rxjs';
 import {map, catchError, tap, switchMap} from 'rxjs/operators';
 import {EducationService} from "../../services/education/education.service";
+import {candidateId} from "../../selectors/auth.selector";
 import {
   addEducation,
   addEducationSuccess,
@@ -16,7 +17,7 @@ import {
   removeEducationFail,
   removeEducation, removeEducationSuccess
 } from "../actions/education.actions";
-import {candidateId} from "../../education-feature/education.selector";
+
 
 @Injectable()
 export class EducationEffects {

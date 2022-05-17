@@ -3,7 +3,6 @@ import {Candidate} from "../../models/candidate/candidate";
 
 let type = "[Candidate]"
 
-
 //CHANGE CANDIDATE
 export const changeCandidate = createAction(
   `${type} changeCandidate`,
@@ -34,6 +33,7 @@ export const addCandidateFail = createAction(
   `${type} addCandidate FAIL`,
   props<{error: any}>()
 )
+
 
 
 

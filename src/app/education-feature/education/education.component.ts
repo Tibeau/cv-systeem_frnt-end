@@ -3,7 +3,7 @@ import { faPencil, faTrashCan, faXmark, faTriangleExclamation} from '@fortawesom
 import {filter, Observable, take} from "rxjs";
 import {Education} from "../../models/education/education";
 import {Store} from '@ngrx/store';
-import {selectMyEducations} from "../education.selector";
+import {selectMyEducations} from "../../selectors/education.selector";
 import {Router} from "@angular/router";
 import {loadEducations, changeEducation, removeEducation} from "../../store/actions/education.actions";
 import {FormBuilder, Validators} from "@angular/forms";

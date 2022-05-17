@@ -92,9 +92,14 @@
             <a [routerLink]="'/languageform/' + language.id">
             <h4 class="font-bold mt-4" >{{language.name}}</h4>
             </a>
-            <p class="text-sm"><span class="font-bold">speaking: </span> <span class="font-light">{{language.speaking}}</span></p>
-            <p class="text-sm"><span class="font-bold">reading: </span> <span class="font-light">{{language.reading}}</span></p>
-            <p class="text-sm"><span class="font-bold">writing: </span> <span class="font-light">{{language.writing}}</span> </p>
+            <div  *ngIf="!language.nativeLanguage">
+              <p class="text-sm"><span class="font-bold">speaking: </span> <span class="font-light">{{language.speaking}}</span></p>
+              <p class="text-sm"><span class="font-bold">reading: </span> <span class="font-light">{{language.reading}}</span></p>
+              <p class="text-sm"><span class="font-bold">writing: </span> <span class="font-light">{{language.writing}}</span> </p>
+            </div>
+            <div  *ngIf="language.nativeLanguage">
+              <p class="text-sm leading-6 font-bold">Native language</p>
+            </div>
           </div>
         </div>
       </div>

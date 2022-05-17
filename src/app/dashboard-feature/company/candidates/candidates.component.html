@@ -7,10 +7,11 @@
           <div class="basis-[97%]">
             <button
               (click)="selectCandidate(candidate.candidateId)"
-              [ngClass]="candidate.candidateId === currentCandidate ? 'flex bg-white items-center hover:bg-Jorange hover:text-white text-Jorange':'text-white hover:text-Jorange hover:bg-white'" class="h-10 w-auto rounded-xl">
+              [ngClass]="candidate.candidateId === currentCandidate ? 'flex bg-white items-center hover:bg-Jorange hover:text-white text-Jorange':'text-white hover:text-Jorange hover:bg-white'"
+              class="h-10 w-auto rounded-xl">
               <h3 class="text-xl leading-6 font-bold m-2">
                 {{candidate.firstname}} {{candidate.lastname}}
-            </h3>
+              </h3>
             </button>
           </div>
           <div class="flex justify-between">
@@ -126,7 +127,7 @@
       </div>
     </nav>
   </div>
-  </div>
+</div>
 
 
 

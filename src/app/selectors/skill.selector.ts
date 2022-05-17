@@ -4,5 +4,3 @@ import {selectSkills, skillFeatureKey, State} from "../store/reducers/skill.redu
 export const selectSkillFeature = createFeatureSelector<State>(skillFeatureKey);
 
 export const selectMySkills = createSelector(selectSkillFeature, selectSkills);
-
-export const candidateId = localStorage.getItem("CANDIDATE");

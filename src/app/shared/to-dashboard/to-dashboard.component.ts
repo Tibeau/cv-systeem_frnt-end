@@ -2,10 +2,10 @@ import {Component, Input, OnInit} from '@angular/core';
 import { faArrowLeft} from '@fortawesome/free-solid-svg-icons';
 import {filter, Observable, take} from "rxjs";
 import {User} from "../../security/user";
-import {selectMyUser} from "../../security/user.selector";
+import {selectMyUser} from "../../selectors/auth.selector";
 import {Store} from "@ngrx/store";
 import {UserPagination} from "../../models/user/user-pagination";
-import {selectMyCandidates} from "../../dashboard-feature/company/candidates/user.selector";
+import {selectMyCandidates} from "../../selectors/user.selector";
 import {map} from "rxjs/operators";
 import {loadCandidates} from "../../store/actions/user.actions";
 
@@ -22,7 +22,7 @@ export class ToDashboardComponent implements OnInit {
   candidates$: Observable<UserPagination | null> = this.candidateStore.select(selectMyCandidates);
   myCandidate$: Observable<User | undefined> = this.candidates$.pipe(
     filter((candidates): candidates is UserPagination => candidates !== undefined),
-    map(candidates => candidates?.content.find(candidate => candidate.id == (localStorage.getItem('CANDIDATE')))));
+    map(candidates => candidates?.content.find(candidate => candidate.id == (localStorage.getItem('Candidate')))));
 
 
 

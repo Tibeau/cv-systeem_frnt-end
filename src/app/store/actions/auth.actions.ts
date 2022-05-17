@@ -1,5 +1,6 @@
 import {createAction, props} from '@ngrx/store';
 import {User} from "../../security/user";
+import {Candidate} from "../../models/candidate/candidate";
 
 
 let type = "[Auth]";
@@ -8,6 +9,11 @@ let type = "[Auth]";
 //CHANGE USER
 export const changeUser = createAction(
   `${type} changeUser`,
+  props<{user: User, id: number}>(),
+)
+
+export const changeNewUser = createAction(
+  `${type} changeNewUser`,
   props<{user: User, id: number}>(),
 )
 
@@ -49,6 +55,7 @@ export const loadUser = createAction(
   props<{id: number}>()
 )
 
+
 export const loadUserSuccess = createAction(
   `${type} get user SUCCESS `,
   props<{user: User}>()
@@ -68,6 +75,7 @@ export const addUser = createAction(
 
 export const addUserSuccess = createAction(
   `${type} add user SUCCESS `,
+  props<{user: User}>()
 )
 
 export const addUserFailure = createAction(

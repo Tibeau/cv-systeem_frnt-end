@@ -31,6 +31,9 @@ import {loadSkillItems} from "../../store/actions/skillItem.actions";
 import {loadCandidates} from "../../store/actions/user.actions";
 import {UserPagination} from "../../models/user/user-pagination";
 import {selectMyCandidates} from "../../selectors/user.selector";
+import {candidateId} from "../../selectors/auth.selector";
+import {companyId} from "../../selectors/auth.selector";
+
 
 
 @Component({
@@ -55,7 +58,7 @@ export class CvTemplateComponent implements OnInit {
   candidates$: Observable<UserPagination | null> = this.candidateStore.select(selectMyCandidates);
   myCandidate$: Observable<User | undefined> = this.candidates$.pipe(
     filter((candidates): candidates is UserPagination => candidates !== undefined),
-    map(candidates => candidates?.content.find(candidate => candidate.id == (localStorage.getItem('CANDIDATE')))));
+    map(candidates => candidates?.content.find(candidate => candidate.candidateId === Number(candidateId))));
 
   educations$: Observable<EducationPagination | null> = this.educationStore.select(selectMyEducations);
   myEducations$: Observable<Education[] | undefined> = this.educations$.pipe(
@@ -98,10 +101,10 @@ export class CvTemplateComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.company = !!localStorage.getItem('COMPANY')
+    this.company = !!companyId
+
 
     this.candidateStore.dispatch(loadCandidates({page: 0, items: 999999999}));
-
     this.experienceStore.dispatch(loadExperiences({page: 0, items: 999999999}));
     this.educationStore.dispatch(loadEducations({page: 0, items: 999999999}));
     this.languageStore.dispatch(loadLanguages({page: 0, items: 999999999}));

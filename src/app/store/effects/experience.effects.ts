@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {Actions, createEffect, Effect, ofType} from '@ngrx/effects';
 import {of} from 'rxjs';
 import {map, catchError, tap, switchMap} from 'rxjs/operators';
-import {candidateId} from "../../education-feature/education.selector";
+import {candidateId} from "../../selectors/auth.selector";
 import {ExperienceService} from "../../services/experience/experience.service";
 import {
   addExperience,

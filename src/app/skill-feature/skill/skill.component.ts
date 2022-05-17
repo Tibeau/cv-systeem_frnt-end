@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import {filter, Observable, take} from "rxjs";
 import {SkillPagination} from "../../models/skill/skill-pagination";
-import {selectMySkills} from "../../skill-feature/skill.selector";
+import {selectMySkills} from "../../selectors/skill.selector";
 import {Skill} from "../../models/skill/skill";
 import {map} from "rxjs/operators";
 import {FormBuilder, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import { faPencil, faTrashCan, faXmark, faTriangleExclamation} from '@fortawesome/free-solid-svg-icons';
 import {Store} from "@ngrx/store";
+import {candidateId} from "../../selectors/auth.selector";
 import {changeSkill, loadSkills, removeSkill} from "../../store/actions/skill.actions";
 import {SkillItem} from "../../models/skillItem/skillItem";
-import {selectMySkillItems} from "../skillItem.selector";
+import {selectMySkillItems} from "../../selectors/skillItem.selector";
 import {loadSkillItems} from "../../store/actions/skillItem.actions";
 
 @Component({
@@ -47,7 +48,7 @@ export class SkillComponent implements OnInit {
     name: ['', Validators.required],
     description: ['', Validators.required],
     active: [false, Validators.required],
-    candidateId: ['', Validators.required]
+    candidateId: [candidateId, Validators.required]
   })
 
   constructor(private router: Router, private fb: FormBuilder, private skillStore: Store<{ skills: SkillPagination }>, private skillItemStore: Store<{ skillItems: SkillItem[] }>) {

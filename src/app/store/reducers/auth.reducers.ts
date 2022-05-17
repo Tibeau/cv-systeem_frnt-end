@@ -1,6 +1,14 @@
 import {User} from "../../security/user";
 import {createReducer, on} from "@ngrx/store";
-import {loadUserSuccess, login, logInFailure, logInSuccess, logout} from "../actions/auth.actions";
+import {
+  loadUser,
+  loadUserFailure,
+  loadUserSuccess,
+  login,
+  logInFailure,
+  logInSuccess,
+  logout
+} from "../actions/auth.actions";
 
 
 export const userFeatureKey = "user";
@@ -36,7 +44,6 @@ export const authReducer = createReducer(
     isAuthenticated: true,
     user: props.user,
     errorMessage: null})),
-
 );
 
 

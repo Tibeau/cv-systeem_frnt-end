@@ -5,4 +5,3 @@ export const selectLanguageFeature = createFeatureSelector<State>(languageFeatur
 
 export const selectMyLanguages = createSelector(selectLanguageFeature, selectLanguages);
 
-export const candidateId = localStorage.getItem("id");

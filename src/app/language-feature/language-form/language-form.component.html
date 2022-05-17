@@ -1,11 +1,15 @@
+
 <div class="max-w-5xl mx-auto">
+  <app-to-dashboard [title]="languageForm.value.name"
+                    class="mt-6 flex ml-16"
+  ></app-to-dashboard>
   <div class="mt-8 mb-12 mx-auto px-4 sm:px-6 lg:px-8 bg-Jblue rounded-3xl mr-6 ml-6 border-white border-2 bg-gradient-to-b from-indigo-600 to-Jblue ">
     <form [formGroup]="languageForm" (ngSubmit)="onSubmit()" class="space-y-8 divide-y divide-gray-200 ">
       <div class="space-y-8 divide-y divide-gray-200 ">
         <div class="pt-8 pb-4">
           <h3 class="text-lg leading-6 text-bold font-large text-white text-3xl mb-4">Language</h3>
-          <p *ngIf="mode === 'add'" class="mt-1 text-lg text-white">add a new education to your CV <span class="text-sm">(added educations are automatically set to active)</span></p>
-          <p *ngIf="mode === 'edit'" class="mt-1 text-lg text-white">change one of your educations <span class="text-sm">(be sure to submit your changes)</span></p>
+          <p *ngIf="mode === 'add'" class="mt-1 text-lg text-white">add a new language to your CV <span class="text-sm">(added languages are automatically set to active)</span></p>
+          <p *ngIf="mode === 'edit'" class="mt-1 text-lg text-white">change one of your languages <span class="text-sm">(be sure to submit your changes)</span></p>
 
           <hr>
 
@@ -22,7 +26,7 @@
             </div>
           </div>
 
-          <div class="sm:col-span-3 mt-4">
+          <div class="sm:col-span-3 mt-4" [ngClass]="languageForm.value.nativeLanguage ? 'hidden': ''">
             <label for="reading" class="block text-sm font-medium text-white">Reading</label>
             <div class="mt-1">
               <select placeholder="level of reading"
@@ -41,7 +45,7 @@
             </div>
           </div>
 
-          <div class="sm:col-span-3 mt-4">
+          <div class="sm:col-span-3 mt-4" [ngClass]="languageForm.value.nativeLanguage ? 'hidden': ''">
             <label for="reading" class="block text-sm font-medium text-white">Writing</label>
             <div class="mt-1">
               <select placeholder="level of writing"
@@ -60,7 +64,7 @@
             </div>
           </div>
 
-          <div class="sm:col-span-3 mt-4">
+          <div class="sm:col-span-3 mt-4" [ngClass]="languageForm.value.nativeLanguage ? 'hidden': ''">
             <label for="reading" class="block text-sm font-medium text-white">Speaking</label>
             <div class="mt-1">
               <select placeholder="level of speaking"
@@ -83,8 +87,9 @@
             <input type="checkbox" name="nativeLanguage" id="nativeLanguage" formControlName="nativeLanguage"
                    class="ml-6 bg-gray-300 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 text-Jorange focus:ring-offset-2 focus:ring-Jorange" role="switch">
             <span class="ml-8">
-          <span  *ngIf="languageForm.value.nativeLanguage === false" class="text-lg font-bold text-Jblue ">Native Language </span>
-          <span  *ngIf="languageForm.value.nativeLanguage === true" class="text-lg font-bold text-Jorange ">Native Language </span></span>
+          <span class="text-lg font-bold text-Jblue ">Native Language </span>
+<!--          <span  *ngIf="languageForm.value.nativeLanguage === true" class="text-lg font-bold text-Jorange ">Native Language </span>-->
+            </span>
           </div>
 
 
@@ -95,7 +100,7 @@
 
           <div class="flex justify-around mt-8">
             <div>
-              <button type="submit" name="submitButton" [disabled]="!languageForm.valid"  class="justify-center hover:bg-Jorange bg-white items-center h-10 w-48 rounded-xl mb-4">
+              <button type="submit" name="submitButton" [disabled]="!languageForm.valid && languageForm.value.nativeLanguage === false"  class="justify-center hover:bg-Jorange bg-white items-center h-10 w-48 rounded-xl mb-4">
                 <p class="text-Jblue hover:text-white font-bold text-2xl">Submit</p>
               </button>
             </div>

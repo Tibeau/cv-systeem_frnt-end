@@ -4,22 +4,23 @@ export interface User {
   companyId?: number;
   username: string;
   email: string;
-  phone: string;
+  phone?: string;
   password: string;
-  firstname: string;
-  lastname: string;
-  country: string;
-  street: string;
-  city: string;
-  description: string;
-  linkedIn: string;
-  imgUrl: string;
-  driversLicence: string;
+  firstname?: string;
+  lastname?: string;
+  country?: string;
+  street?: string;
+  city?: string;
+  description?: string;
+  linkedIn?: string;
+  imgUrl?: string;
+  driversLicence?: string;
   role: string;
-  token: string;
-  number: string;
-  postalCode: string;
-  active: string;
+  token?: string;
+  number?: string;
+  postalCode?: string;
+  active: boolean;
+  firstLogin?: boolean;
 
 
 

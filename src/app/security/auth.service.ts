@@ -24,6 +24,10 @@ export class AuthService {
     return this.httpClient.put<User>(`${this.api}/users/${id}`, user);
   }
 
+  createUSer(user: User){
+    return this.httpClient.post<User>(`${this.api}/users`, user);
+  }
+
   getUserById(id: number): Observable<User> {
     return this.httpClient.get<User>(`${this.api}/users/${id}`);
   }

@@ -9,4 +9,3 @@ export const selectEducationFeature = createFeatureSelector<State>(educationFeat
 
 export const selectMyEducations = createSelector(selectEducationFeature, selectEducations);
 
-export const candidateId = localStorage.getItem("id");

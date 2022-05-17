@@ -3,7 +3,7 @@ import {filter, Observable, take} from "rxjs";
 import { faPencil, faTrashCan, faXmark, faTriangleExclamation} from '@fortawesome/free-solid-svg-icons';
 
 import {LanguagePagination} from "../../models/language/language-pagination";
-import {selectMyLanguages} from "../../language-feature/language.selector";
+import {selectMyLanguages} from "../../selectors/language.selector";
 import {Language} from "../../models/language/language";
 import {map} from "rxjs/operators";
 import {FormBuilder, Validators} from "@angular/forms";

@@ -1,13 +1,26 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../security/auth.service';
-import { faIdCard, faGraduationCap, faBriefcase, faRightFromBracket, faGear,  faCertificate, faFile, faMessage, faEarthEurope, faBrain, faAngleLeft, faAngleRight} from '@fortawesome/free-solid-svg-icons';
-import { Store } from '@ngrx/store';
+import {Component, OnInit} from '@angular/core';
+import {
+  faAngleLeft,
+  faAngleRight,
+  faBrain,
+  faBriefcase,
+  faCertificate,
+  faEarthEurope,
+  faFile,
+  faGear,
+  faGraduationCap,
+  faIdCard,
+  faMailForward,
+  faMessage,
+  faPeopleGroup,
+  faRightFromBracket
+} from '@fortawesome/free-solid-svg-icons';
+import {Store} from '@ngrx/store';
 import {loadUser, logout} from "../store/actions/auth.actions";
 import {User} from "../security/user";
-import {filter, Observable, take} from "rxjs";
-import {selectMyUser} from "../security/user.selector";
-import {loadEducations} from "../store/actions/education.actions";
-import {FormBuilder, Validators} from "@angular/forms";
+import {Observable, take} from "rxjs";
+import {selectMyUser} from "../selectors/auth.selector";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -19,6 +32,7 @@ import {FormBuilder, Validators} from "@angular/forms";
 export class NavigationComponent implements OnInit {
   user$: Observable<User | null> = this.authStore.select(selectMyUser);
 
+  faMailForward = faMailForward
   faBrain = faBrain;
   faEarthEurope = faEarthEurope;
   faMessage = faMessage;
@@ -28,25 +42,27 @@ export class NavigationComponent implements OnInit {
   faRightFromBracket = faRightFromBracket;
   faGear = faGear;
   faCertificate = faCertificate;
-  faFile =faFile;
-  faAngleLeft= faAngleLeft
-  faAngleRight =faAngleRight
+  faFile = faFile;
+  faAngleLeft = faAngleLeft
+  faAngleRight = faAngleRight
+  faPeopleGroup = faPeopleGroup
 
   isLoggedIn: boolean = false;
   isShownNav: boolean = false; // hidden by default
   isExtendSideBar: boolean = true;
-  userId: number = Number(localStorage.getItem('id') || '');
+  userId: number = 0;
+  role: String = ';'
 
-  constructor(private authService: AuthService,
+  constructor(public router: Router,
               private authStore: Store<{ user: User }>
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
+    this.userId = Number(localStorage.getItem('user' || ''));
     this.isLoggedIn = !!localStorage.getItem('token');
-    if (this.isLoggedIn){
-      this.authStore.dispatch(loadUser({id: this.userId}));
-    }
     this.isExtendSideBar = JSON.parse(localStorage.getItem('sideBar') || 'true');
+    this.authStore.dispatch(loadUser({id: this.userId}));
     this.user$.pipe(take(1)).subscribe();
   }
 
@@ -54,7 +70,7 @@ export class NavigationComponent implements OnInit {
     this.isShownNav = false;
   }
 
-  openNav(){
+  openNav() {
     this.isShownNav = true;
   }
 
@@ -66,6 +82,5 @@ export class NavigationComponent implements OnInit {
   logOut(): void {
     this.authStore.dispatch(logout());
   }
-
 
 }

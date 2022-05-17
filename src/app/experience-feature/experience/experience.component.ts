@@ -6,7 +6,7 @@ import {Router} from "@angular/router";
 import {FormBuilder, Validators} from "@angular/forms";
 import {map} from "rxjs/operators";
 import {ExperiencePagination} from "../../models/experience/experience-pagination";
-import {selectMyExperiences} from "../experience.selector";
+import {selectMyExperiences} from "../../selectors/experience.selector";
 import {Experience} from "../../models/experience/experience";
 import {changeExperience, loadExperiences, removeExperience} from "../../store/actions/experience.actions";
 
@@ -38,7 +38,7 @@ export class ExperienceComponent implements OnInit {
 
   experienceForm = this.fb.group({
     id: [0, Validators.required],
-    description: ['', Validators.required],
+    description: [''],
     profession: ['', Validators.required],
     employer: ['', Validators.required],
     company: ['', Validators.required],

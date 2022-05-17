@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { faPencil, faTrashCan, faXmark, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
+import {Component, OnInit} from '@angular/core';
+import {faPencil, faTrashCan, faTriangleExclamation, faXmark} from '@fortawesome/free-solid-svg-icons';
 import {Router} from "@angular/router";
 import {FormBuilder, Validators} from "@angular/forms";
 import {Store} from "@ngrx/store";
@@ -7,7 +7,7 @@ import {CertificatePagination} from "../../models/certificate/certificate-pagina
 import {filter, Observable, take} from "rxjs";
 import {map} from "rxjs/operators";
 import {Certificate} from "../../models/certificate/certificate";
-import {selectMyCertificates} from "../certificate.selector";
+import {selectMyCertificates} from "../../selectors/certificate.selector";
 import {changeCertificate, loadCertificates, removeCertificate} from "../../store/actions/certificate.actions";
 
 @Component({
@@ -29,13 +29,13 @@ export class CertificateComponent implements OnInit {
 
   active: boolean = false;
   showModal: boolean = false;
-
   currentPage = 0;
+
   pageAmountSub$: Observable<number> = this.certificates$.pipe(
     filter((certificate): certificate is CertificatePagination => certificate !== undefined),
     map(certificates => certificates?.totalPages));
   pageAmount: number = 0;
-  candidateId: number = Number(localStorage.getItem("id"));
+  candidateId: number = Number(localStorage.getItem("Candidate"));
 
 
   certificateForm = this.fb.group({
@@ -55,26 +55,29 @@ export class CertificateComponent implements OnInit {
   ngOnInit(): void {
     this.certificateStore.dispatch(loadCertificates({page: this.currentPage, items: 3}));
     this.myCertificates$.pipe(take(1)).subscribe();
-    this.pageAmountSub$.subscribe((page:number) => {this.pageAmount = page})
+    this.pageAmountSub$.subscribe((page: number) => {
+      this.pageAmount = page
+    })
   }
 
   onEdit(certificate: Certificate) {
     this.router.navigate([`/certificateform/${certificate.id}`]);
   }
-  onAdd(){
+
+  onAdd() {
     this.router.navigate(['/certificateform']);
   }
 
-  showDeleteModal(myCertificate: Certificate){
+  showDeleteModal(myCertificate: Certificate) {
     this.certificateForm.setValue(myCertificate);
     this.showModal = true;
   }
 
-  toggleActive(myCertificate: Certificate){
+  toggleActive(myCertificate: Certificate) {
     this.active = myCertificate.active
     this.certificateForm.setValue(myCertificate)
     this.active = !this.active;
-    this.certificateForm.patchValue({ active: this.active })
+    this.certificateForm.patchValue({active: this.active})
     this.certificateStore.dispatch(changeCertificate({certificate: this.certificateForm.value, id: myCertificate.id}));
   }
 
@@ -89,7 +92,7 @@ export class CertificateComponent implements OnInit {
   }
 
 
-  closeDeleteModal(modal: boolean){
+  closeDeleteModal(modal: boolean) {
     this.showModal = modal;
   }
 

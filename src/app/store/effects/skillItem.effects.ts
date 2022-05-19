@@ -34,7 +34,7 @@ export class SkillItemEffects {
     ofType(addSkillItem),
     switchMap(({skillItem}) => this.skillItemService.createSkillItem(skillItem)
       .pipe(
-        map(skillItem => (addSkillItemSuccess())),
+        //map(skillItem => (addSkillItemSuccess({skillItem: skillItem}))),
         catchError(() => of(addSkillItemFail)),
         map(skillItem => (loadSkillItems()))
       )))
@@ -43,7 +43,7 @@ export class SkillItemEffects {
     ofType(changeSkillItem),
     switchMap((({skillItem, id}) => this.skillItemService.putSkillItem(skillItem, id)
       .pipe(
-        map(skillItem => (changeSkillItemSuccess())),
+        //map(skillItem => (changeSkillItemSuccess())),
         catchError(() => of(changeSkillItemFail)),
         map(skillItem => (loadSkillItems()))
       )))

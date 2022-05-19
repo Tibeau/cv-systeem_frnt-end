@@ -15,6 +15,7 @@ export const changeSkill = createAction(
 
 export const changeSkillSuccess = createAction(
   `${type} changeSkill SUCCESS`,
+  props<{skill: Skill}>(),
 )
 
 export const changeSkillFail = createAction(
@@ -31,6 +32,7 @@ export const addSkill = createAction(
 )
 export const addSkillSuccess = createAction(
   `${type} addSkill SUCCESS`,
+  props<{skill: Skill}>(),
 )
 
 export const addSkillFail = createAction(

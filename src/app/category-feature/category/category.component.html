@@ -1,0 +1,86 @@
+<div class="max-w-7xl mt-8 mb-12 mx-auto px-4 sm:px-6 lg:px-8 ">
+  <div class="max-w-3xl mx-auto">
+
+    <div class="grid grid-cols-2 gap-8">
+      <div class="mt-8 mb-12 mx-auto px-4 sm:px-6 lg:px-8 bg-Jblue rounded-3xl mr-6 ml-6 border-white border-2 bg-gradient-to-b from-indigo-600 to-Jblue ">
+        <button (click)="clear()">RESEt</button>
+        <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()" class="space-y-8 divide-y divide-gray-200 ">
+          <div class="space-y-8 divide-y divide-gray-200 ">
+            <div class="pt-8 pb-4">
+              <h3 class="text-lg leading-6 text-bold font-large text-white text-3xl mb-4">Category</h3>
+
+              <hr>
+
+              <div class="sm:col-span-3 mt-4">
+                <label for="name" class="block text-sm font-medium text-white">Name</label>
+                <div class="mt-1">
+                  <input placeholder="name"
+                         required type="text" name="name" id="name" formControlName="name"
+                         class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                  <div *ngIf="categoryForm.get('name')?.dirty && categoryForm.get('name')?.touched && categoryForm.get('name')?.hasError('required')"
+                       class="text-white text-sm italic">
+                     Name is required.
+                  </div>
+                </div>
+              </div>
+
+
+                  <input type="checkbox"  name="active" id="active" formControlName="active">
+
+              <div class="flex justify-around mt-8">
+                <div>
+                  <button type="submit" name="submitButton" [disabled]="!categoryForm.valid"  class="justify-center hover:bg-Jorange bg-white items-center h-10 w-48 rounded-xl mb-4">
+                    <p class="text-Jblue hover:text-white font-bold text-2xl">Submit</p>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div>
+        <div *ngFor="let category of categories$ | async " class="bg-Jblue drop-shadow-2xl overflow-hidden rounded-2xl border-white border-2 mt-6">
+          <div class="px-4 py-5 sm:px-6  bg-gradient-to-b from-indigo-500 to-Jblue ">
+
+            <div class="flex flex-row">
+              <div class="basis-[97%] µ">
+                <h3 class="text-xl leading-6 font-bold text-white">{{category.name}}</h3>
+              </div>
+              <div class="flex justify-center">
+                <button (click)="onEdit(category)" class="text-white rounded-xl w-10 h-10 hover:bg-Jorange">
+                  <fa-icon transform="grow-12" [icon]="faPencil"></fa-icon>
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="flex justify-between">
+            <div class="flex bg-white items-center h-10 w-40 rounded-xl mb-4 ml-4">
+              <input type="checkbox" (click)="toggleActive(category)"  *ngIf="category.active === false" class="ml-6 bg-gray-300 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 text-Jorange focus:ring-offset-2 focus:ring-Jorange" role="switch">
+              <input type="checkbox" (click)="toggleActive(category)" *ngIf="category.active === true" checked  class="ml-6 bg-gray-300 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 text-Jorange focus:ring-offset-2 focus:ring-Jorange" role="switch">
+
+              <span class="ml-3" id="isActive">
+    <span  *ngIf="category.active === false" class="text-lg font-bold text-Jblue ">Active </span>
+          <span  *ngIf="category.active === true" class="text-lg font-bold text-Jorange ">Active </span>
+  </span>
+            </div>
+
+            <div class="flex justify-center">
+              <button (click)="showDeleteModal(category)" class="text-red-600 hover:text-white bg-white rounded-xl mr-6 mb-4 w-10 h-10 hover:bg-Jorange">
+                <fa-icon transform="grow-7" [icon]="faTrashCan"></fa-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+<app-delete-modal [modal]=showModal [item]="categoryForm.value.name" [category]="'Categories'" [id]="categoryForm.value.id" (deleteItemEvent)="onRemove($event)" (closeModalEvent)="closeDeleteModal($event)">
+</app-delete-modal>

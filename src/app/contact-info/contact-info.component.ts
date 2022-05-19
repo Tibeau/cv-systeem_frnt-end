@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActionsSubject, Store} from "@ngrx/store";
+import {Store} from "@ngrx/store";
 import {User} from "../security/user";
 import {filter, Observable, take} from "rxjs";
 import {selectMyUser} from "../selectors/auth.selector";
@@ -7,6 +7,9 @@ import {FormBuilder, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {changeUser} from "../store/actions/auth.actions";
 import {HttpClient} from "@angular/common/http";
+import {Category} from "../models/category/category";
+import {selectMyCategories} from "../selectors/category.selector";
+import {loadCategories} from "../store/actions/category.actions";
 
 
 @Component({
@@ -16,6 +19,7 @@ import {HttpClient} from "@angular/common/http";
 })
 export class ContactInfoComponent implements OnInit {
   user$: Observable<User | null> = this.authStore.select(selectMyUser);
+  categories$: Observable<Category[] | null> = this.categoryStore.select(selectMyCategories);
 
   userForm = this.fb.group({
     id: ["", Validators.required,],
@@ -23,6 +27,7 @@ export class ContactInfoComponent implements OnInit {
     companyId: [""],
     email: ["", Validators.required,],
     username: [""],
+    category: [""],
     phone: ["", Validators.required,],
     password: [""],
     firstname: ["", Validators.required,],
@@ -44,10 +49,13 @@ export class ContactInfoComponent implements OnInit {
 
   constructor(private http: HttpClient, private router: Router, private fb: FormBuilder,
               private authStore: Store<{ user: User }>,
+              private categoryStore: Store<{ categories: Category[] }>,
   ) {
   }
 
   ngOnInit(): void {
+    this.categoryStore.dispatch(loadCategories())
+    this.categories$.pipe(take(1)).subscribe()
     this.user$.pipe(
       filter((user): user is User => user !== null),
       take(1)).subscribe((user) => {
@@ -63,6 +71,12 @@ export class ContactInfoComponent implements OnInit {
         username: this.userForm.value.email
       })
 
+      if (this.userForm.value.firstLogin) {
+        this.userForm.patchValue({
+          firstLogin: false,
+          active: true,
+        })
+      }
       this.authStore.dispatch(changeUser({user: this.userForm.value, id: this.userForm.value.id}));
     }
   }

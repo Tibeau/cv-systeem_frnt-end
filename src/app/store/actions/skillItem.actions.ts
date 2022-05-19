@@ -31,6 +31,7 @@ export const addSkillItem = createAction(
 )
 export const addSkillItemSuccess = createAction(
   `${type} addSkillItem SUCCESS`,
+  props<{skillItem: SkillItem}>(),
 )
 
 export const addSkillItemFail = createAction(

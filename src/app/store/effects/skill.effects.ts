@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Actions, createEffect, Effect, ofType} from '@ngrx/effects';
-import {of} from 'rxjs';
+import {of, pipe} from 'rxjs';
 import {map, catchError, tap, switchMap} from 'rxjs/operators';
 import {candidateId} from "../../selectors/auth.selector";
 import {SkillService} from "../../services/skill/skill.service";
@@ -42,22 +42,35 @@ export class SkillEffects{
     ofType(addSkill),
     switchMap(({skill}) => this.skillService.createSkill(skill)
       .pipe(
-        map(skill => ( addSkillSuccess())),
+        map(newSkill => ( addSkillSuccess({skill: newSkill}))),
         catchError(() => of(addSkillFail)),
-        map(skill => (loadSkills({page: 0, items: 3})))
       )))
   );
+
+  addSkillSuccess = createEffect(() => this.actions$.pipe(
+    ofType(addSkillSuccess),
+    pipe(
+      catchError(() => of(addSkillFail)),
+      map(skill => (loadSkills({page: 0, items: 3})))
+    )))
 
 
   changeSkill$ = createEffect(() => this.actions$.pipe(
     ofType(changeSkill),
     switchMap((({skill, id}) => this.skillService.putSkill(skill, id)
       .pipe(
-        map(skill => ( changeSkillSuccess())),
+        map(skill => ( changeSkillSuccess({skill: skill}))),
+        catchError(() => of(changeSkillFail)),
+      )))
+  ));
+
+  changeSkillSuccess$ = createEffect(() => this.actions$.pipe(
+    ofType(changeSkillSuccess),
+      pipe(
         catchError(() => of(changeSkillFail)),
         map(skill => (loadSkills({page: 0, items: 3})))
       )))
-  ));
+
 
   removeSkill$ = createEffect(() => this.actions$.pipe(
     ofType(removeSkill),

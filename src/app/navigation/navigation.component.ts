@@ -13,7 +13,8 @@ import {
   faMailForward,
   faMessage,
   faPeopleGroup,
-  faRightFromBracket
+  faRightFromBracket,
+  faShapes,
 } from '@fortawesome/free-solid-svg-icons';
 import {Store} from '@ngrx/store';
 import {loadUser, logout} from "../store/actions/auth.actions";
@@ -43,9 +44,10 @@ export class NavigationComponent implements OnInit {
   faGear = faGear;
   faCertificate = faCertificate;
   faFile = faFile;
-  faAngleLeft = faAngleLeft
-  faAngleRight = faAngleRight
-  faPeopleGroup = faPeopleGroup
+  faAngleLeft = faAngleLeft;
+  faAngleRight = faAngleRight;
+  faPeopleGroup = faPeopleGroup;
+  faShapes = faShapes;
 
   isLoggedIn: boolean = false;
   isShownNav: boolean = false; // hidden by default

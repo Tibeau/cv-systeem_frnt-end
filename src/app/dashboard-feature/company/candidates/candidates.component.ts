@@ -14,13 +14,14 @@ import {
   faMessage,
   faPencil,
   faPeopleGroup,
+  faPrint,
   faRightFromBracket,
   faTrashCan,
   faTriangleExclamation,
   faXmark
 } from '@fortawesome/free-solid-svg-icons';
 import {map} from "rxjs/operators";
-import {FormBuilder} from "@angular/forms";
+import {FormBuilder, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {Store} from "@ngrx/store";
 import {UserPagination} from "../../../models/user/user-pagination";
@@ -28,6 +29,7 @@ import {User} from "../../../security/user";
 import {loadCandidates} from "../../../store/actions/user.actions";
 import {selectMyCandidates} from "../../../selectors/user.selector";
 import {candidateId} from "../../../selectors/auth.selector";
+import {changeNewUser} from "../../../store/actions/auth.actions";
 
 
 @Component({
@@ -58,11 +60,40 @@ export class CandidatesComponent implements OnInit {
   faGear = faGear;
   faCertificate = faCertificate;
   faFile = faFile;
-  faAngleLeft = faAngleLeft
-  faAngleRight = faAngleRight
-  faPeopleGroup = faPeopleGroup
+  faAngleLeft = faAngleLeft;
+  faAngleRight = faAngleRight;
+  faPeopleGroup = faPeopleGroup;
+  faPrint = faPrint;
 
   selected: boolean = false;
+  active: boolean = false;
+
+
+  userForm = this.fb.group({
+    id: ["",],
+    candidateId: [0],
+    companyId: [0],
+    email: ["", Validators.required,],
+    username: [""],
+    phone: ["",],
+    password: [""],
+    firstname: [""],
+    lastname: [""],
+    country: [""],
+    street: [""],
+    city: [""],
+    description: [""],
+    linkedIn: [""],
+    imgUrl: [""],
+    driversLicence: [""],
+    role: ["CANDIDATE",],
+    token: [""],
+    number: [""],
+    postalCode: [""],
+    firstLogin: [true],
+    active: [false,],
+  })
+
 
   currentCandidate: number = Number(candidateId)
 
@@ -72,7 +103,7 @@ export class CandidatesComponent implements OnInit {
     map(candidates => candidates?.totalPages));
   pageAmount: number = 0;
 
-  constructor(private router: Router, private fb: FormBuilder, private userStore: Store<{ users: UserPagination }>) {
+  constructor(private router: Router, private fb: FormBuilder, private userStore: Store<{ users: UserPagination }>, private authStore: Store<{ candidate: User }>) {
   }
 
   ngOnInit(): void {
@@ -85,10 +116,9 @@ export class CandidatesComponent implements OnInit {
     this.isSelected()
   }
 
-  onEdit(candidate: User) {
-  }
 
   selectCandidate(candidateId: number | undefined) {
+    console.log('getting user ', candidateId)
     if (this.currentCandidate != candidateId) {
       localStorage.setItem('Candidate', JSON.stringify(candidateId) || "")
     } else {
@@ -103,6 +133,18 @@ export class CandidatesComponent implements OnInit {
     } else {
       this.selected = false
     }
+  }
+
+  // print(candidateId: number | undefined) {
+  //
+  // }
+
+  toggleActive(candidate: User) {
+    this.active = candidate.active
+    this.userForm.setValue(candidate)
+    this.active = !this.active;
+    this.userForm.patchValue({active: this.active})
+    this.authStore.dispatch(changeNewUser({user: this.userForm.value, id: Number(candidate.id)}));
   }
 
   pageChanged(page: number) {

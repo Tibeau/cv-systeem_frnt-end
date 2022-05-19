@@ -1,27 +1,27 @@
 <div class="max-w-5xl mx-auto">
-  <div class="mt-8 mb-12 mx-auto px-4 sm:px-6 lg:px-8 bg-Jblue rounded-3xl mr-6 ml-6 border-white border-2 bg-gradient-to-b from-indigo-600 to-Jblue ">
+  <div
+    class="mt-8 mb-12 mx-auto px-4 sm:px-6 lg:px-8 bg-Jblue rounded-3xl mr-6 ml-6 border-white border-2 bg-gradient-to-b from-indigo-600 to-Jblue ">
     <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="space-y-8 divide-y divide-gray-200 ">
       <div class="space-y-8 divide-y divide-gray-200 ">
         <div class="pt-8 pb-4">
           <h3 class="text-lg leading-6 text-bold font-large text-white text-3xl mb-4">Invite a new candidate</h3>
-          <p class="mt-1 text-lg text-white"> Type in the email address of the new candidate</p>
+          <p class="mt-1 text-lg text-white"> Type in the email address of the candidate youwant to invite</p>
           <hr>
 
-
-            <div class="sm:col-span-6">
-              <label for="email" class="block text-sm font-medium text-white"> Email </label>
-              <div class="mt-1">
-                <input placeholder="your email address" type="text" name="email" id="email" formControlName="email" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
-                <div *ngIf="userForm.get('email')?.dirty && userForm.get('email')?.touched && userForm.get('email')?.hasError('required')"
-                     class="text-white text-sm italic">
-                  Email is required.
-                </div>
-              </div>
+          <label for="email" class="block text-sm font-medium text-white mt-2"> Email </label>
+          <div class="mt-1">
+            <input placeholder="your email address" type="text" name="email" id="email" formControlName="email"
+                   class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+            <div
+              *ngIf="userForm.get('email')?.dirty && userForm.get('email')?.touched && userForm.get('email')?.hasError('required')"
+              class="text-white text-sm italic">
+              Email is required.
             </div>
-
-          <div class="flex justify-around mt-8">
+          </div>
+          <div class="flex justify-center mt-8">
             <div>
-              <button type="submit" name="submitButton" [disabled]="!userForm.valid"  class="justify-center hover:bg-Jorange bg-white items-center h-10 w-48 rounded-xl mb-4">
+              <button type="submit" name="submitButton" [disabled]="!userForm.valid"
+                      class="justify-center hover:bg-Jorange bg-white items-center h-10 w-48 rounded-xl mb-4">
                 <p class="text-Jblue hover:text-white font-bold text-2xl">Submit</p>
               </button>
             </div>

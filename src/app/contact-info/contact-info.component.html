@@ -144,7 +144,7 @@
               <label for="country" class="block text-sm font-medium text-white"> Category </label>
               <div class="mt-1">
                 <select   id="category" name="category" autocomplete="category-name" formControlName="category" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
-                  <option *ngFor="let category of categories$ | async">{{category.name}}</option>
+                  <option *ngFor="let category of myCategories$ | async">{{category.name}}</option>
                 </select>
               </div>
             </div>

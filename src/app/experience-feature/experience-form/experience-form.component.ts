@@ -8,7 +8,7 @@ import {ActivatedRoute, Params, Router} from "@angular/router";
 import {Store} from "@ngrx/store";
 import {selectMyExperiences} from "../../selectors/experience.selector";
 import {Experience} from "../../models/experience/experience";
-import {addExperience, changeExperience} from "../../store/actions/experience.actions";
+import {addExperience, changeExperience, loadExperiences} from "../../store/actions/experience.actions";
 
 @Component({
   selector: 'app-experience-form',
@@ -44,6 +44,7 @@ export class ExperienceFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.experienceStore.dispatch(loadExperiences({page: this.currentPage, items: 3}));
     this.route.params.pipe(take(1)).subscribe((params: Params) => this.experienceId = params['id']);
 
     if (this.experienceId) {

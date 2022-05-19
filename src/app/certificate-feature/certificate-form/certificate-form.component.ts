@@ -8,7 +8,7 @@ import {Certificate} from "../../models/certificate/certificate";
 import {filter, Observable, shareReplay, take} from "rxjs";
 import {map} from "rxjs/operators";
 import {selectMyCertificates} from "../../selectors/certificate.selector";
-import {addCertificate, changeCertificate} from "../../store/actions/certificate.actions";
+import {addCertificate, changeCertificate, loadCertificates} from "../../store/actions/certificate.actions";
 
 @Component({
   selector: 'app-certificate-form',
@@ -43,9 +43,10 @@ export class CertificateFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe((response: any) => {
-      this.certificates = response.certificates;
-    });
+    this.certificateStore.dispatch(loadCertificates({page: this.currentPage, items: 3}));
+    // this.activatedRoute.data.subscribe((response: any) => {
+    //   this.certificates = response.certificates;
+    // });
 
     this.certificateId$.pipe(take(1)).subscribe();
     this.route.params.pipe(take(1)).subscribe((params: Params) => this.certificateId = params['id']);

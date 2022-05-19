@@ -1,5 +1,6 @@
 import {createAction, props} from '@ngrx/store';
 import {Category} from "../../models/category/category";
+import {CategoryPagination} from "../../models/category/category-pagination";
 
 
 
@@ -41,10 +42,11 @@ export const addCategoryFail = createAction(
 //LOAD CATEGORIEs
 export const loadCategories = createAction(
   `${type} loadCategories`,
+  props<{page: number, items: number}>(),
 )
 export const loadCategoriesSuccess = createAction(
   `${type} loadCategories SUCCESS`,
-  props<{categories: Category[]}>(),
+  props<{categories: CategoryPagination}>(),
 )
 
 export const loadCategoriesFail = createAction(

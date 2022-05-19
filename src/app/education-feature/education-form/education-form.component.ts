@@ -8,7 +8,7 @@ import {ActivatedRoute, Params, Router} from "@angular/router";
 import {selectMyEducations} from "../../selectors/education.selector";
 import {map} from "rxjs/operators";
 import {candidateId} from "../../selectors/auth.selector";
-import {addEducation, changeEducation} from "../../store/actions/education.actions";
+import {addEducation, changeEducation, loadEducations} from "../../store/actions/education.actions";
 import {
   CustomeDateValidators,
 } from "../../shared/directives/date-validation.directive";
@@ -47,6 +47,7 @@ export class EducationFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.educationStore.dispatch(loadEducations({page: this.currentPage, items: 3}));
     this.route.params.pipe(take(1)).subscribe((params: Params) => this.educationId = params['id']);
 
 

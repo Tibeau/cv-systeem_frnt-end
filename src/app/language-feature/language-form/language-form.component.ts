@@ -8,7 +8,7 @@ import {FormBuilder, Validators} from "@angular/forms";
 import {candidateId} from "../../selectors/auth.selector";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {Store} from "@ngrx/store";
-import {addLanguage, changeLanguage} from "../../store/actions/language.actions";
+import {addLanguage, changeLanguage, loadLanguages} from "../../store/actions/language.actions";
 
 @Component({
   selector: 'app-language-form',
@@ -41,6 +41,8 @@ export class LanguageFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.languageStore.dispatch(loadLanguages({page: this.currentPage, items: 3}));
+
     this.route.params.pipe(take(1)).subscribe((params: Params) => this.languageId = params['id']);
 
 

@@ -8,6 +8,7 @@ import {
   changeCategorySuccess,
   changeCategoryFail
 } from '../actions/category.actions';
+import {CategoryPagination} from "../../models/category/category-pagination";
 
 export const categoryFeatureKey = "categories";
 
@@ -17,7 +18,7 @@ export const selectCategory = (state: State) => state.categories
 
 
 export interface State {
-  categories: Category[] | null;
+  categories: CategoryPagination | null;
   errorMessage: string | null;
 }
 

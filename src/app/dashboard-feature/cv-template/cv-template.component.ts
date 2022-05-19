@@ -33,6 +33,7 @@ import {UserPagination} from "../../models/user/user-pagination";
 import {selectMyCandidates} from "../../selectors/user.selector";
 import {candidateId} from "../../selectors/auth.selector";
 import {companyId} from "../../selectors/auth.selector";
+import {FormBuilder, Validators} from "@angular/forms";
 
 
 
@@ -42,6 +43,15 @@ import {companyId} from "../../selectors/auth.selector";
   styleUrls: ['./cv-template.component.scss']
 })
 export class CvTemplateComponent implements OnInit {
+
+
+  scale: string = '';
+  height: number | undefined;
+
+  scaleForm = this.fb.group({
+    scale: "1",
+  })
+
   faPencil = faPencil
   faPhone = faPhone
   faMailBulk = faMailBulk
@@ -89,7 +99,9 @@ export class CvTemplateComponent implements OnInit {
 
   company: boolean = false;
 
-  constructor( private authStore: Store<{ user: User }>,
+  constructor(
+               private fb: FormBuilder,
+               private authStore: Store<{ user: User }>,
                private educationStore: Store<{ educations: EducationPagination}>,
                private experienceStore: Store<{ experiences: ExperiencePagination}>,
                private languageStore: Store<{ languages: LanguagePagination}>,
@@ -120,6 +132,21 @@ export class CvTemplateComponent implements OnInit {
     this.mySkills$.pipe(take(1)).subscribe();
     this.myCertificates$.pipe(take(1)).subscribe();
     this.myCandidate$.pipe(take(1)).subscribe();
+  }
+
+
+
+
+  setScale(): void {
+    this.scale = this.scaleForm.value.scale;
+    this.setHeight();
+  }
+
+  setHeight(): void {
+    const cv = document.getElementById("cv")
+    if (cv != null) {
+      this.height = cv.clientHeight*parseFloat(this.scale);
+    }
   }
 
 }

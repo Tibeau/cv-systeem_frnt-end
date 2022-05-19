@@ -8,9 +8,9 @@
       <div class="space-y-8 divide-y divide-gray-200 ">
         <div class="pt-8 pb-4">
           <h3 class="text-lg leading-6 text-bold font-large text-white text-3xl mb-4">Skill</h3>
-          <p *ngIf="mode === 'add'" class="mt-1 text-lg text-white">add a new skill to your CV <span
+          <p *ngIf="skillMode === 'add'" class="mt-1 text-lg text-white">add a new skill to your CV <span
             class="text-sm">(added skills are automatically set to active)</span></p>
-          <p *ngIf="mode === 'edit'" class="mt-1 text-lg text-white">change one of your skills <span
+          <p *ngIf="skillMode === 'edit'" class="mt-1 text-lg text-white">change one of your skills <span
             class="text-sm">(be sure to submit your changes)</span></p>
 
           <hr>
@@ -67,24 +67,39 @@
 
     <h3 class="text-lg leading-6 text-bold font-large text-white text-3xl mb-4">Skill Items</h3>
     <p class="mt-1 text-lg text-white">add some sub skills to explain your better explain your
-      skill <span class="text-sm">(added educations are automatically set to active)</span>
+      skill
 
     <hr>
 
     <div class="mb-6">
-      <div class="ml-6 " *ngFor="let skillItem of skillItems$ | async">
-        <div class="mt-4" *ngIf="skillItem.skillId === skillForm.value.id">
+      <div class="ml-6 " *ngFor="let newSkillItem of newSkillItems">
+        <div class="mt-4">
           <div class="flex flex-row">
             <div class="basis-[97%] µ">
-              <h3 class="text-xl leading-6 font-bold text-white"> - {{skillItem.name}}</h3>
-              <p class="mt-1 max-w-2xl text-sm text-white">{{skillItem.description}}</p>
+              <h3 class="text-xl leading-6 font-bold text-white"> - {{newSkillItem.name}}</h3>
+              <p class="mt-1 max-w-2xl text-sm text-white">{{newSkillItem.description}}</p>
             </div>
           </div>
-          <button (click)="onEdit(skillItem)" class="text-white rounded-xl w-10 h-10 hover:bg-Jorange">
+          <button (click)="skillItemModal(newSkillItem)" class="text-white rounded-xl w-10 h-10 hover:bg-Jorange">
             <fa-icon transform="grow-12" [icon]="faPencil"></fa-icon>
           </button>
+        </div>
+      </div>
+
+      <div class="ml-6 " *ngFor="let skillItem of skillItems$ | async">
+      <div class="mt-4" *ngIf="skillItem.skillId === skillForm.value.id">
+        <div class="flex flex-row">
+          <div class="basis-[97%] µ">
+            <h3 class="text-xl leading-6 font-bold text-white"> - {{skillItem.name}}</h3>
+            <p class="mt-1 max-w-2xl text-sm text-white">{{skillItem.description}}</p>
+          </div>
+        </div>
+        <button (click)="skillItemModal(skillItem)" class="text-white rounded-xl w-10 h-10 hover:bg-Jorange">
+          <fa-icon transform="grow-12" [icon]="faPencil"></fa-icon>
+        </button>
       </div>
     </div>
+
       <button (click)="onAdd()" name="skillItemButton"
               class="justify-center hover:bg-Jorange bg-white items-center h-10 w-48 rounded-xl mb-4">
         <p class="text-Jblue hover:text-white font-bold text-2xl">Add</p>
@@ -93,7 +108,7 @@
 
 
     <!--                        skill item modal-->
-    <div *ngIf="editSkillIem" class="container flex justify-center mx-auto">
+    <div *ngIf="skillItemMode != ''" class="container flex justify-center mx-auto">
       <div class="absolute inset-0 flex items-center justify-center bg-gray-700 bg-opacity-50">
         <div class="max-w-2xl p-6 bg-gradient-to-b border-2 border-white from-indigo-600 to-Jblue rounded-xl">
           <div class="flex items-center justify-between ">
@@ -103,7 +118,7 @@
                 <div class="pt-8 pb-4">
                   <h3 (click)="onClose()" class="text-lg leading-6 text-bold font-large text-white text-3xl mb-4">
                     {{skillItemForm.value.name}}</h3>
-                  <p *ngIf="mode === 'add'" class="mt-1 text-lg text-white">add or change a sub skill of your CV
+                  <p *ngIf="skillMode === 'add'" class="mt-1 text-lg text-white">add or change a sub skill of your CV
                   </p>
 
                   <hr>

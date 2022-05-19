@@ -63,7 +63,7 @@
                 <input placeholder="country you currently live in" type="text" name="country" id="country" formControlName="country" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
                 <div *ngIf="userForm.get('country')?.dirty && userForm.get('country')?.touched && userForm.get('country')?.hasError('required')"
                      class="text-white text-sm italic">
-                  Last name is required.
+                  Country name is required.
                 </div>
               </div>
             </div>
@@ -74,7 +74,7 @@
                 <input placeholder="your phone number" type="text" name="phone" id="phone" formControlName="phone" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
                 <div *ngIf="userForm.get('phone')?.dirty && userForm.get('phone')?.touched && userForm.get('phone')?.hasError('required')"
                      class="text-white text-sm italic">
-                  Last name is required.
+                  Phone number is required.
                 </div>
               </div>
             </div>
@@ -86,7 +86,7 @@
                 <input placeholder="city you currently live in" type="text" name="city" id="city" formControlName="city" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
                 <div *ngIf="userForm.get('city')?.dirty && userForm.get('city')?.touched && userForm.get('city')?.hasError('required')"
                      class="text-white text-sm italic">
-                  Last name is required.
+                  City name is required.
                 </div>
               </div>
             </div>
@@ -97,7 +97,7 @@
                 <input placeholder="city you currently live in" type="text" name="postalCode" id="postalCode" formControlName="postalCode" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
                 <div *ngIf="userForm.get('postalCode')?.dirty && userForm.get('postalCode')?.touched && userForm.get('postalCode')?.hasError('required')"
                      class="text-white text-sm italic">
-                  Last name is required.
+                  Postal code is required.
                 </div>
               </div>
             </div>
@@ -108,7 +108,7 @@
                 <input placeholder="city you currently live in" type="text" name="street" id="street" formControlName="street" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
                 <div *ngIf="userForm.get('street')?.dirty && userForm.get('street')?.touched && userForm.get('street')?.hasError('required')"
                      class="text-white text-sm italic">
-                  Last name is required.
+                  Street name is required.
                 </div>
               </div>
             </div>
@@ -119,7 +119,7 @@
                 <input placeholder="city you currently live in" type="text" name="number" id="number" formControlName="number" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
                 <div *ngIf="userForm.get('number')?.dirty && userForm.get('number')?.touched && userForm.get('number')?.hasError('required')"
                      class="text-white text-sm italic">
-                  Last name is required.
+                  House number is required.
                 </div>
               </div>
             </div>
@@ -143,10 +143,8 @@
             <div class="sm:col-span-3">
               <label for="country" class="block text-sm font-medium text-white"> Category </label>
               <div class="mt-1">
-                <select id="category" name="category" autocomplete="category-name" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
-                  <option>Work in progress</option>
-                  <option>back-end</option>
-                  <option>cloud native</option>
+                <select   id="category" name="category" autocomplete="category-name" formControlName="category" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                  <option *ngFor="let category of categories$ | async">{{category.name}}</option>
                 </select>
               </div>
             </div>
@@ -157,7 +155,7 @@
                 <input placeholder="city you currently live in" type="text" name="linkedIn" id="linkedIn" formControlName="linkedIn" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
                 <div *ngIf="userForm.get('linkedIn')?.dirty && userForm.get('linkedIn')?.touched && userForm.get('linkedIn')?.hasError('required')"
                      class="text-white text-sm italic">
-                  Last name is required.
+                  LinkedIn  name is required.
                 </div>
               </div>
             </div>

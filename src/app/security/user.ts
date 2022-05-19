@@ -11,6 +11,7 @@ export interface User {
   country?: string;
   street?: string;
   city?: string;
+  category: string;
   description?: string;
   linkedIn?: string;
   imgUrl?: string;

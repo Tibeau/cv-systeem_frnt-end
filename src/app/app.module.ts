@@ -57,6 +57,9 @@ import {userReducer} from "./store/reducers/user.reducers";
 import {CandidateEffects} from "./store/effects/candidate.effects";
 import {candidateReducer} from "./store/reducers/candidate.reducers";
 import {newUserReducer} from "./store/reducers/created-user.reducer";
+import {CategoryEffects} from "./store/effects/category.effects";
+import {categoryReducer} from "./store/reducers/category.reducers";
+import { CategoryComponent } from './category-feature/category/category.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +85,7 @@ import {newUserReducer} from "./store/reducers/created-user.reducer";
     CandidatesComponent,
     ToDashboardComponent,
     RegistrationComponent,
+    CategoryComponent,
 
   ],
   imports: [
@@ -92,9 +96,9 @@ import {newUserReducer} from "./store/reducers/created-user.reducer";
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    EffectsModule.forRoot([AuthEffects, EducationEffects, CertificateEffects, ExperienceEffects, LanguageEffects, SkillEffects, SkillItemEffects, UserEffects, CandidateEffects]),
+    EffectsModule.forRoot([AuthEffects, EducationEffects, CertificateEffects, ExperienceEffects, LanguageEffects, SkillEffects, SkillItemEffects, UserEffects, CandidateEffects, CategoryEffects]),
     EffectsModule.forFeature(),
-    StoreModule.forRoot({educations: educationReducer, user: authReducer, certificates: certificateReducer, experiences: experienceReducer, languages: languageReducer, skills: skillReducer, skillItems: skillItemReducer, users: userReducer, candidate: candidateReducer, newUser: newUserReducer}),
+    StoreModule.forRoot({educations: educationReducer, user: authReducer, certificates: certificateReducer, experiences: experienceReducer, languages: languageReducer, skills: skillReducer, skillItems: skillItemReducer, users: userReducer, candidate: candidateReducer, newUser: newUserReducer, categories: categoryReducer}),
     BrowserAnimationsModule,
     LayoutModule,
     CommonModule,

@@ -10,6 +10,10 @@ import {HttpClient} from "@angular/common/http";
 import {Category} from "../models/category/category";
 import {selectMyCategories} from "../selectors/category.selector";
 import {loadCategories} from "../store/actions/category.actions";
+import {Education} from "../models/education/education";
+import {EducationPagination} from "../models/education/education-pagination";
+import {map} from "rxjs/operators";
+import {CategoryPagination} from "../models/category/category-pagination";
 
 
 @Component({
@@ -19,7 +23,10 @@ import {loadCategories} from "../store/actions/category.actions";
 })
 export class ContactInfoComponent implements OnInit {
   user$: Observable<User | null> = this.authStore.select(selectMyUser);
-  categories$: Observable<Category[] | null> = this.categoryStore.select(selectMyCategories);
+  categories$: Observable<CategoryPagination | null> = this.categoryStore.select(selectMyCategories);
+  myCategories$: Observable<Category[] | undefined> = this.categories$.pipe(
+    filter(( categories):  categories is CategoryPagination => categories !== undefined),
+    map(categories => categories?.content.filter(categories => categories.active === true)));
 
   userForm = this.fb.group({
     id: ["", Validators.required,],
@@ -54,7 +61,7 @@ export class ContactInfoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.categoryStore.dispatch(loadCategories())
+    this.categoryStore.dispatch(loadCategories({page: 0, items: 999999999}))
     this.categories$.pipe(take(1)).subscribe()
     this.user$.pipe(
       filter((user): user is User => user !== null),

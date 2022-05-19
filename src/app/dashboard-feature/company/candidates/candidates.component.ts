@@ -80,6 +80,7 @@ export class CandidatesComponent implements OnInit {
     firstname: [""],
     lastname: [""],
     country: [""],
+    category: [""],
     street: [""],
     city: [""],
     description: [""],

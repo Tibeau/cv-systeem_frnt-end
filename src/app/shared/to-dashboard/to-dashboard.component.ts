@@ -19,21 +19,23 @@ export class ToDashboardComponent implements OnInit {
 
   @Input() title = "";
 
+  user$: Observable<User | null> = this.authStore.select(selectMyUser);
+
   candidates$: Observable<UserPagination | null> = this.candidateStore.select(selectMyCandidates);
   myCandidate$: Observable<User | undefined> = this.candidates$.pipe(
     filter((candidates): candidates is UserPagination => candidates !== undefined),
-    map(candidates => candidates?.content.find(candidate => candidate.id == (localStorage.getItem('Candidate')))));
-
-
+    map(candidates => candidates?.content.find(candidate => candidate.candidateId == Number(localStorage.getItem('Candidate')))));
 
   faArrowLeft = faArrowLeft;
 
-  constructor( private candidateStore: Store<{candidate : User[]}>
+  constructor( private candidateStore: Store<{candidate : User[]}>,
+               private authStore: Store<{ user: User }>
   ) { }
 
   ngOnInit(): void {
     this.candidateStore.dispatch(loadCandidates({page: 0, items: 999999999}));
     this.myCandidate$.pipe(take(1)).subscribe();
+    this.user$.pipe(take(1)).subscribe();
   }
 
 }

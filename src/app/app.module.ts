@@ -60,6 +60,7 @@ import {newUserReducer} from "./store/reducers/created-user.reducer";
 import {CategoryEffects} from "./store/effects/category.effects";
 import {categoryReducer} from "./store/reducers/category.reducers";
 import { CategoryComponent } from './category-feature/category/category.component';
+import { ShortenContentPipe } from './shared/pipes/shorten-content/shorten-content.pipe';
 
 @NgModule({
   declarations: [
@@ -86,6 +87,7 @@ import { CategoryComponent } from './category-feature/category/category.componen
     ToDashboardComponent,
     RegistrationComponent,
     CategoryComponent,
+    ShortenContentPipe,
 
   ],
   imports: [

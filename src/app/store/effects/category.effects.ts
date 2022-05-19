@@ -29,7 +29,7 @@ export class CategoryEffects{
 
   getCategories$ = createEffect(() => this.actions$.pipe(
     ofType(loadCategories),
-    switchMap((() => this.categoryService.loadCategories()
+    switchMap((({page, items}) => this.categoryService.loadCategories(page, items)
       .pipe(
         map(categories => ( loadCategoriesSuccess({categories: categories}) )),
         catchError(() => of(loadCategoriesFail))
@@ -43,7 +43,7 @@ export class CategoryEffects{
       .pipe(
         map(category => ( addCategorySuccess())),
         catchError(() => of(addCategoryFail)),
-        map(category => (loadCategories()))
+        map(category => (loadCategories({page: 0, items: 8})))
       )))
   );
 
@@ -54,7 +54,7 @@ export class CategoryEffects{
       .pipe(
         map(category => ( changeCategorySuccess())),
         catchError(() => of(changeCategoryFail)),
-        map(category => (loadCategories()))
+        map(category => (loadCategories({page: 0, items: 8})))
       )))
   ));
 
@@ -64,7 +64,7 @@ export class CategoryEffects{
       .pipe(
         map(category => ( removeCategorySuccess() )),
         catchError(() => of(removeCategoryFail)),
-        map(category => (loadCategories()))
+        map(category => (loadCategories({page: 0, items: 8})))
       )))
   );
 }

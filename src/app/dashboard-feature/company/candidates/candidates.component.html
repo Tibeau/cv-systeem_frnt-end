@@ -9,11 +9,22 @@
               (click)="selectCandidate(candidate.candidateId)"
               [ngClass]="candidate.candidateId === currentCandidate ? 'flex bg-white items-center hover:bg-Jorange hover:text-white text-Jorange':'text-white hover:text-Jorange hover:bg-white'"
               class="h-10 w-auto rounded-xl">
-              <h3 class="text-xl leading-6 font-bold m-2">
-                {{candidate.firstname}} {{candidate.lastname}}
+              <div *ngIf="candidate.firstname != ''">
+                <h3  class="text-xl leading-6 font-bold my-2">
+                  {{candidate.firstname}} {{candidate.lastname}}
+                </h3>
+                <span *ngIf="candidate.candidateId != currentCandidate" class="text-white text-sm font-bold ">email: {{candidate.username}}</span>
+              </div>
+
+
+              <h3 *ngIf="candidate.firstname === ''" class="text-xl leading-6 font-bold m-2">
+                {{candidate.username}}
               </h3>
             </button>
 
+          <h3 *ngIf="candidate.candidateId != currentCandidate" class="text-xl text-white leading-6 font-bold m-2">
+            {{candidate.category}}
+          </h3>
 
           <div class="flex justify-between ">
             <div class="flex bg-white items-center h-10 w-40 rounded-xl">

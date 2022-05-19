@@ -4,9 +4,54 @@
   ></app-to-dashboard>
   <div
     class="mt-8 mb-12 mx-auto px-4 sm:px-6 lg:px-8 bg-Jblue rounded-3xl mr-6 ml-6 border-white border-2 bg-gradient-to-b from-indigo-600 to-Jblue ">
-    <form [formGroup]="skillForm" (ngSubmit)="onSubmit()" class="space-y-8 divide-y divide-gray-200 ">
+
+    <div class="mb-6 mt-8 justify-center">
+      <h3 class="text-lg leading-6 text-bold font-large text-white text-3xl mb-4">Skill Items</h3>
+      <p class="mt-1 text-lg text-white">add some sub skills to explain your better explain your
+        skill
+      <hr>
+
+      <div class="ml-6 mt-4 mr-6 bg-Jblue rounded-lg" *ngFor="let newSkillItem of newSkillItems">
+        <div class="m-4">
+          <div class="grid grid-cols-6 gap-4">
+                <h3 class="text-xl leading-6 font-bold text-white col-start-1 col-end-6 mt-2"> - {{newSkillItem.name}}
+                </h3>
+          <button (click)="newSkillItemModal(newSkillItem)" class="text-white rounded-xl w-10 h-10 hover:bg-Jorange mt-1 col-end-10 col-span-2">
+            <fa-icon transform="grow-6" [icon]="faPencil"></fa-icon>
+          </button>
+          </div>
+              <p class="max-w-2xl text-sm text-white mb-2">{{newSkillItem.description}}</p>
+        </div>
+      </div>
+
+
+      <div class="ml-6 mr-6 bg-Jblue rounded-lg" *ngFor="let skillItem of skillItems$ | async">
+        <div class="m-4" *ngIf="skillItem.skillId === skillForm.value.id">
+          <div class="grid grid-cols-6 gap-4">
+          <h3 class="text-xl leading-6 font-bold text-white col-start-1 col-end-6 mt-2"> - {{skillItem.name}}
+          </h3>
+          <button (click)="skillItemModal(skillItem)" class="text-white rounded-xl w-10 h-10 hover:bg-Jorange mt-1 col-end-10 col-span-2">
+            <fa-icon transform="grow-6" [icon]="faPencil"></fa-icon>
+          </button>
+          </div>
+          <p class="max-w-2xl text-sm text-white mb-2">{{skillItem.description}}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex justify-start mt-8">
+      <div>
+        <button  (click)="onAdd()"
+                 class="justify-center hover:bg-Jorange bg-white items-center h-10 w-48 rounded-xl mb-4">
+          <p class="text-Jblue hover:text-white font-bold text-2xl">Add</p>
+        </button>
+      </div>
+    </div>
+
+
+    <form [formGroup]="skillForm" (ngSubmit)="onSubmit()" class="space-y-8 divide-y divide-gray-200 mt-4">
       <div class="space-y-8 divide-y divide-gray-200 ">
-        <div class="pt-8 pb-4">
+        <div class="pb-4 mt-4">
           <h3 class="text-lg leading-6 text-bold font-large text-white text-3xl mb-4">Skill</h3>
           <p *ngIf="skillMode === 'add'" class="mt-1 text-lg text-white">add a new skill to your CV <span
             class="text-sm">(added skills are automatically set to active)</span></p>
@@ -48,7 +93,7 @@
           </div>
           <div class="flex justify-around mt-8">
             <div>
-              <button type="submit" name="submitButton" [disabled]="!skillForm.valid"
+              <button type="submit" (click)="onSubmit()" name="submitButton" [disabled]="!skillForm.valid"
                       class="justify-center hover:bg-Jorange bg-white items-center h-10 w-48 rounded-xl mb-4">
                 <p class="text-Jblue hover:text-white font-bold text-2xl">Submit</p>
               </button>
@@ -65,46 +110,7 @@
       </div>
     </form>
 
-    <h3 class="text-lg leading-6 text-bold font-large text-white text-3xl mb-4">Skill Items</h3>
-    <p class="mt-1 text-lg text-white">add some sub skills to explain your better explain your
-      skill
 
-    <hr>
-
-    <div class="mb-6">
-      <div class="ml-6 " *ngFor="let newSkillItem of newSkillItems">
-        <div class="mt-4">
-          <div class="flex flex-row">
-            <div class="basis-[97%] µ">
-              <h3 class="text-xl leading-6 font-bold text-white"> - {{newSkillItem.name}}</h3>
-              <p class="mt-1 max-w-2xl text-sm text-white">{{newSkillItem.description}}</p>
-            </div>
-          </div>
-          <button (click)="skillItemModal(newSkillItem)" class="text-white rounded-xl w-10 h-10 hover:bg-Jorange">
-            <fa-icon transform="grow-12" [icon]="faPencil"></fa-icon>
-          </button>
-        </div>
-      </div>
-
-      <div class="ml-6 " *ngFor="let skillItem of skillItems$ | async">
-      <div class="mt-4" *ngIf="skillItem.skillId === skillForm.value.id">
-        <div class="flex flex-row">
-          <div class="basis-[97%] µ">
-            <h3 class="text-xl leading-6 font-bold text-white"> - {{skillItem.name}}</h3>
-            <p class="mt-1 max-w-2xl text-sm text-white">{{skillItem.description}}</p>
-          </div>
-        </div>
-        <button (click)="skillItemModal(skillItem)" class="text-white rounded-xl w-10 h-10 hover:bg-Jorange">
-          <fa-icon transform="grow-12" [icon]="faPencil"></fa-icon>
-        </button>
-      </div>
-    </div>
-
-      <button (click)="onAdd()" name="skillItemButton"
-              class="justify-center hover:bg-Jorange bg-white items-center h-10 w-48 rounded-xl mb-4">
-        <p class="text-Jblue hover:text-white font-bold text-2xl">Add</p>
-      </button>
-  </div>
 
 
     <!--                        skill item modal-->
@@ -158,15 +164,15 @@
                   <div class="flex justify-around mt-8">
                     <div>
                       <button type="submit" name="submitButton" [disabled]="!skillItemForm.valid"
-                              class="justify-center hover:bg-Jorange bg-white items-center h-10 w-48 rounded-xl mb-4">
-                        <p class="text-Jblue hover:text-white font-bold text-2xl">Submit</p>
+                              class="justify-center hover:bg-Jorange bg-white items-center h-10 w-40 rounded-xl m-2">
+                        <p class="text-Jblue hover:text-white font-bold text-xl">Submit</p>
                       </button>
                     </div>
 
                     <div>
                       <button (click)="onClose()"
-                              class="justify-center bg-white hover:bg-Jorange  items-center h-10 w-48 rounded-xl mb-4">
-                        <p class="text-red-600 hover:text-white font-bold text-2xl">Cancel</p>
+                              class="justify-center bg-white hover:bg-Jorange  items-center h-10 w-40 rounded-xl m-2">
+                        <p class="text-red-600 hover:text-white font-bold text-xl">Cancel</p>
                       </button>
                     </div>
                   </div>

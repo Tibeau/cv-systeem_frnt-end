@@ -8,7 +8,13 @@ import {candidateId} from "../../selectors/auth.selector";
 import {FormBuilder, Validators} from "@angular/forms";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {ActionsSubject, Store} from "@ngrx/store";
-import {addSkill, addSkillSuccess, changeSkill, changeSkillSuccess} from "../../store/actions/skill.actions";
+import {
+  addSkill,
+  addSkillSuccess,
+  changeSkill,
+  changeSkillSuccess,
+  loadSkills
+} from "../../store/actions/skill.actions";
 import {SkillItem} from "../../models/skillItem/skillItem";
 import {addSkillItem, changeSkillItem, loadSkillItems} from "../../store/actions/skillItem.actions";
 import {selectMySkillItems} from "../../selectors/skillItem.selector";
@@ -49,6 +55,14 @@ export class SkillFormComponent implements OnInit {
     candidateId: [candidateId, Validators.required]
   });
 
+  skillItemEditForm = this.fb.group({
+    id: [""],
+    name: [''],
+    description: [''],
+    skillId: [""],
+    candidateId: [""]
+  });
+
   newSkillItems: SkillItem[] = []
 
   constructor(private router: Router,
@@ -61,6 +75,8 @@ export class SkillFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.skillStore.dispatch(loadSkills({page: this.currentPage, items: 3}));
+    this.skillItemStore.dispatch(loadSkillItems());
     this.route.params.pipe(take(1)).subscribe((params: Params) => this.skillId = params['id']);
 
     if (this.skillId) {
@@ -122,11 +138,23 @@ export class SkillFormComponent implements OnInit {
     this.skillItemMode = "edit"
   }
 
+  newSkillItemModal(skillItem: SkillItem) {
+    this.skillItemForm.setValue(skillItem);
+    this.skillItemEditForm.setValue(skillItem);
+    this.skillItemMode = "newEdit";
+
+  }
+
   onAdd() {
     this.skillItemMode = "add"
   }
 
   onClose() {
+    this.skillItemForm.patchValue({
+      id: 0,
+      name: "",
+      description: "",
+    })
     this.skillItemMode = ""
   }
 
@@ -138,13 +166,16 @@ export class SkillFormComponent implements OnInit {
         skillItem: this.skillItemForm.value,
         id: this.skillItemForm.value.id
       }))
+    } else if (this.skillItemMode === "newEdit") {
+      this.newSkillItems.forEach((skillItem,index)=>{
+        if(skillItem.name ===  this.skillItemEditForm.value.name) {
+          this.newSkillItems.splice(index, 1);
+        }
+      });
+      this.newSkillItems.push(this.skillItemForm.value)
     }
 
-    this.skillItemForm.patchValue({
-      id: 0,
-      name: "",
-      description: "",
-    })
+
     this.onClose()
   }
 

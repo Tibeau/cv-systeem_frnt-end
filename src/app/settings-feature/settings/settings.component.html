@@ -1,11 +1,24 @@
+<div class="mt-20">
+<div
+  class="mt-8 xl:w-[800px] sm:px-6 lg:px-8 bg-Jblue rounded-3xl border-white border-2 bg-gradient-to-b from-indigo-600 to-Jblue text-center ml-[25%] mr-[40%]">
 
-<div class="max-w-5xl mx-auto">
-  <div class="mt-8 mb-12 mx-auto px-4 sm:px-6 lg:px-8 bg-Jblue rounded-3xl mr-6 ml-6 border-white border-2 bg-gradient-to-b from-indigo-600 to-Jblue ">
-
-    SETTINGS
-  </div>
+  <h1 class="text-white flex-shrink-0 inline-flex  rounded-lg m-4 font-bold text-3xl">Settings</h1>
+  <hr>
+  <a [routerLink]="'/change-password'"
+     class="hover:bg-JorangeSelect text-white flex-shrink-0 inline-flex  m-1 rounded-lg">
+    <span class="m-2">Change Password</span>
+  </a>
+  <hr class="mb-12">
+  <hr class="mb-12">
+  <hr class="mb-12">
+  <hr class="mb-12">
+  <hr >
+  <a href="/login"  class="hover:bg-JorangeSelect text-white flex-shrink-0 inline-flex  m-1 rounded-lg" (click)="logOut()">
+    <span class="m-2">Logout</span>
+  </a>
 </div>
 
+</div>
 
 
 

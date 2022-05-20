@@ -40,7 +40,8 @@ export class AuthEffects {
     switchMap((({payload}) => this.authService.logIn(payload.email, payload.password)
       .pipe(
         map((user: User) =>
-          (logInSuccess({user})
+          ( tap(() => (console.log(user))),
+            logInSuccess({user})
           )),
         catchError(() => of(logInFailure))
       )))

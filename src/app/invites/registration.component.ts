@@ -72,12 +72,18 @@ export class RegistrationComponent implements OnInit {
     this.userForm.patchValue(
       {
         username: this.userForm.value.email,
-        password: "1234", //due to change
+        password: pass,
       }
     )
-    this.authStore.dispatch(addUser({user: this.userForm.value}));
     this.candidateStore.dispatch(addCandidate({candidate: this.candidateForm.value}))
 
+
+
+    this.actionsSubject$.pipe(ofType(addCandidateSuccess)).subscribe((data: any) => {
+      this.userForm.patchValue({candidateId: data.candidate.id})
+      this.candidateForm.patchValue({id: data.candidate.id})
+      this.authStore.dispatch(addUser({user: this.userForm.value}));
+    })
 
     this.actionsSubject$.pipe(ofType(addUserSuccess)).subscribe((data: any) => {
       this.candidateForm.patchValue({userId: data.user.id})
@@ -88,12 +94,6 @@ export class RegistrationComponent implements OnInit {
       }))
       this.authStore.dispatch(changeNewUser({user: this.userForm.value, id: this.userForm.value.id}))
     })
-
-    this.actionsSubject$.pipe(ofType(addCandidateSuccess)).subscribe((data: any) => {
-      this.userForm.patchValue({candidateId: data.candidate.id})
-      this.candidateForm.patchValue({id: data.candidate.id})
-    })
-
 
     this.actionsSubject$.pipe(ofType(changeUserSuccess)).subscribe((data: any) => {
       this.userForm.patchValue({candidateId: "", id: ""})

@@ -16,6 +16,7 @@ import {LanguageFormComponent} from "./language-feature/language-form/language-f
 import {SettingsComponent} from "./settings-feature/settings/settings.component";
 import {RegistrationComponent} from "./invites/registration.component";
 import {CategoryComponent} from "./category-feature/category/category.component";
+import {ChangePasswordComponent} from "./change-password/change-password.component";
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
@@ -39,6 +40,7 @@ const routes: Routes = [
   { path: 'languageform/:id', component: LanguageFormComponent },
   { path: 'settings', component: SettingsComponent },
   { path: 'categories', component: CategoryComponent },
+  { path: 'change-password', component: ChangePasswordComponent },
 
 ];
 

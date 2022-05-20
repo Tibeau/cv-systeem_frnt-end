@@ -61,6 +61,7 @@ import {CategoryEffects} from "./store/effects/category.effects";
 import {categoryReducer} from "./store/reducers/category.reducers";
 import { CategoryComponent } from './category-feature/category/category.component';
 import { ShortenContentPipe } from './shared/pipes/shorten-content/shorten-content.pipe';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -88,6 +89,7 @@ import { ShortenContentPipe } from './shared/pipes/shorten-content/shorten-conte
     RegistrationComponent,
     CategoryComponent,
     ShortenContentPipe,
+    ChangePasswordComponent,
 
   ],
   imports: [

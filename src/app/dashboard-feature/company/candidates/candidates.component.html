@@ -13,7 +13,7 @@
                 <h3  class="text-xl leading-6 font-bold my-2">
                   {{candidate.firstname}} {{candidate.lastname}}
                 </h3>
-                <span *ngIf="candidate.candidateId != currentCandidate" class="text-white text-sm font-bold ">email: {{candidate.username}}</span>
+                <span *ngIf="candidate.candidateId != currentCandidate" class="text-white text-sm font-bold ">{{candidate.username}}</span>
               </div>
 
 

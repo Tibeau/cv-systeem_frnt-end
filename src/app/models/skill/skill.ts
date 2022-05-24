@@ -4,4 +4,5 @@ export interface Skill {
   description: string;
   active: boolean;
   candidateId: number;
+  score: 1;
 }

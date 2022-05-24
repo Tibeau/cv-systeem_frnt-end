@@ -54,7 +54,7 @@
       </nav>
   </header>
   <!-- Bottom section -->
-  <div   class="min-h-0 flex-1 flex overflow-hidden">
+  <div   class="min-h-0 flex-1 flex">
     <!-- Narrow sidebar-->
     <nav *ngIf="isLoggedIn == true && (user$ | async)?.firstLogin === false && (user$ | async)?.role === 'CANDIDATE' || (user$ | async)?.role === 'COMPANY'" [ngClass]="!isExtendSideBar ? '': 'w-60 sidebar'" class="hidden md:block md:flex-shrink-0 md:bg-Jorange md:overflow-y-auto" aria-label="Sidebar">
       <div class="relative w-20 flex flex-col p-3 space-y-3">
@@ -149,9 +149,9 @@
     </div>
 
     <!-- Main area -->
-    <main class="min-w-0 flex-1 border-t border-gray-200 lg:flex bgImage">
+    <main class="min-w-0 flex-1 border-t border-gray-200 bgImage">
       <!-- Primary column -->
-      <section aria-labelledby="primary-heading" class="min-w-0 flex-1 h-full flex flex-col overflow-y-auto lg:order-last">
+      <section class="min-w-0 flex-1 h-full flex-col">
         <h1 id="primary-heading" class="sr-only">Home</h1>
           <router-outlet></router-outlet>
       </section>

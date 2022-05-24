@@ -114,8 +114,6 @@ export class CvTemplateComponent implements OnInit {
 
   ngOnInit(): void {
     this.company = !!companyId
-
-
     this.candidateStore.dispatch(loadCandidates({page: 0, items: 999999999}));
     this.experienceStore.dispatch(loadExperiences({page: 0, items: 999999999}));
     this.educationStore.dispatch(loadEducations({page: 0, items: 999999999}));
@@ -133,8 +131,6 @@ export class CvTemplateComponent implements OnInit {
     this.myCertificates$.pipe(take(1)).subscribe();
     this.myCandidate$.pipe(take(1)).subscribe();
   }
-
-
 
 
   setScale(): void {

@@ -30,6 +30,7 @@ import {loadCandidates} from "../../../store/actions/user.actions";
 import {selectMyCandidates} from "../../../selectors/user.selector";
 import {candidateId} from "../../../selectors/auth.selector";
 import {changeNewUser} from "../../../store/actions/auth.actions";
+import { Output, EventEmitter } from '@angular/core';
 
 
 @Component({
@@ -117,7 +118,6 @@ export class CandidatesComponent implements OnInit {
     this.isSelected()
   }
 
-
   selectCandidate(candidateId: number | undefined) {
     console.log('getting user ', candidateId)
     if (this.currentCandidate != candidateId) {
@@ -135,10 +135,6 @@ export class CandidatesComponent implements OnInit {
       this.selected = false
     }
   }
-
-  // print(candidateId: number | undefined) {
-  //
-  // }
 
   toggleActive(candidate: User) {
     this.active = candidate.active

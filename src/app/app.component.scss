@@ -2,3 +2,8 @@
   background-image: url("../assets/background.png");
   background-size: cover ;
 }
+
+.scroll {
+  height: 100vh;
+  overflow: auto;
+}

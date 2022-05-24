@@ -22,7 +22,4 @@ export interface User {
   postalCode?: string;
   active: boolean;
   firstLogin?: boolean;
-
-
-
 }
